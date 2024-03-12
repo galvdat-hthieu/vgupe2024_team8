@@ -16,3 +16,11 @@ This project is about an application to effectively manage a pharmaceutical stor
 - Built-in messaging system for communication among users
 - Generation of invoices, bills, receipts, and other related documents
 - Management of drugs and consumables within the pharmacy unit
+
+## Requirement 
+1. Functional:
+   -
+3. Non-Functional:
+   -
+   
+
