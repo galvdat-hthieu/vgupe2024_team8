@@ -28,13 +28,17 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall maintain an accurate inventory count by updating quantities of medicines or drugs received from suppliers.
    3. Administration management of employee records
       - The system shall provide forms or fields to input personal details, employment contracts, performance evaluations, training records, job title and role within the pharmacy, licensing and certification details.
+      - The system shall create employee ID whenever there is a new employee input.
       - The system shall define clear access levels and permissions for employees and administrators.
       - The system shall ensure that only authorized personnel can view or modify employee and medication information.
       - The system shall support search functionality base on criteria such as employee names, numbers, role.
       - The system shall be able to update or edit existing records of the list.
       - The system shall maintain an audit trail to track changes made to employee records, including details such as the date, time, and user responsible for each modification.
-   4. Provision of separate usernames and passwords for each employee
-      - ferwfwerfew
+   4. Provision of separate accounts with usernames and passwords for each employee
+      - The system shall create account username base on employee ID, and a random password.
+      - When creating account, the password will be given to employee.
+      - Employee can change password after accessing into the account.
+      - The account contains employee ID, personal detail of employee, job title, role within the pharmacy, training records, licensing and certification details.
    6. Built-in messaging system for communication among users
    7. Generation of invoices, bills, receipts, and other related documents
    8. Management of drugs and consumables within the pharmacy unit
