@@ -29,6 +29,8 @@ This project is about an application to effectively manage a pharmaceutical stor
    3. Administration management of employee records
       - The system shall provide personal details, employment contracts, performance evaluations, training records, job title and role within the pharmacy, licensing and certification details.
       - The system shall define clear access levels and permissions for employees and administrators to ensure that only authorized personnel can view or modify employee and medication information.
+      - The system shall support search functionality base on criteria such as employee names, numbers, role.
+      - The system shall be able to update or edit existing records of the list.
    4. Provision of separate usernames and passwords for each employee
    5. Built-in messaging system for communication among users
    6. Generation of invoices, bills, receipts, and other related documents
