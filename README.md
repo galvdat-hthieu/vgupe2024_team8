@@ -34,7 +34,7 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall be able to update or edit existing records of the list.
       - The system shall maintain an audit trail to track changes made to employee records, including details such as the date, time, and user responsible for each modification.
    4. Provision of separate usernames and passwords for each employee
-      - 
+      - ferwfwerfew
    6. Built-in messaging system for communication among users
    7. Generation of invoices, bills, receipts, and other related documents
    8. Management of drugs and consumables within the pharmacy unit
