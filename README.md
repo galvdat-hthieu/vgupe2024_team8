@@ -28,7 +28,7 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall maintain an accurate inventory count by updating quantities of medicines or drugs received from suppliers.
    3. Administration management of employee records
       - The system shall provide forms or fields to input personal details, employment contracts, performance evaluations, training records, job title and role within the pharmacy, licensing and certification details.
-      - The system shall create employee ID whenever there is a new employee input.
+      - The system shall create unique employee ID whenever there is a new employee input.
       - The system shall define clear access levels and permissions for employees and administrators.
       - The system shall ensure that only authorized personnel can view or modify employee and medication information.
       - The system shall support search functionality base on criteria such as employee names, numbers, role.
