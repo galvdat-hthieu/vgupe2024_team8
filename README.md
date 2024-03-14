@@ -39,6 +39,8 @@ This project is about an application to effectively manage a pharmaceutical stor
       - When creating account, the password will be given to employee.
       - Employee can change password after accessing into the account.
       - The account contains employee ID, personal detail of employee, job title, role within the pharmacy, training records, licensing and certification details.
+      - Higher permission of the account will be granted base on role of the employee.
+      - The account can be (optionally) deleted 1 years after employee leave the pharmarcy.
    6. Built-in messaging system for communication among users
    7. Generation of invoices, bills, receipts, and other related documents
    8. Management of drugs and consumables within the pharmacy unit
