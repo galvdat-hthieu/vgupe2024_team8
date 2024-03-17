@@ -41,14 +41,16 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The account contains employee ID, personal detail of employee, job title, role within the pharmacy, training records, licensing and certification details.
       - Higher permission of the account will be granted base on role of the employee.
       - The account can be (optionally) deleted 1 years after employee leave the pharmarcy.
-   6. Built-in messaging system for communication among users
+   5. Built-in messaging system for communication among users
       - The system should support message editing and deletion, allowing users to modify or remove sent messages within a specified timeframe.
       - Users should be able to view message history and search for specific messages.
       - Users should have the ability to create or participate in group conversations with multiple participants.
       - Group messaging features should include adding or removing members.
       - Users should have the option to export or back up their message history for safekeeping.
-   8. Generation of invoices, bills, receipts, and other related documents
-   9. Management of drugs and consumables within the pharmacy unit
+      - Users can forward received messages to other users or groups.
+      - Users can add new contacts to their contact list.
+   6. Generation of invoices, bills, receipts, and other related documents
+   7. Management of drugs and consumables within the pharmacy unit
 ### Non-Functional:
    -
    
