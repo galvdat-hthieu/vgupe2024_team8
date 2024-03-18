@@ -51,7 +51,7 @@ This project is about an application to effectively manage a pharmaceutical stor
       - Users can add new contacts to their contact list.
    6. Generation of invoices, bills, receipts, and other related documents
    7. Management of drugs and consumables within the pharmacy unit
-- vdv 
+      - htrhfhf
 ### Non-Functional:
    -
    
