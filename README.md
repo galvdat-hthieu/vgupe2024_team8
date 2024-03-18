@@ -51,7 +51,9 @@ This project is about an application to effectively manage a pharmaceutical stor
       - Users can add new contacts to their contact list.
    6. Generation of invoices, bills, receipts, and other related documents
    7. Management of drugs and consumables within the pharmacy unit
-      - htrhfhf
+      - Inventory management: Keep an accurate record of stocked drugs and consumables in the pharmacy unit. Including the quantities, the expiration date, suppliers, and ID number.
+      - Monitoring medication stock: Alert when the quantities are below a certain threshold, to ensure that the pharmacy never runs out of medications.
+      - Order processing: Order generation, supplier management for cost, quantities of the order, and order tracking.
 ### Non-Functional:
    -
    
