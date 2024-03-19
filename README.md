@@ -18,8 +18,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 - Management of drugs and consumables within the pharmacy unit
 
 ## Requirement 
-### Functional:
-   1. The system shall have an intuitive and user-friendly interface.
+### Functional:   
    2. Record maintenance of medicines/drugs and supplies sent by the supplier
       - The system shall provide forms or fields to input details such as medicine name, batch number, expiration date, quantity, and supplier information.
       - The system shall allow user to create new records for each medicine or drug received from the supplier.
@@ -59,6 +58,6 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall monitor the medication stock and alert when the quantities are below a certain threshold to ensure that the pharmacy never runs out of medications.
       - The system shall generate orders, manage suppliers for cost and quantities of the order, and track orders.
 ### Non-Functional:
-   -
+   1. The system shall have an intuitive and user-friendly interface.
    
 
