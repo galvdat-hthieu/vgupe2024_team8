@@ -55,9 +55,9 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall meet regulatory standards and compliance requirements, ensuring legal and industry-specific document compliance.
    6. Management of drugs and consumables within the pharmacy unit
       - The system shall keep track of the medication information frequently.
-      - The system shall alert when the quantities are below a certain threshold to ensure that the pharmacy never runs out of medications. The same goes for expiration monitoring.
+      - The system shall alert when the quantities are below a certain threshold to ensure that the pharmacy never runs out of medications and consumables. The same goes for expiration monitoring.
       - The system shall display the recorded information as commanded.
-      - The system shall alert when the consumables are below a certain threshold of quantity.
+      - The system shall alert before the supplier contracts are over.
 ### Non-Functional:
    1. The system shall have an intuitive and user-friendly interface.
    
