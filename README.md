@@ -50,7 +50,11 @@ This project is about an application to effectively manage a pharmaceutical stor
       - Users can forward received messages to other users or groups.
       - Users can add new contacts to their contact list.
    6. Generation of invoices, bills, receipts, and other related documents
-   7. Management of drugs and consumables within the pharmacy unit
+      - The system shall integrate with current databases and transaction records, automatically print out document templates with accurate information.
+      - The system shall calculates totals, taxes, discounts, and other financial details from input data.
+      - The system shall print out accurate payment details, transaction IDs, payment status in documents, or legal documents...
+      - The system shall meet regulatory standards and compliance requirements, ensuring legal and industry-specific document compliance.
+   8. Management of drugs and consumables within the pharmacy unit
       - Inventory management: Keep an accurate record of stocked drugs and consumables in the pharmacy unit. Including the quantities, the expiration date, suppliers, and ID number.
       - Monitoring medication stock: Alert when the quantities are below a certain threshold, to ensure that the pharmacy never runs out of medications.
       - Order processing: Order generation, supplier management for cost, quantities of the order, and order tracking.
