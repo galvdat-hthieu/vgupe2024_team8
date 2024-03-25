@@ -24,6 +24,7 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall allow user to create new records for each medicine or drug received from the supplier.
       - The system shall be able to update or edit existing records, including modifying quantities, expiration dates, or other relevant information.
       - The system shall maintain an accurate inventory count by updating quantities of medicines or drugs received from suppliers.
+      - The system shall support search functionality base on criteria such as medicine name, batch number, supplier information.
    2. Administration management of employee records
       - The system shall provide forms or fields to input personal details, employment contracts and role within the pharmacy, licensing and certification details.
       - The system shall create unique employee ID whenever there is a new employee input.
@@ -53,7 +54,6 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall print out accurate payment details, transaction IDs, and payment status in documents, or legal documents...
       - The system shall meet regulatory standards and compliance requirements, ensuring legal and industry-specific document compliance.
    6. Management of drugs and consumables within the pharmacy unit
-      - The system shall support search functionality base on criteria such as medicine name, batch number, supplier information.
       - The system shall keep track of the medication and consumables information frequently.
       - The system shall alert when the quantities are below a certain threshold to ensure that the pharmacy never runs out of medications and consumables. The same goes for expiration monitoring.
       - The system shall display the recorded information as commanded.
