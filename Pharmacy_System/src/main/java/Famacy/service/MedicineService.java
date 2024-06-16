@@ -33,6 +33,10 @@ public class MedicineService {
     public void updateMedicine(Medicine medicine) {
         medicineRepository.save(medicine);
     }
+    
+    public List<Medicine> searchMedicines(String name, String batchNumber, String supplier) {
+        return medicineRepository.searchMedicines(name, batchNumber, supplier);
+    }
 
 
     public void deleteMedicine(MedicineId id) {
