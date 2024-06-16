@@ -43,6 +43,36 @@ public class MedicineRepository {
         }
         return medicine;
     }
+    
+        public List<Medicine> searchMedicines(String name, String batchNumber, String supplier) {
+        Session session = factory.openSession();
+        String queryString = "from Medicine m where 1=1";
+        if (name != null && !name.isEmpty()) {
+            queryString += " and m.id.name like :name";
+        }
+        if (batchNumber != null && !batchNumber.isEmpty()) {
+            queryString += " and m.id.batchNumber like :batchNumber";
+        }
+        if (supplier != null && !supplier.isEmpty()) {
+            queryString += " and m.supplier like :supplier";
+        }
+
+        var query = session.createQuery(queryString, Medicine.class);
+
+        if (name != null && !name.isEmpty()) {
+            query.setParameter("name", "%" + name + "%");
+        }
+        if (batchNumber != null && !batchNumber.isEmpty()) {
+            query.setParameter("batchNumber", "%" + batchNumber + "%");
+        }
+        if (supplier != null && !supplier.isEmpty()) {
+            query.setParameter("supplier", "%" + supplier + "%");
+        }
+
+        List<Medicine> medicines = query.list();
+        session.close();
+        return medicines;
+    }
 
     public void delete(MedicineId id) {
         try (Session session = factory.openSession()) {
