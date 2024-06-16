@@ -19,6 +19,9 @@ public class MedicineManagementForm extends JFrame {
     private MedicineService medicineService;
     private JTable medicineTable;
     private DefaultTableModel tableModel;
+    private JTextField searchNameField;
+    private JTextField searchBatchNumberField;
+    private JTextField searchSupplierField;
 
     public MedicineManagementForm(MedicineService medicineService) {
         this.medicineService = medicineService;
@@ -30,6 +33,32 @@ public class MedicineManagementForm extends JFrame {
     }
 
     private void initializeComponents() {
+        setLayout(new BorderLayout());
+
+        // Search Panel
+        JPanel searchPanel = new JPanel(new GridLayout(2, 4));
+        searchPanel.add(new JLabel("Name:"));
+        searchNameField = new JTextField();
+        searchPanel.add(searchNameField);
+
+        searchPanel.add(new JLabel("Batch Number:"));
+        searchBatchNumberField = new JTextField();
+        searchPanel.add(searchBatchNumberField);
+
+        searchPanel.add(new JLabel("Supplier:"));
+        searchSupplierField = new JTextField();
+        searchPanel.add(searchSupplierField);
+
+        JButton searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                searchMedicines();
+            }
+        });
+        searchPanel.add(searchButton);
+
+        add(searchPanel, BorderLayout.NORTH);
         // Create a custom table model with non-editable columns
         tableModel = new DefaultTableModel(new String[]{"Name", "Batch Number", "Supplier", "Supplied Date", "Expiration Date", "Quantity"}, 0) {
             @Override
@@ -130,6 +159,25 @@ public class MedicineManagementForm extends JFrame {
             loadMedicineData();
         } else {
             JOptionPane.showMessageDialog(this, "Please select a row to update.", "Update Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    private void searchMedicines() {
+        String name = searchNameField.getText();
+        String batchNumber = searchBatchNumberField.getText();
+        String supplier = searchSupplierField.getText();
+
+        List<Medicine> medicines = medicineService.searchMedicines(name, batchNumber, supplier);
+        tableModel.setRowCount(0); // Clear the table model
+        for (Medicine medicine : medicines) {
+            tableModel.addRow(new Object[]{
+                    medicine.getId().getName(),
+                    medicine.getId().getBatchNumber(),
+                    medicine.getSupplier(),
+                    medicine.getSuppliedDate(),
+                    medicine.getExpirationDate(),
+                    medicine.getQuantity()
+            });
         }
     }
 
