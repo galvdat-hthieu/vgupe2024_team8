@@ -9,78 +9,78 @@ public class Employee {
 
     @Id
     @Column(name = "\"ID\"")
-    private EmployeeID id;
+    private int EID;
 
     @Column(name = "\"Name\"")
-    private String name;
+    private String EName;
 
     @Column(name = "\"Gender\"")
-    private String gender;
+    private String Gender;
 
     @Column(name = "\"Role\"")
-    private String role;
+    private String Role;
 
     @Column(name = "\"Birth\"")
-    private Date birth;
+    private String Birth;
 
     @Column(name = "\"Phone\"")
-    private String phone;
+    private String Phone;
 
     // Constructor with all fields
-    public Employee(EmployeeID id, String name, String gender, String role, Date birth, String phone) {
-        this.id = id;
-        this.name = name;
-        this.gender = gender;
-        this.role = role;
-        this.birth = birth;
-        this.phone = phone;
+    public Employee(int EID, String EName, String Gender, String Role, String Birth, String Phone) {
+        this.EID = EID;
+        this.EName = EName;
+        this.Gender = Gender;
+        this.Role = Role;
+        this.Birth = Birth;
+        this.Phone = Phone;
     }
 
-    public EmployeeID getId() {
-        return id;
+    public int getId() {
+        return EID;
     }
 
-    public void setId(EmployeeID id) {
-        this.id = id;
+    public void setId(int EID) {
+        this.EID = EID;
     }
 
     public String getName() {
-        return name;
+        return EName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String EName) {
+        this.EName = EName;
     }
 
     public String getGender() {
-        return gender;
+        return Gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public void setGender(String Gender) {
+        this.Gender = Gender;
     }
 
     public String getRole() {
-        return role;
+        return Role;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole(String Role) {
+        this.Role = Role;
     }
 
-    public Date getBirth() {
-        return birth;
+    public String getBirth() {
+        return Birth;
     }
 
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setBirth(String Birth) {
+        this.Birth = Birth;
     }
 
     public String getPhone() {
-        return phone;
+        return Phone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhone(String Phone) {
+        this.Phone = Phone;
     }
 }
