@@ -5,7 +5,6 @@
 package Famacy.view;
 
 import Famacy.model.Employee;
-import Famacy.model.EmployeeID;
 import Famacy.service.EmployeeService;
 
 import javax.swing.*;
@@ -13,7 +12,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.*;
 import java.util.List;
 
 public class EmployeeManagementForm extends JFrame {
@@ -88,14 +86,14 @@ public class EmployeeManagementForm extends JFrame {
     private void updateEmployee() {
         int selectedRow = employeeTable.getSelectedRow();
         if (selectedRow >= 0) {
-            EmployeeID id = (EmployeeID) tableModel.getValueAt(selectedRow, 0);
-            String name = (String) tableModel.getValueAt(selectedRow, 1);
-            String gender = (String) tableModel.getValueAt(selectedRow, 2);
-            String role = (String) tableModel.getValueAt(selectedRow, 3);
-            Date birth = (Date) tableModel.getValueAt(selectedRow, 4);
-            String phone = (String) tableModel.getValueAt(selectedRow, 5);
+            int EID = (int) tableModel.getValueAt(selectedRow, 0);
+            String EName = (String) tableModel.getValueAt(selectedRow, 1);
+            String Gender = (String) tableModel.getValueAt(selectedRow, 2);
+            String Role = (String) tableModel.getValueAt(selectedRow, 3);
+            String Birth = (String) tableModel.getValueAt(selectedRow, 4);
+            String Phone = (String) tableModel.getValueAt(selectedRow, 5);
     
-            Employee employee = new Employee(id, name, gender, role, birth, phone);
+            Employee employee = new Employee(EID, EName, Gender, Role, Birth, Phone);
     
             employeeService.updateEmployee(employee);
             JOptionPane.showMessageDialog(this, "Employee updated successfully!");
@@ -106,10 +104,16 @@ public class EmployeeManagementForm extends JFrame {
     }
     
     private void searchEmployees() {
-        String name = searchNameField.getText();
-        String role = searchRoleField.getText();
+        String text = searchNameField.getText();
+        int EID;
+        try {
+            EID = Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Please enter a valid integer ID.", "Search Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
     
-        List<Employee> employees = employeeService.searchEmployees(name, role);
+        List<Employee> employees = employeeService.searchEmployees(EID);
     
         // Clear the table before adding new rows
         tableModel.setRowCount(0);
@@ -123,11 +127,9 @@ public class EmployeeManagementForm extends JFrame {
     private void deleteEmployee() {
         int selectedRow = employeeTable.getSelectedRow();
         if (selectedRow >= 0) {
-            String name = (String) tableModel.getValueAt(selectedRow, 0);
-            String role = (String) tableModel.getValueAt(selectedRow, 1);
-            EmployeeID id = new EmployeeID(name, role);
+            int EID = (int) tableModel.getValueAt(selectedRow, 0); // assuming EID is in the first column
     
-            employeeService.deleteEmployee(id);
+            employeeService.deleteEmployee(EID);
             tableModel.removeRow(selectedRow);
             JOptionPane.showMessageDialog(this, "Employee deleted successfully!");
             loadEmployeeData();
