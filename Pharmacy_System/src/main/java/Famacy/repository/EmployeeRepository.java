@@ -1,11 +1,9 @@
 package Famacy.repository;
 
 import Famacy.model.Employee;
-import Famacy.model.EmployeeID;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import Famacy.util.HibernateUtil;
-import java.util.*;
 
 import java.util.List;
 
@@ -33,42 +31,36 @@ public class EmployeeRepository {
         return employees;
     }
 
-    public Employee findById(EmployeeID id) {
+    public Employee findById(int EID) {
         Employee employee;
         try (Session session = factory.openSession()) {
-            employee = session.get(Employee.class, id);
+            employee = session.get(Employee.class, EID);
         }
         return employee;
     }
     
-public List<Employee> searchEmployees(String name, String role) {
-    Session session = factory.openSession();
-    String queryString = "from Employee e where 1=1";
-    if (name != null && !name.isEmpty()) {
-        queryString += " and e.name like :name";
-    }
-    if (role != null && !role.isEmpty()) {
-        queryString += " and e.role like :role";
+    public List<Employee> searchEmployees(int EID) {
+        Session session = factory.openSession();
+        String queryString = "from Employee e where 1=1";
+        if (EID > 0) {
+            queryString += " and e.id = :id";
+        }
+    
+        var query = session.createQuery(queryString, Employee.class);
+    
+        if (EID > 0) {
+            query.setParameter("id", EID);
+        }
+    
+        List<Employee> employees = query.list();
+        session.close();
+        return employees;
     }
 
-    var query = session.createQuery(queryString, Employee.class);
-
-    if (name != null && !name.isEmpty()) {
-        query.setParameter("name", "%" + name + "%");
-    }
-    if (role != null && !role.isEmpty()) {
-        query.setParameter("role", "%" + role + "%");
-    }
-
-    List<Employee> employees = query.list();
-    session.close();
-    return employees;
-}
-
-    public void delete(EmployeeID id) {
+    public void delete(int EID) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
-            Employee employee = session.get(Employee.class, id);
+            Employee employee = session.get(Employee.class, EID);
             if (employee != null) {
                 session.delete(employee);
             }
