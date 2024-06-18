@@ -1,10 +1,8 @@
 package Famacy.service;
 
 import Famacy.model.Employee;
-import Famacy.model.EmployeeID;
 import Famacy.repository.EmployeeRepository;
 
-import java.util.*;
 import java.util.List;
 
 public class EmployeeService {
@@ -22,19 +20,19 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getEmployeeById(EmployeeID id) {
-        return employeeRepository.findById(id);
+    public Employee getEmployeeById(int EID) {
+        return employeeRepository.findById(EID);
     }
     
     public void updateEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
     
-    public List<Employee> searchEmployees(String name, String role) {
-        return employeeRepository.searchEmployees(name, role);
+    public List<Employee> searchEmployees(int EID) {
+        return employeeRepository.searchEmployees(EID);
     }
 
-    public void deleteEmployee(EmployeeID id) {
-        employeeRepository.delete(id);
+    public void deleteEmployee(int EID) {
+        employeeRepository.delete(EID);
     }
 }
