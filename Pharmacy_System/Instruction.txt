@@ -27,3 +27,6 @@
 - hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
 
 - Link: https://www.geeksforgeeks.org/hibernate-tutorial/
+
+#edit database:
+Employee: EID change type to NONE
