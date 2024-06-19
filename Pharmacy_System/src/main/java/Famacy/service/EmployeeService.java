@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Famacy.service;
 
 import Famacy.model.Employee;
@@ -23,6 +19,11 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
+    public boolean employeeExists(int id) {
+        Employee employee = employeeRepository.findById(id);
+        return employee != null;
+    }
+
     public Employee getEmployeeById(int id) {
         return employeeRepository.findById(id);
     }
@@ -35,7 +36,7 @@ public class EmployeeService {
         employeeRepository.delete(id);
     }
 
-    public List<Employee> searchEmployees(String name, String role) {
-        return employeeRepository.searchEmployees(name, role);
+    public List<Employee> searchEmployees(String name, String role, int id) {
+        return employeeRepository.searchEmployees(name, role, id);
     }
 }
