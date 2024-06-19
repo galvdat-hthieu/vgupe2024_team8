@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Famacy.repository;
 
 import Famacy.model.Employee;
@@ -43,7 +39,7 @@ public class EmployeeRepository {
         return employee;
     }
     
-    public List<Employee> searchEmployees(String name, String role) {
+    public List<Employee> searchEmployees(String name, String role, Integer id) {
         Session session = factory.openSession();
         String queryString = "from Employee e where 1=1";
         if (name != null && !name.isEmpty()) {
@@ -52,16 +48,22 @@ public class EmployeeRepository {
         if (role != null && !role.isEmpty()) {
             queryString += " and e.role like :role";
         }
-
+        if (id != null) {
+            queryString += " and e.id = :id";
+        }
+    
         var query = session.createQuery(queryString, Employee.class);
-
+    
         if (name != null && !name.isEmpty()) {
             query.setParameter("name", "%" + name + "%");
         }
         if (role != null && !role.isEmpty()) {
             query.setParameter("role", "%" + role + "%");
         }
-
+        if (id != null) {
+            query.setParameter("id", id);
+        }
+    
         List<Employee> employees = query.list();
         session.close();
         return employees;
