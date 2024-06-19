@@ -1,86 +1,76 @@
 package Famacy.model;
 
+import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "\"Employee\"")
-public class Employee {
-
+public class Employee implements Serializable {
     @Id
-    @Column(name = "\"ID\"")
-    private int EID;
+    @Column(name = "\"EID\"")
+    private int id;
 
-    @Column(name = "\"Name\"")
-    private String EName;
+    @Column(name = "\"EName\"")
+    private String name;
 
     @Column(name = "\"Gender\"")
-    private String Gender;
+    private String gender;
 
     @Column(name = "\"Role\"")
-    private String Role;
+    private String role;
 
     @Column(name = "\"Birth\"")
-    private String Birth;
+    private String birth;
 
     @Column(name = "\"Phone\"")
-    private String Phone;
+    private String phone;
 
-    // Constructor with all fields
-    public Employee(int EID, String EName, String Gender, String Role, String Birth, String Phone) {
-        this.EID = EID;
-        this.EName = EName;
-        this.Gender = Gender;
-        this.Role = Role;
-        this.Birth = Birth;
-        this.Phone = Phone;
-    }
-
+    // Getters and setters
     public int getId() {
-        return EID;
+        return id;
     }
 
-    public void setId(int EID) {
-        this.EID = EID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
-        return EName;
+        return name;
     }
 
-    public void setName(String EName) {
-        this.EName = EName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
-    public void setGender(String Gender) {
-        this.Gender = Gender;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getRole() {
-        return Role;
+        return role;
     }
 
-    public void setRole(String Role) {
-        this.Role = Role;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getBirth() {
-        return Birth;
+        return birth;
     }
 
-    public void setBirth(String Birth) {
-        this.Birth = Birth;
+    public void setBirth(String birth) {
+        this.birth = birth;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
-    public void setPhone(String Phone) {
-        this.Phone = Phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
