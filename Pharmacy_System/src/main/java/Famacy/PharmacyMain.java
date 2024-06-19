@@ -6,11 +6,25 @@ package Famacy;
 
 
 import javax.swing.*;
+
+import Famacy.view.EmployeeManagementForm;
+import Famacy.view.MedicineManagementForm;
+import Famacy.service.EmployeeService;
+import Famacy.service.MedicineService;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+
 import java.awt.*;
 
 public class PharmacyMain extends JFrame {
+    private EmployeeService employeeService;
+        private MedicineService medicineService;
 
     public PharmacyMain() {
+        this.employeeService = new EmployeeService();
+        this.medicineService = new MedicineService();
         setTitle("Famacy's Search");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,6 +59,24 @@ public class PharmacyMain extends JFrame {
         middlePanel.add(supplyButton);
         middlePanel.add(chatButton);
         middlePanel.add(employeeButton);
+
+        employeeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                EmployeeManagementForm recordForm = new EmployeeManagementForm(employeeService);
+                recordForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                recordForm.setVisible(true);
+            }
+        });
+
+        inventoryButton.addActionListener(new ActionListener() {
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        MedicineManagementForm medicineForm = new MedicineManagementForm(medicineService);
+        medicineForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        medicineForm.setVisible(true);
+    }
+});
 
         // Sidebar
         JPanel sidebar = new JPanel(new GridLayout(13, 1, 10, 10));
