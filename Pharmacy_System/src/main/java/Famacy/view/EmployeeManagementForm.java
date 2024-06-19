@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Famacy.view;
 
 import Famacy.model.Employee;
+
 import Famacy.service.EmployeeService;
 
 
@@ -21,7 +18,7 @@ public class EmployeeManagementForm extends JFrame {
     private DefaultTableModel tableModel;
     private JTextField searchNameField;
     private JTextField searchRoleField;
-    private JTextField searchPhoneField;
+    private JTextField searchIDField;
 
     public EmployeeManagementForm(EmployeeService employeeService) {
         this.employeeService = employeeService;
@@ -45,6 +42,10 @@ public class EmployeeManagementForm extends JFrame {
         searchRoleField = new JTextField();
         searchPanel.add(searchRoleField);
 
+        searchPanel.add(new JLabel("ID:"));
+        searchIDField = new JTextField();
+        searchPanel.add(searchIDField);
+
 
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(new ActionListener() {
@@ -66,10 +67,19 @@ public class EmployeeManagementForm extends JFrame {
 
         // Button Panel
         JPanel buttonPanel = new JPanel();
+        JButton addButton = new JButton("Add");
         JButton updateButton = new JButton("Update");
         JButton deleteButton = new JButton("Delete");
+        buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
+
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                openEmployeeRecordForm();
+            }
+        });
 
         updateButton.addActionListener(new ActionListener() {
             @Override
@@ -104,11 +114,44 @@ public class EmployeeManagementForm extends JFrame {
         }
     }
 
+    public void addEmployeeToTable(Employee employee) {
+        tableModel.addRow(new Object[]{
+                employee.getId(),
+                employee.getName(),
+                employee.getGender(),
+                employee.getRole(),
+                employee.getBirth(),
+                employee.getPhone()
+        });
+    }
+
+    private void openEmployeeRecordForm() {
+        EmployeeRecordForm recordForm = new EmployeeRecordForm(employeeService);
+        recordForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        recordForm.setVisible(true);
+    }
+
     private void searchEmployees() {
         String name = searchNameField.getText();
         String role = searchRoleField.getText();
-
-        List<Employee> employees = employeeService.searchEmployees(name, role);
+        String text = searchIDField.getText();
+    
+        List<Employee> employees;
+        if (name.isEmpty() && role.isEmpty() && text.isEmpty()) {
+            employees = employeeService.getAllEmployees();
+        } else {
+            Integer id = null;
+            if (!text.isEmpty()) {
+                try {
+                    id = Integer.parseInt(text);
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input: " + text);
+                    return;
+                }
+            }
+            employees = employeeService.searchEmployees(name, role, id);
+        }
+    
         tableModel.setRowCount(0); // Clear the table model
         for (Employee employee : employees) {
             tableModel.addRow(new Object[]{
