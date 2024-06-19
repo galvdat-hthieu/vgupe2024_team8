@@ -7,6 +7,7 @@ package Famacy.view;
 import Famacy.model.Employee;
 import Famacy.service.EmployeeService;
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -15,24 +16,35 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class EmployeeManagementForm extends JFrame {
-    private JTextField searchNameField;
-    private JTextField searchRoleField;
+    private EmployeeService employeeService;
     private JTable employeeTable;
     private DefaultTableModel tableModel;
-    private EmployeeService employeeService;
+    private JTextField searchNameField;
+    private JTextField searchRoleField;
+    private JTextField searchPhoneField;
 
     public EmployeeManagementForm(EmployeeService employeeService) {
         this.employeeService = employeeService;
+        setTitle("Employee Management");
+        setSize(800, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initializeComponents();
+        loadEmployeeData();
+    }
+
+    private void initializeComponents() {
         setLayout(new BorderLayout());
 
-        JPanel searchPanel = new JPanel();
+        // Search Panel
+        JPanel searchPanel = new JPanel(new GridLayout(2, 4));
         searchPanel.add(new JLabel("Name:"));
-        searchNameField = new JTextField(20);
+        searchNameField = new JTextField();
         searchPanel.add(searchNameField);
 
         searchPanel.add(new JLabel("Role:"));
-        searchRoleField = new JTextField(20);
+        searchRoleField = new JTextField();
         searchPanel.add(searchRoleField);
+
 
         JButton searchButton = new JButton("Search");
         searchButton.addActionListener(new ActionListener() {
@@ -45,21 +57,41 @@ public class EmployeeManagementForm extends JFrame {
 
         add(searchPanel, BorderLayout.NORTH);
 
-        tableModel = new DefaultTableModel();
+        // Table Panel
+        tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Gender", "Role", "Birth", "Phone"}, 0);
         employeeTable = new JTable(tableModel);
-        add(new JScrollPane(employeeTable), BorderLayout.CENTER);
 
-        tableModel.addColumn("ID");
-        tableModel.addColumn("Name");
-        tableModel.addColumn("Gender");
-        tableModel.addColumn("Role");
-        tableModel.addColumn("Birth");
-        tableModel.addColumn("Phone");
+        JScrollPane scrollPane = new JScrollPane(employeeTable);
+        add(scrollPane, BorderLayout.CENTER);
+
+        // Button Panel
+        JPanel buttonPanel = new JPanel();
+        JButton updateButton = new JButton("Update");
+        JButton deleteButton = new JButton("Delete");
+        buttonPanel.add(updateButton);
+        buttonPanel.add(deleteButton);
+
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateEmployee();
+            }
+        });
+
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteEmployee();
+            }
+        });
+
+        add(buttonPanel, BorderLayout.SOUTH);
     }
 
     private void loadEmployeeData() {
-        tableModel.setRowCount(0);
+        tableModel.setRowCount(0); // Clear the table model
         List<Employee> employees = employeeService.getAllEmployees();
+        employees.sort((e1, e2) -> Integer.compare(e1.getId(), e2.getId())); // Sort by EID
         for (Employee employee : employees) {
             tableModel.addRow(new Object[]{
                     employee.getId(),
@@ -71,30 +103,43 @@ public class EmployeeManagementForm extends JFrame {
             });
         }
     }
-    
-    public void addEmployeeToTable(Employee employee) {
-        tableModel.addRow(new Object[]{
-                employee.getId(),
-                employee.getName(),
-                employee.getGender(),
-                employee.getRole(),
-                employee.getBirth(),
-                employee.getPhone()
-        });
+
+    private void searchEmployees() {
+        String name = searchNameField.getText();
+        String role = searchRoleField.getText();
+
+        List<Employee> employees = employeeService.searchEmployees(name, role);
+        tableModel.setRowCount(0); // Clear the table model
+        for (Employee employee : employees) {
+            tableModel.addRow(new Object[]{
+                    employee.getId(),
+                    employee.getName(),
+                    employee.getGender(),
+                    employee.getRole(),
+                    employee.getBirth(),
+                    employee.getPhone()
+            });
+        }
     }
-    
+
     private void updateEmployee() {
         int selectedRow = employeeTable.getSelectedRow();
         if (selectedRow >= 0) {
-            int EID = (int) tableModel.getValueAt(selectedRow, 0);
-            String EName = (String) tableModel.getValueAt(selectedRow, 1);
-            String Gender = (String) tableModel.getValueAt(selectedRow, 2);
-            String Role = (String) tableModel.getValueAt(selectedRow, 3);
-            String Birth = (String) tableModel.getValueAt(selectedRow, 4);
-            String Phone = (String) tableModel.getValueAt(selectedRow, 5);
-    
-            Employee employee = new Employee(EID, EName, Gender, Role, Birth, Phone);
-    
+            int id = (int) tableModel.getValueAt(selectedRow, 0);
+            String name = (String) tableModel.getValueAt(selectedRow, 1);
+            String gender = (String) tableModel.getValueAt(selectedRow, 2);
+            String role = (String) tableModel.getValueAt(selectedRow, 3);
+            String birth = (String) tableModel.getValueAt(selectedRow, 4);
+            String phone = (String) tableModel.getValueAt(selectedRow, 5);
+
+            Employee employee = new Employee();
+            employee.setId(id);
+            employee.setName(name);
+            employee.setGender(gender);
+            employee.setRole(role);
+            employee.setBirth(birth);
+            employee.setPhone(phone);
+
             employeeService.updateEmployee(employee);
             JOptionPane.showMessageDialog(this, "Employee updated successfully!");
             loadEmployeeData();
@@ -102,34 +147,13 @@ public class EmployeeManagementForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a row to update.", "Update Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    private void searchEmployees() {
-        String text = searchNameField.getText();
-        int EID;
-        try {
-            EID = Integer.parseInt(text);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid integer ID.", "Search Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-    
-        List<Employee> employees = employeeService.searchEmployees(EID);
-    
-        // Clear the table before adding new rows
-        tableModel.setRowCount(0);
-    
-        // Add the searched employees to the table
-        for (Employee employee : employees) {
-            addEmployeeToTable(employee);
-        }
-    }
 
     private void deleteEmployee() {
         int selectedRow = employeeTable.getSelectedRow();
         if (selectedRow >= 0) {
-            int EID = (int) tableModel.getValueAt(selectedRow, 0); // assuming EID is in the first column
-    
-            employeeService.deleteEmployee(EID);
+            int id = (int) tableModel.getValueAt(selectedRow, 0);
+
+            employeeService.deleteEmployee(id);
             tableModel.removeRow(selectedRow);
             JOptionPane.showMessageDialog(this, "Employee deleted successfully!");
             loadEmployeeData();
@@ -137,11 +161,10 @@ public class EmployeeManagementForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Delete Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     public static void main(String[] args) {
         EmployeeService employeeService = new EmployeeService();
         EmployeeManagementForm managementForm = new EmployeeManagementForm(employeeService);
         managementForm.setVisible(true);
     }
-
 }
