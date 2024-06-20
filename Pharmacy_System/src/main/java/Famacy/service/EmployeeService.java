@@ -1,8 +1,9 @@
 package Famacy.service;
 
+import java.util.List;
+
 import Famacy.model.Employee;
 import Famacy.repository.EmployeeRepository;
-import java.util.List;
 
 public class EmployeeService {
     private EmployeeRepository employeeRepository;
@@ -36,7 +37,7 @@ public class EmployeeService {
         employeeRepository.delete(id);
     }
 
-    public List<Employee> searchEmployees(String name, String role, int id) {
+    public List<Employee> searchEmployees(String name, String role, Integer id) {
         return employeeRepository.searchEmployees(name, role, id);
     }
 }
