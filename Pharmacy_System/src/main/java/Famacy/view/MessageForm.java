@@ -1,8 +1,14 @@
 package Famacy.view;
 
+import Famacy.model.Employee;
+import Famacy.repository.EmployeeRepository;
+
 import javax.swing.*;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.util.List;
 
 public class MessageForm extends JFrame {
     private JPanel mainPanel;
@@ -32,18 +38,18 @@ public class MessageForm extends JFrame {
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
         leftPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
+        JLabel userNameLabel = new JLabel("User_Name :");
+        userNameLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        leftPanel.add(userNameLabel);
+
         JLabel yourConversationLabel = new JLabel("Your Conversation :");
-        yourConversationLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        yourConversationLabel.setAlignmentX(Component.RIGHT_ALIGNMENT);
         leftPanel.add(yourConversationLabel);
 
         userComboBox = new JComboBox<>();
         userComboBox.setPreferredSize(new Dimension(200, 25));
         userComboBox.setMaximumSize(new Dimension(200, 25));
         leftPanel.add(userComboBox);
-
-        JLabel userNameLabel = new JLabel("User_Name :");
-        userNameLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        leftPanel.add(userNameLabel);
 
         mainPanel.add(leftPanel, BorderLayout.WEST);
 
@@ -69,6 +75,17 @@ public class MessageForm extends JFrame {
             SendMessageForm sendMessageForm = new SendMessageForm();
             sendMessageForm.setVisible(true);
         });
+
+        loadEmployeeList();
+    }
+
+    private void loadEmployeeList() {
+        EmployeeRepository repository = new EmployeeRepository();
+        List<Employee> employees = repository.findAll();
+        userComboBox.removeAllItems();
+        for (Employee employee : employees) {
+            userComboBox.addItem(employee.getName());
+        }
     }
 
     public static void main(String[] args) {

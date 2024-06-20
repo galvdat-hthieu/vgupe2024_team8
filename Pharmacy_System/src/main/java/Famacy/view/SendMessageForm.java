@@ -1,7 +1,14 @@
 package Famacy.view;
 
+import Famacy.model.Employee;
+import Famacy.model.Message;
+import Famacy.model.MessageId;
+import Famacy.repository.EmployeeRepository;
+import Famacy.repository.MessageRepository;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class SendMessageForm extends JFrame {
     private JPanel mainPanel;
@@ -11,7 +18,13 @@ public class SendMessageForm extends JFrame {
     private JButton sendButton;
     private JButton backButton;
 
+    private EmployeeRepository employeeRepository;
+    private MessageRepository messageRepository;
+
     public SendMessageForm() {
+        employeeRepository = new EmployeeRepository();
+        messageRepository = new MessageRepository();
+
         setTitle("Send_Message Form");
         setSize(500, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -83,6 +96,43 @@ public class SendMessageForm extends JFrame {
             MessageForm chatApplicationUI = new MessageForm();
             chatApplicationUI.setVisible(true);
         });
+
+        sendButton.addActionListener(e -> {
+            sendMessage();
+        });
+
+        loadEmployeeList();
+    }
+
+    private void loadEmployeeList() {
+        List<Employee> employees = employeeRepository.findAll();
+        toComboBox.removeAllItems();
+        for (Employee employee : employees) {
+            toComboBox.addItem(employee.getName());
+        }
+    }
+
+    private void sendMessage() {
+        String messageFrom = fromTextField.getText();
+        String messageTo = (String) toComboBox.getSelectedItem();
+        String content = messageTextArea.getText();
+
+        Integer senderId = employeeRepository.findEmployeeIdByName(messageFrom);
+        Integer receiverId = employeeRepository.findEmployeeIdByName(messageTo);
+
+        if (senderId != null && receiverId != null) {
+            MessageId messageId = new MessageId(senderId, receiverId);
+            Message message = new Message();
+            message.setId(messageId);
+            message.setContent(content);
+            messageRepository.saveMessage(message);
+            JOptionPane.showMessageDialog(this, "Message sent successfully!");
+            dispose();
+            MessageForm messageForm = new MessageForm();
+            messageForm.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Failed to send message. Please check the names.");
+        }
     }
 
     public static void main(String[] args) {
