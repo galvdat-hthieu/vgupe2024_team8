@@ -14,6 +14,8 @@
 
         <!-- List of annotated entity classes -->
         <mapping class="Famacy.model.Medicine"/>
+        <mapping class="Famacy.model.Account"/>
+        <mapping class="Famacy.model.Employee"/>
 <!--        <mapping class="com.yourcompany.model.Employee"/>
         <mapping class="com.yourcompany.model.User"/>-->
         <!-- Add other entity mappings here -->
