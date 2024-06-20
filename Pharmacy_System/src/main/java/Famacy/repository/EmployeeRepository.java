@@ -1,11 +1,12 @@
 package Famacy.repository;
 
-import Famacy.model.Employee;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import Famacy.util.HibernateUtil;
 
-import java.util.List;
+import Famacy.model.Employee;
+import Famacy.util.HibernateUtil;
 
 public class EmployeeRepository {
     private SessionFactory factory;
@@ -55,10 +56,10 @@ public class EmployeeRepository {
         var query = session.createQuery(queryString, Employee.class);
     
         if (name != null && !name.isEmpty()) {
-            query.setParameter("name", "%" + name + "%");
+            query.setParameter("name", "%" + name + "%"); // Add % around name
         }
         if (role != null && !role.isEmpty()) {
-            query.setParameter("role", "%" + role + "%");
+            query.setParameter("role", "%" + role + "%"); // Add % around role
         }
         if (id != null) {
             query.setParameter("id", id);
