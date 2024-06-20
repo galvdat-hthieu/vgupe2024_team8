@@ -3,7 +3,7 @@ package Famacy.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Message")
+@Table(name = "\"Message\"")
 public class Message {
 
     @EmbeddedId
