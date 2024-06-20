@@ -1,6 +1,7 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
+import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -62,8 +63,8 @@ public class ResetPasswordForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                MainMenu mainMenu = new MainMenu(currentUsername); // Continue with the current logged-in user
-                mainMenu.setVisible(true);
+                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Continue with the current logged-in user
+                pharmacyMain.setVisible(true);
             }
         });
     }

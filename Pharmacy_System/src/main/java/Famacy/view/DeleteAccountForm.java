@@ -1,6 +1,7 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
+import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -62,30 +63,10 @@ public class DeleteAccountForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                MainMenu mainMenu = new MainMenu(currentUsername); // Continue with the current logged-in user
-                mainMenu.setVisible(true);
+                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Continue with the current logged-in user
+                pharmacyMain.setVisible(true);
             }
         });
-    }
-
-    private void placeComponents(JPanel panel) {
-        panel.setLayout(null);
-
-        JLabel userLabel = new JLabel("Username:");
-        userLabel.setBounds(10, 20, 80, 25);
-        panel.add(userLabel);
-
-        usernameField = new JTextField(20);
-        usernameField.setBounds(150, 20, 165, 25);
-        panel.add(usernameField);
-
-        deleteAccountButton = new JButton("Delete Account");
-        deleteAccountButton.setBounds(10, 60, 150, 25);
-        panel.add(deleteAccountButton);
-
-        backButton = new JButton("Back");
-        backButton.setBounds(170, 60, 100, 25);
-        panel.add(backButton);
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
+import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,6 @@ public class ChangePasswordForm extends JFrame {
     private JPasswordField newPasswordField;
     private JButton changePasswordButton;
     private JButton backButton;
-    private JButton logoutButton;
     private JPanel changePasswordPanel;
 
     private String username;
@@ -39,8 +39,8 @@ public class ChangePasswordForm extends JFrame {
                     accountService.changePassword(username, newPassword);
                     JOptionPane.showMessageDialog(null, "Password changed successfully!");
                     dispose();
-                    MainMenu mainMenu = new MainMenu(username);
-                    mainMenu.setVisible(true);
+                    PharmacyMain pharmacyMain = new PharmacyMain(username);
+                    pharmacyMain.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Old password is incorrect.");
                 }
@@ -52,18 +52,8 @@ public class ChangePasswordForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                MainMenu mainMenu = new MainMenu(username);
-                mainMenu.setVisible(true);
-            }
-        });
-
-        logoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Logout and return to login screen
-                dispose();
-                LoginForm loginForm = new LoginForm();
-                loginForm.setVisible(true);
+                PharmacyMain pharmacyMain = new PharmacyMain(username);
+                pharmacyMain.setVisible(true);
             }
         });
     }
@@ -94,10 +84,6 @@ public class ChangePasswordForm extends JFrame {
         backButton = new JButton("Back");
         backButton.setBounds(170, 80, 100, 25);
         panel.add(backButton);
-
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(10, 110, 150, 25);
-        panel.add(logoutButton);
     }
 
     public static void main(String[] args) {

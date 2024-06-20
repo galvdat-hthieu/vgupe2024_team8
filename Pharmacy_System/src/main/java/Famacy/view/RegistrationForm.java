@@ -1,6 +1,7 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
+import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -13,11 +14,11 @@ public class RegistrationForm extends JFrame {
     private JTextField employeeIdField;
     private JButton registerButton;
     private JButton backButton;
-    private JButton logoutButton;
     private JPanel registrationPanel;
 
+    private String currentUsername;  // Store the current logged-in username
+
     private static final String[] ROLES = {"admin", "user"}; // Define available roles
-    private String currentUsername;
 
     public RegistrationForm(String currentUsername) {
         this.currentUsername = currentUsername;
@@ -43,8 +44,8 @@ public class RegistrationForm extends JFrame {
                 if (accountService.registerAccount(username, password, role, employeeId)) {
                     JOptionPane.showMessageDialog(null, "Account registered successfully!");
                     dispose();
-                    MainMenu mainMenu = new MainMenu(currentUsername); // Continue with the current logged-in user
-                    mainMenu.setVisible(true);
+                    PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Return to main screen
+                    pharmacyMain.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Username already exists.");
                 }
@@ -56,18 +57,8 @@ public class RegistrationForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                MainMenu mainMenu = new MainMenu(currentUsername); // Continue with the current logged-in user
-                mainMenu.setVisible(true);
-            }
-        });
-
-        logoutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Logout and return to login screen
-                dispose();
-                LoginForm loginForm = new LoginForm();
-                loginForm.setVisible(true);
+                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Return to main screen
+                pharmacyMain.setVisible(true);
             }
         });
     }
@@ -114,15 +105,11 @@ public class RegistrationForm extends JFrame {
         backButton = new JButton("Back");
         backButton.setBounds(170, 140, 100, 25);
         panel.add(backButton);
-
-        logoutButton = new JButton("Logout");
-        logoutButton.setBounds(10, 170, 150, 25);
-        panel.add(logoutButton);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            RegistrationForm registrationForm = new RegistrationForm("currentuser"); // Example usage
+            RegistrationForm registrationForm = new RegistrationForm("admin"); // Example usage
             registrationForm.setVisible(true);
         });
     }

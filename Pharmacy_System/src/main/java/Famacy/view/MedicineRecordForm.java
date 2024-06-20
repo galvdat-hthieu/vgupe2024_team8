@@ -22,7 +22,6 @@ public class MedicineRecordForm extends JFrame {
         this.medicineService = medicineService;
         setTitle("Medicine Form");
         setSize(400, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initializeComponents();
     }
 

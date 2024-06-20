@@ -11,7 +11,7 @@ public class EmployeeRecordForm extends JFrame {
     private EmployeeRepository employeeRepository = new EmployeeRepository();
     private JTextField idField;
     private JTextField nameField;
-    private JTextField genderField;
+    private JComboBox<String> genderComboBox;
     private JTextField roleField;
     private JTextField birthField;
     private JTextField phoneField;
@@ -29,7 +29,7 @@ public class EmployeeRecordForm extends JFrame {
     private void initializeComponents() {
         idField = new JTextField(20);
         nameField = new JTextField(20);
-        genderField = new JTextField(20);
+        genderComboBox = new JComboBox<>(new String[]{"M", "F"});
         roleField = new JTextField(20);
         birthField = new JTextField(20);
         phoneField = new JTextField(20);
@@ -43,7 +43,7 @@ public class EmployeeRecordForm extends JFrame {
         add(new JLabel("Name:"));
         add(nameField);
         add(new JLabel("Gender:"));
-        add(genderField);
+        add(genderComboBox);
         add(new JLabel("Role:"));
         add(roleField);
         add(new JLabel("Birth:"));
@@ -69,7 +69,7 @@ public class EmployeeRecordForm extends JFrame {
             Employee employee = new Employee();
             employee.setId(id);
             employee.setName(nameField.getText());
-            employee.setGender(genderField.getText());
+            employee.setGender((String) genderComboBox.getSelectedItem());
             employee.setRole(roleField.getText());
             employee.setBirth(birthField.getText());
             employee.setPhone(phoneField.getText());
@@ -77,8 +77,6 @@ public class EmployeeRecordForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Employee saved successfully!");
         }
     }
-
-    
 
     private boolean isInputValid() {
         if (idField.getText().isEmpty()) {
@@ -89,7 +87,7 @@ public class EmployeeRecordForm extends JFrame {
             JOptionPane.showMessageDialog(this, "Name field is empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        if (genderField.getText().isEmpty()) {
+        if (genderComboBox.getSelectedItem() == null) {
             JOptionPane.showMessageDialog(this, "Gender field is empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }

@@ -203,4 +203,3 @@ public class MedicineManagementForm extends JFrame {
         managementForm.setVisible(true);
     }
 }
-

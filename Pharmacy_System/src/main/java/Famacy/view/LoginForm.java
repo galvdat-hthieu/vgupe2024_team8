@@ -1,10 +1,13 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
+import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class LoginForm extends JFrame {
     private JTextField usernameField;
@@ -25,20 +28,41 @@ public class LoginForm extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                AccountService accountService = new AccountService();
-                String username = usernameField.getText();
-                String password = new String(passwordField.getPassword());
+                login();
+            }
+        });
 
-                if (accountService.validateAccount(username, password)) {
-                    JOptionPane.showMessageDialog(null, "Login successful!");
-                    dispose();
-                    MainMenu mainMenu = new MainMenu(username);
-                    mainMenu.setVisible(true);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        passwordField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    login();
                 }
             }
         });
+
+        usernameField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    login();
+                }
+            }
+        });
+    }
+
+    private void login() {
+        AccountService accountService = new AccountService();
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
+
+        if (accountService.validateAccount(username, password)) {
+            dispose();
+            PharmacyMain pharmacyMain = new PharmacyMain(username);
+            pharmacyMain.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        }
     }
 
     private void placeComponents(JPanel panel) {
