@@ -149,7 +149,11 @@ public class EmployeeManagementForm extends JFrame {
                     return;
                 }
             }
-            employees = employeeService.searchEmployees(name, role, id);
+            if (id != null) {
+                employees = employeeService.searchEmployees(name, role, id);
+            } else {
+                employees = employeeService.searchEmployees(name, role, null);
+            }
         }
     
         tableModel.setRowCount(0); // Clear the table model
@@ -164,7 +168,6 @@ public class EmployeeManagementForm extends JFrame {
             });
         }
     }
-
     private void updateEmployee() {
         int selectedRow = employeeTable.getSelectedRow();
         if (selectedRow >= 0) {
