@@ -33,21 +33,21 @@ public class PharmacyMain extends JFrame {
         setTitle("Famacy's Search");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);  // Center the frame
+        setLocationRelativeTo(null); // Center the frame
         initializeComponents();
     }
 
     private void initializeComponents() {
         // Main panel
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBackground(Color.decode("#E6EEF2"));  // Set background color
+        mainPanel.setBackground(Color.decode("#E6EEF2")); // Set background color
 
         // Top search bar
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         searchPanel.setBackground(Color.decode("#E6EEF2"));
         JTextField searchField = new JTextField("Enter the meds name here...", 30);
-        JButton searchButton = new JButton(new ImageIcon("search_icon.png"));  // Use actual path to your icon
-        JButton micButton = new JButton(new ImageIcon("mic_icon.png"));  // Use actual path to your icon
+        JButton searchButton = new JButton(new ImageIcon("search_icon.png")); // Use actual path to your icon
+        JButton micButton = new JButton(new ImageIcon("mic_icon.png")); // Use actual path to your icon
         searchPanel.add(searchField);
         searchPanel.add(searchButton);
         searchPanel.add(micButton);
@@ -58,7 +58,7 @@ public class PharmacyMain extends JFrame {
         JButton inventoryButton = new JButton("Inventory Management");
         JButton supplyButton = new JButton("Supply Form Generation");
         JButton chatButton = new JButton("Internal Chat");
-        
+
         middlePanel.add(inventoryButton);
         middlePanel.add(supplyButton);
         middlePanel.add(chatButton);
@@ -67,7 +67,7 @@ public class PharmacyMain extends JFrame {
         if ("admin".equals(role)) {
             JButton employeeButton = new JButton("Employee Management");
             middlePanel.add(employeeButton);
-            
+
             employeeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -90,7 +90,7 @@ public class PharmacyMain extends JFrame {
         chatButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MessageForm chatApplicationUI = new MessageForm();
+                MessageForm chatApplicationUI = new MessageForm(username);
                 chatApplicationUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 chatApplicationUI.setVisible(true);
             }
@@ -177,7 +177,8 @@ public class PharmacyMain extends JFrame {
         });
         sidebar.add(yourAccountButton);
 
-        String[] sidebarItems = {"Personal Info", "History", "Transactions", "Records", "Themes", "Zooms", "Print", "Help", "Setting"};
+        String[] sidebarItems = { "Personal Info", "History", "Transactions", "Records", "Themes", "Zooms", "Print",
+                "Help", "Setting" };
         for (String item : sidebarItems) {
             JButton button = new JButton(item);
             sidebar.add(button);
