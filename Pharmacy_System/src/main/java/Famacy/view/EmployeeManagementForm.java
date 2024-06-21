@@ -7,6 +7,9 @@ import Famacy.service.EmployeeService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import org.postgresql.util.PSQLException;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -194,19 +197,26 @@ public class EmployeeManagementForm extends JFrame {
         }
     }
 
-    private void deleteEmployee() {
-        int selectedRow = employeeTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            int id = (int) tableModel.getValueAt(selectedRow, 0);
-
+private void deleteEmployee() {
+    int selectedRow = employeeTable.getSelectedRow();
+    if (selectedRow >= 0) {
+        int id = (int) tableModel.getValueAt(selectedRow, 0);
+        try {
             employeeService.deleteEmployee(id);
             tableModel.removeRow(selectedRow);
             JOptionPane.showMessageDialog(this, "Employee deleted successfully!");
             loadEmployeeData();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Delete Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) {
+            if (e.getMessage().contains("update or delete on table \"Employee\" violates foreign key constraint \"employee_id_fkey\" on table \"Account\"")) {
+                JOptionPane.showMessageDialog(this, "User Account exists", "Error", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "An error occurred: A user account with this ID exists", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Delete Error", JOptionPane.ERROR_MESSAGE);
     }
+}
 
     public static void main(String[] args) {
         EmployeeService employeeService = new EmployeeService();
