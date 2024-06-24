@@ -197,9 +197,9 @@ public class MedicineManagementForm extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        MedicineService medicineService = new MedicineService();
-        MedicineManagementForm managementForm = new MedicineManagementForm(medicineService);
-        managementForm.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        MedicineService medicineService = new MedicineService();
+//        MedicineManagementForm managementForm = new MedicineManagementForm(medicineService);
+//        managementForm.setVisible(true);
+//    }
 }

@@ -107,10 +107,10 @@ public class RegistrationForm extends JFrame {
         panel.add(backButton);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            RegistrationForm registrationForm = new RegistrationForm("admin"); // Example usage
-            registrationForm.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            RegistrationForm registrationForm = new RegistrationForm("admin"); // Example usage
+//            registrationForm.setVisible(true);
+//        });
+//    }
 }

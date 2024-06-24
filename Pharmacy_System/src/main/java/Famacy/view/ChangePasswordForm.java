@@ -86,10 +86,10 @@ public class ChangePasswordForm extends JFrame {
         panel.add(backButton);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ChangePasswordForm changePasswordForm = new ChangePasswordForm("testuser"); // Example usage
-            changePasswordForm.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            ChangePasswordForm changePasswordForm = new ChangePasswordForm("testuser"); // Example usage
+//            changePasswordForm.setVisible(true);
+//        });
+//    }
 }

@@ -69,10 +69,10 @@ public class DeleteAccountForm extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            DeleteAccountForm deleteAccountForm = new DeleteAccountForm("admin"); // Example usage
-            deleteAccountForm.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            DeleteAccountForm deleteAccountForm = new DeleteAccountForm("admin"); // Example usage
+//            deleteAccountForm.setVisible(true);
+//        });
+//    }
 }

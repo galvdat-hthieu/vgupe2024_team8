@@ -69,10 +69,10 @@ public class ResetPasswordForm extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            ResetPasswordForm resetPasswordForm = new ResetPasswordForm("admin"); // Example usage
-            resetPasswordForm.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            ResetPasswordForm resetPasswordForm = new ResetPasswordForm("admin"); // Example usage
+//            resetPasswordForm.setVisible(true);
+//        });
+//    }
 }

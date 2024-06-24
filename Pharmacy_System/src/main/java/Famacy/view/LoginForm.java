@@ -89,10 +89,10 @@ public class LoginForm extends JFrame {
         panel.add(loginButton);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            LoginForm loginForm = new LoginForm();
-            loginForm.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            LoginForm loginForm = new LoginForm();
+//            loginForm.setVisible(true);
+//        });
+//    }
 }
