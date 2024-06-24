@@ -1,6 +1,10 @@
 package Famacy;
 
 import Famacy.service.AccountService;
+import Famacy.service.EmployeeService;
+import Famacy.service.MedicineService;
+import Famacy.service.ConsumableService;
+import Famacy.service.TransactionService;
 import Famacy.view.ChangePasswordForm;
 import Famacy.view.DeleteAccountForm;
 import Famacy.view.LoginForm;
@@ -9,8 +13,8 @@ import Famacy.view.ResetPasswordForm;
 import Famacy.view.EmployeeManagementForm;
 import Famacy.view.MedicineManagementForm;
 import Famacy.view.MessageForm;
-import Famacy.service.EmployeeService;
-import Famacy.service.MedicineService;
+import Famacy.view.ConsumableManagementForm;
+import Famacy.view.TransactionManagementForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +26,8 @@ public class PharmacyMain extends JFrame {
     private String role;
     private EmployeeService employeeService;
     private MedicineService medicineService;
+    private ConsumableService consumableService;
+    private TransactionService transactionService;
 
     public PharmacyMain(String username) {
         this.username = username;
@@ -29,6 +35,8 @@ public class PharmacyMain extends JFrame {
         this.role = accountService.getRoleByUsername(username);
         this.employeeService = new EmployeeService();
         this.medicineService = new MedicineService();
+        this.consumableService = new ConsumableService();
+        this.transactionService = new TransactionService();
 
         setTitle("Famacy's Search");
         setSize(800, 600);
@@ -55,12 +63,12 @@ public class PharmacyMain extends JFrame {
         // Middle buttons
         JPanel middlePanel = new JPanel(new GridLayout(1, 4, 10, 10));
         middlePanel.setBackground(Color.decode("#E6EEF2"));
-        JButton inventoryButton = new JButton("Inventory Management");
-        JButton supplyButton = new JButton("Supply Form Generation");
+        JButton medicineButton = new JButton("Medicine");
+        JButton consumableButton = new JButton("Consumable");
         JButton chatButton = new JButton("Internal Chat");
 
-        middlePanel.add(inventoryButton);
-        middlePanel.add(supplyButton);
+        middlePanel.add(medicineButton);
+        middlePanel.add(consumableButton);
         middlePanel.add(chatButton);
 
         // Only add the Employee Management button if the user's role is admin
@@ -78,12 +86,21 @@ public class PharmacyMain extends JFrame {
             });
         }
 
-        inventoryButton.addActionListener(new ActionListener() {
+        medicineButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 MedicineManagementForm medicineForm = new MedicineManagementForm(medicineService);
                 medicineForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 medicineForm.setVisible(true);
+            }
+        });
+        
+        consumableButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                ConsumableManagementForm consumableForm = new ConsumableManagementForm(consumableService);
+                consumableForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                consumableForm.setVisible(true);
             }
         });
 
@@ -182,6 +199,17 @@ public class PharmacyMain extends JFrame {
         for (String item : sidebarItems) {
             JButton button = new JButton(item);
             sidebar.add(button);
+            
+            if (item.equals("Transactions")) {
+                button.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        TransactionManagementForm transactionForm = new TransactionManagementForm(transactionService);
+                        transactionForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+                        transactionForm.setVisible(true);
+                    }
+                });
+            }
         }
 
         // Status bar
