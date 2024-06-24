@@ -85,4 +85,31 @@ public class MedicineRepository {
             session.close();
         }
     }
+    
+    public List<String> findMedicineNames(String name) {
+        List<String> names;
+        try (Session session = factory.openSession()) {
+            String queryString = "select m.id.name from Medicine m where m.id.name like :name";
+            var query = session.createQuery(queryString, String.class);
+            query.setParameter("name", "%" + name + "%");
+            names = query.list();
+        }
+        return names;
+    }
+    
+    public void updateQuantity(String name, int quantity) {
+        try (Session session = factory.openSession()) {
+            session.beginTransaction();
+            String queryString = "from Medicine m where m.id.name = :name";
+            Medicine medicine = session.createQuery(queryString, Medicine.class)
+                                       .setParameter("name", name)
+                                       .uniqueResult();
+            if (medicine != null) {
+                medicine.setQuantity(medicine.getQuantity() - quantity);
+                session.update(medicine);
+            }
+            session.getTransaction().commit();
+        }
+    }
+
 }

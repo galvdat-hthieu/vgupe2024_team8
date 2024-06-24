@@ -1,7 +1,7 @@
+
 package Famacy.repository;
 
 import Famacy.model.Account;
-import Famacy.model.Employee;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
