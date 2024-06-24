@@ -1,3 +1,4 @@
+
 package Famacy.model;
 
 import javax.persistence.*;
