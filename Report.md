@@ -3,15 +3,15 @@
 
 
 ## Table of Contents
-1. [Introduction](#1.-Introduction)
+1. [Introduction](#item-one)
 2. [Example2](#example2)
 3. [Third Example](#third-example)
 4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
 5. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
 6. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
-7. [Task Division](#7.-Task-Division)
+7. [Task Division](#item-seven)
 
-
+<a id="item-one"></a>
 ## 1. Introduction
 This project focuses on an innovative application designed to manage a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
 
@@ -91,4 +91,5 @@ This report outlines the design and implementation of Pharmacy Management System
 
 ## 6. Design
 
+<a id="item-seven"></a>
 ## 7. Task Division
