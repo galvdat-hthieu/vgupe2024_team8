@@ -57,8 +57,15 @@ This project is about an application to effectively manage a pharmaceutical stor
    1. The system shall have an intuitive and user-friendly interface.
 
 ## Framework
+This report outlines the design and implementation of Phamacist Management System using Hibernate, Postgre SQL, and the MVC pattern.
 
-## Library
+### System Architecture
+
+## Technologies Used
+   - Hibernate: ORM framework for mapping Java objects to database tables.
+   - PostgreSQL: Relational database management system for storing employee data.
+   - Swing: GUI toolkit for the Java programming language to create the user interface.
+   - Java: Programming language used for the development of the application.
 
 ## Design
 
