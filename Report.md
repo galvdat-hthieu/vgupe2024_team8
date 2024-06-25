@@ -91,7 +91,7 @@ This report outlines the design and implementation of a Pharmacy Management Syst
 
 Thanks to Java’s diverse libraries, it has helped us a lot in development. We utilized the following
 libraries:
-### Library
+
 
 
 <a id="item-six"></a>
