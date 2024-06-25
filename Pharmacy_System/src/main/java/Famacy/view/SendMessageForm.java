@@ -23,13 +23,11 @@ public class SendMessageForm extends JFrame {
     private MessageRepository messageRepository;
 
     private List<JCheckBox> userCheckBoxes;
-    private boolean allSelected;
 
     public SendMessageForm(String username) {
         this.username = username;
         employeeRepository = new EmployeeRepository();
         messageRepository = new MessageRepository();
-        allSelected = false;
 
         setTitle("Send Message");
         setSize(400, 600);
@@ -70,7 +68,7 @@ public class SendMessageForm extends JFrame {
         mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
         sendButton.addActionListener(e -> proceedToMessage());
-        selectAllButton.addActionListener(e -> toggleSelectAllUsers());
+        selectAllButton.addActionListener(e -> selectAllUsers());
 
         loadEmployeeList();
     }
@@ -85,12 +83,10 @@ public class SendMessageForm extends JFrame {
         }
     }
 
-    private void toggleSelectAllUsers() {
-        allSelected = !allSelected;
+    private void selectAllUsers() {
         for (JCheckBox checkBox : userCheckBoxes) {
-            checkBox.setSelected(allSelected);
+            checkBox.setSelected(true);
         }
-        selectAllButton.setText(allSelected ? "Deselect All" : "All");
     }
 
     private void proceedToMessage() {
