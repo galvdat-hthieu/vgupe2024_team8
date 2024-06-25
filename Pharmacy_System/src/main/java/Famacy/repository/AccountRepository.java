@@ -1,12 +1,11 @@
 
 package Famacy.repository;
 
-import Famacy.model.Account;
-
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import Famacy.model.Account;
 import Famacy.util.HibernateUtil;
 
 public class AccountRepository {
@@ -44,7 +43,7 @@ public class AccountRepository {
     }
 
     // Get employee ID by username
-    public Integer findEmployeeIdByUsername(String username) {
+    public static Integer findEmployeeIdByUsername(String username) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             Query<Account> query = session.createQuery("FROM Account a WHERE a.username = :username", Account.class);
             query.setParameter("username", username); // Corrected parameter name
