@@ -8,147 +8,156 @@ import Famacy.repository.MessageRepository;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SendMessageForm extends JFrame {
     private JPanel mainPanel;
-    private JTextField fromTextField;
-    private JComboBox<String> toComboBox;
+    private JPanel checkboxPanel;
     private JTextArea messageTextArea;
     private JButton sendButton;
-    private JButton backButton;
+    private JButton selectAllButton;
+    private static String username;
 
     private EmployeeRepository employeeRepository;
     private MessageRepository messageRepository;
-    private AccountRepository accountRepository;
-    private static String username;
+
+    private List<JCheckBox> userCheckBoxes;
+    private boolean allSelected;
 
     public SendMessageForm(String username) {
         this.username = username;
         employeeRepository = new EmployeeRepository();
         messageRepository = new MessageRepository();
-        accountRepository = new AccountRepository();
+        allSelected = false;
 
-        setTitle("Send_Message Form");
-        setSize(500, 400);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Send Message");
+        setSize(400, 600);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Ensure only this frame is closed
         setLocationRelativeTo(null);
 
         mainPanel = new JPanel();
-        mainPanel.setLayout(null);
-        mainPanel.setBackground(new Color(60, 63, 65));
+        mainPanel.setLayout(new BorderLayout());
         add(mainPanel);
 
-        JLabel titleLabel = new JLabel("Send_Message Form", SwingConstants.CENTER);
+        // Top Panel
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JLabel titleLabel = new JLabel("Send Message", SwingConstants.CENTER);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(10, 10, 460, 30);
-        mainPanel.add(titleLabel);
+        topPanel.add(titleLabel, BorderLayout.CENTER);
+        mainPanel.add(topPanel, BorderLayout.NORTH);
 
-        JLabel messageInfoLabel = new JLabel("Message_Information", SwingConstants.LEFT);
-        messageInfoLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        messageInfoLabel.setForeground(Color.WHITE);
-        messageInfoLabel.setBounds(20, 50, 200, 25);
-        mainPanel.add(messageInfoLabel);
+        // Center Panel
+        JPanel centerPanel = new JPanel(new BorderLayout());
 
-        JSeparator separator = new JSeparator();
-        separator.setBounds(20, 70, 460, 10);
-        mainPanel.add(separator);
+        // Checkbox Panel
+        checkboxPanel = new JPanel();
+        checkboxPanel.setLayout(new BoxLayout(checkboxPanel, BoxLayout.Y_AXIS));
+        JScrollPane checkboxScrollPane = new JScrollPane(checkboxPanel);
+        checkboxScrollPane.setBorder(BorderFactory.createTitledBorder("Select Users"));
+        centerPanel.add(checkboxScrollPane, BorderLayout.CENTER);
 
-        JLabel fromLabel = new JLabel("Message_From :");
-        fromLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        fromLabel.setForeground(Color.WHITE);
-        fromLabel.setBounds(20, 90, 120, 25);
-        mainPanel.add(fromLabel);
+        // Bottom Panel
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        sendButton = new JButton("Next");
+        selectAllButton = new JButton("All");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPanel.add(selectAllButton);
+        buttonPanel.add(sendButton);
+        bottomPanel.add(buttonPanel, BorderLayout.EAST);
 
-        fromTextField = new JTextField();
-        fromTextField.setBounds(150, 90, 200, 25);
-        fromTextField.setEditable(false);
-        mainPanel.add(fromTextField);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
 
-        JLabel toLabel = new JLabel("Message_To :");
-        toLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        toLabel.setForeground(Color.WHITE);
-        toLabel.setBounds(20, 130, 120, 25);
-        mainPanel.add(toLabel);
-
-        toComboBox = new JComboBox<>();
-        toComboBox.setBounds(150, 130, 200, 25);
-        mainPanel.add(toComboBox);
-
-        JLabel messageLabel = new JLabel("Message_Text :");
-        messageLabel.setFont(new Font("Arial", Font.PLAIN, 14));
-        messageLabel.setForeground(Color.WHITE);
-        messageLabel.setBounds(20, 170, 120, 25);
-        mainPanel.add(messageLabel);
-
-        messageTextArea = new JTextArea();
-        messageTextArea.setBounds(150, 170, 200, 100);
-        JScrollPane messageScrollPane = new JScrollPane(messageTextArea);
-        messageScrollPane.setBounds(150, 170, 200, 100);
-        mainPanel.add(messageScrollPane);
-
-        sendButton = new JButton("Send");
-        sendButton.setBounds(150, 290, 80, 25);
-        mainPanel.add(sendButton);
-
-        backButton = new JButton("Back to Inbox");
-        backButton.setBounds(250, 290, 150, 25);
-        mainPanel.add(backButton);
-
-        backButton.addActionListener(e -> {
-            dispose();
-            MessageForm messageForm = new MessageForm(username);
-            messageForm.setVisible(true);
-        });
-
-        sendButton.addActionListener(e -> {
-            sendMessage();
-        });
+        sendButton.addActionListener(e -> proceedToMessage());
+        selectAllButton.addActionListener(e -> toggleSelectAllUsers());
 
         loadEmployeeList();
-        loadEmployeeName();
     }
 
     private void loadEmployeeList() {
         List<Employee> employees = employeeRepository.findAll();
-        toComboBox.removeAllItems();
+        userCheckBoxes = new ArrayList<>();
         for (Employee employee : employees) {
-            toComboBox.addItem(employee.getName());
+            JCheckBox checkBox = new JCheckBox(employee.getName());
+            userCheckBoxes.add(checkBox);
+            checkboxPanel.add(checkBox);
         }
     }
 
-    private void loadEmployeeName() {
-        Integer employeeId = accountRepository.findEmployeeIdByUsername(username);
-        if (employeeId != null) {
-            String employeeName = employeeRepository.findEmployeeNameById(employeeId);
-            if (employeeName != null) {
-                fromTextField.setText(employeeName);
+    private void toggleSelectAllUsers() {
+        allSelected = !allSelected;
+        for (JCheckBox checkBox : userCheckBoxes) {
+            checkBox.setSelected(allSelected);
+        }
+        selectAllButton.setText(allSelected ? "Deselect All" : "All");
+    }
+
+    private void proceedToMessage() {
+        List<String> selectedUsers = new ArrayList<>();
+        for (JCheckBox checkBox : userCheckBoxes) {
+            if (checkBox.isSelected()) {
+                selectedUsers.add(checkBox.getText());
             }
         }
-    }
 
-    private void sendMessage() {
-        String messageFrom = fromTextField.getText();
-        String messageTo = (String) toComboBox.getSelectedItem();
-        String content = messageTextArea.getText();
-
-        Integer senderId = accountRepository.findEmployeeIdByUsername(username);
-        Integer receiverId = employeeRepository.findEmployeeIdByName(messageTo);
-
-        if (senderId != null && receiverId != null) {
-            Message message = new Message();
-            message.setSenderID(senderId);
-            message.setReceiverID(receiverId);
-            message.setContent(content);
-            messageRepository.saveMessage(message);
-            JOptionPane.showMessageDialog(this, "Message sent successfully!");
-            dispose();
-            MessageForm messageForm = new MessageForm(username);
-            messageForm.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Failed to send message. Please check the names.");
+        if (selectedUsers.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select at least one user.");
+            return;
         }
+
+        // Remove the user selection panel and add the message input panel
+        mainPanel.removeAll();
+
+        JPanel messagePanel = new JPanel(new BorderLayout());
+        messageTextArea = new JTextArea();
+        messageTextArea.setBorder(BorderFactory.createTitledBorder("Message"));
+        messagePanel.add(new JScrollPane(messageTextArea), BorderLayout.CENTER);
+
+        JPanel sendPanel = new JPanel(new BorderLayout());
+        sendButton = new JButton("Send Message");
+        sendPanel.add(sendButton, BorderLayout.EAST);
+
+        mainPanel.add(messagePanel, BorderLayout.CENTER);
+        mainPanel.add(sendPanel, BorderLayout.SOUTH);
+
+        sendButton.addActionListener(e -> sendMessage(selectedUsers));
+
+        // Refresh the frame
+        mainPanel.revalidate();
+        mainPanel.repaint();
     }
 
+    private void sendMessage(List<String> selectedUsers) {
+        String messageContent = messageTextArea.getText();
+
+        for (String user : selectedUsers) {
+            Integer receiverId = employeeRepository.findEmployeeIdByName(user);
+            Integer senderId = AccountRepository.findEmployeeIdByUsername(username);
+
+            if (receiverId != null && senderId != null) {
+                Message message = new Message();
+                message.setSenderID(senderId);
+                message.setReceiverID(receiverId);
+                message.setContent(messageContent);
+
+                // Debugging information to verify message before saving
+                System.out.println("Sending message from ID " + senderId + " to ID " + receiverId + " with content: "
+                        + messageContent);
+
+                messageRepository.saveMessage(message);
+
+                // Debugging information to verify message was saved
+                System.out.println("Message saved for user: " + user);
+            } else {
+                // Debugging information for potential issues with IDs
+                System.out.println("Failed to find sender or receiver ID for user: " + user);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Message sent to selected users.");
+        dispose();
+        MessageForm messageForm = new MessageForm(username);
+        messageForm.setVisible(true);
+    }
 }
