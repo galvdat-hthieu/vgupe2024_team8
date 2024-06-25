@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Famacy.view;
 
 import Famacy.model.Medicine;
@@ -22,14 +18,24 @@ public class MedicineManagementForm extends JFrame {
     private JTextField searchNameField;
     private JTextField searchBatchNumberField;
     private JTextField searchSupplierField;
+    private JButton addButton;
+    private JButton updateButton;
+    private JButton deleteButton;
 
-    public MedicineManagementForm(MedicineService medicineService) {
+    public MedicineManagementForm(MedicineService medicineService, String role) {
         this.medicineService = medicineService;
         setTitle("Medicine Management");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initializeComponents();
         loadMedicineData();
+        
+        // Disable buttons if the role is "user"
+        if ("user".equals(role)) {
+            addButton.setEnabled(false);
+            updateButton.setEnabled(false);
+            deleteButton.setEnabled(false);
+        }
     }
 
     private void initializeComponents() {
@@ -73,9 +79,9 @@ public class MedicineManagementForm extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel();
-        JButton addButton = new JButton("Add");
-        JButton updateButton = new JButton("Update");
-        JButton deleteButton = new JButton("Delete");
+        addButton = new JButton("Add");
+        updateButton = new JButton("Update");
+        deleteButton = new JButton("Delete");
         buttonPanel.add(addButton);
         buttonPanel.add(updateButton);
         buttonPanel.add(deleteButton);
