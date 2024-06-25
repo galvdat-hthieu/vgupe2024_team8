@@ -15,6 +15,7 @@ import Famacy.view.MedicineManagementForm;
 import Famacy.view.MessageForm;
 import Famacy.view.ConsumableManagementForm;
 import Famacy.view.TransactionManagementForm;
+import Famacy.view.ChangeRoleForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -89,16 +90,16 @@ public class PharmacyMain extends JFrame {
         medicineButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MedicineManagementForm medicineForm = new MedicineManagementForm(medicineService);
+                MedicineManagementForm medicineForm = new MedicineManagementForm(medicineService, role);
                 medicineForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 medicineForm.setVisible(true);
             }
         });
-        
+
         consumableButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ConsumableManagementForm consumableForm = new ConsumableManagementForm(consumableService);
+                ConsumableManagementForm consumableForm = new ConsumableManagementForm(consumableService, role);
                 consumableForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
                 consumableForm.setVisible(true);
             }
@@ -122,14 +123,15 @@ public class PharmacyMain extends JFrame {
             JButton accountManagerButton = new JButton("Account Manager");
             accountManagerButton.addActionListener(e -> {
                 JFrame accountManagerFrame = new JFrame("Account Manager");
-                accountManagerFrame.setSize(400, 300);
+                accountManagerFrame.setSize(400, 400);
                 accountManagerFrame.setLocationRelativeTo(null);
                 accountManagerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                JPanel accountManagerPanel = new JPanel(new GridLayout(3, 1, 10, 10));
+                JPanel accountManagerPanel = new JPanel(new GridLayout(4, 1, 10, 10));
                 JButton createAccountButton = new JButton("Create Account");
                 JButton resetPasswordButton = new JButton("Reset Password");
                 JButton deleteAccountButton = new JButton("Delete Account");
+                JButton changeRoleButton = new JButton("Change Role");
 
                 createAccountButton.addActionListener(event -> {
                     RegistrationForm registrationForm = new RegistrationForm(username);
@@ -152,9 +154,17 @@ public class PharmacyMain extends JFrame {
                     accountManagerFrame.dispose();
                 });
 
+                changeRoleButton.addActionListener(event -> {
+                    ChangeRoleForm changeRoleForm = new ChangeRoleForm(username);
+                    changeRoleForm.setVisible(true);
+                    dispose(); // Close PharmacyMain
+                    accountManagerFrame.dispose();
+                });
+
                 accountManagerPanel.add(createAccountButton);
                 accountManagerPanel.add(resetPasswordButton);
                 accountManagerPanel.add(deleteAccountButton);
+                accountManagerPanel.add(changeRoleButton);
                 accountManagerFrame.add(accountManagerPanel);
 
                 accountManagerFrame.setVisible(true);
@@ -179,10 +189,10 @@ public class PharmacyMain extends JFrame {
                 ChangePasswordForm changePasswordForm = new ChangePasswordForm(username);
                 changePasswordForm.setVisible(true);
                 accountFrame.dispose();
-                dispose();
             });
 
             logoutButton.addActionListener(event -> {
+                accountFrame.dispose();
                 dispose();
                 new LoginForm().setVisible(true);
             });
@@ -199,7 +209,7 @@ public class PharmacyMain extends JFrame {
         for (String item : sidebarItems) {
             JButton button = new JButton(item);
             sidebar.add(button);
-            
+
             if (item.equals("Transactions")) {
                 button.addActionListener(new ActionListener() {
                     @Override
