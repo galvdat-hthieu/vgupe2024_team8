@@ -1,5 +1,5 @@
 # Programing Exercise Report: Pharmacy Management System
-### Team 8
+# Team 8
 
 
 ## Table of Contents
