@@ -58,4 +58,12 @@ public class AccountService {
             accountRepository.saveAccount(account);
         }
     }
+
+    public void changeRole(String username, String newRole) {
+        Account account = accountRepository.findByUsername(username);
+        if (account != null) {
+            account.setRole(newRole);
+            accountRepository.saveAccount(account);
+        }
+    }
 }
