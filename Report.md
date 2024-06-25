@@ -4,12 +4,13 @@
 
 ## Table of Contents
 1. [Introduction](#item-one)
-2. [Example2](#item-two)
-3. [Third Example](#item-three)
-4. [Fourth Example](#item-four)
-5. [Fourth Example](#item-five)
-6. [Fourth Example](#item-six)
-7. [Task Division](#item-seven)
+2. [Problem Description](#item-two)
+3. [Customer Requirement](#item-three)
+4. [Framework](#item-four)
+5. [Technologies Used](#item-five)
+6. [Design](#item-six)
+7. [User Guide](#item-seven)
+8. [Task Division](#item-seven)
 
 <a id="item-one"></a>
 ## 1. Introduction
@@ -98,4 +99,7 @@ libraries:
 ## 6. Design
 
 <a id="item-seven"></a>
-## 7. Task Division
+## 7. User Guide
+
+<a id="item-seven"></a>
+## 8. Task Division
