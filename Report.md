@@ -1,10 +1,10 @@
 # Programing Exercise Report
 ### Team 8
 
-## 1.Introduction
+## 1. Introduction
 This project focuses on an innovative application designed to manage a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
 
-## 2.Problem Description
+## 2. Problem Description
 This project is about an application to effectively manage a pharmaceutical store. It helps the pharmacist to :
 - Record maintenance of medicines/drugs and supplies sent by the supplier
 - Administration management of employee records
@@ -13,7 +13,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 - Generation of invoices, bills, receipts, and other related documents
 - Management of drugs and consumables within the pharmacy unit
 
-## 3.Customer Requirement
+## 3. Customer Requirement
 ### Functional:   
    1. Record maintenance of medicines/drugs and supplies sent by the supplier
       - The system shall provide forms or fields to input details such as medicine name, batch number, expiration date, quantity, and supplier information.
@@ -56,7 +56,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 ### Non-Functional:
    1. The system shall have an intuitive and user-friendly interface.
 
-## 4.Framework
+## 4. Framework
 This report outlines the design and implementation of Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. 
 
 ### System Architecture
@@ -69,7 +69,7 @@ This report outlines the design and implementation of Pharmacy Management System
 - util/: Contains utility classes.
 
 
-## 5.Technologies Used
+## 5. Technologies Used
    - Hibernate: ORM framework for mapping Java objects to database tables.
    - PostgreSQL: Relational database management system for storing employee data.
    - Swing: GUI toolkit for the Java programming language to create the user interface.
@@ -78,6 +78,6 @@ This report outlines the design and implementation of Pharmacy Management System
 ### Library
 
 
-## 6.Design
+## 6. Design
 
-## 7.Task Division
+## 7. Task Division
