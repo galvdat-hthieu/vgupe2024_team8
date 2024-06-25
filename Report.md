@@ -4,17 +4,18 @@
 
 ## Table of Contents
 1. [Introduction](#item-one)
-2. [Example2](#example2)
-3. [Third Example](#third-example)
-4. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
-5. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
-6. [Fourth Example](#fourth-examplehttpwwwfourthexamplecom)
+2. [Example2](#item-two)
+3. [Third Example](#item-three)
+4. [Fourth Example](#item-four)
+5. [Fourth Example](#item-five)
+6. [Fourth Example](#item-six)
 7. [Task Division](#item-seven)
 
 <a id="item-one"></a>
 ## 1. Introduction
 This project focuses on an innovative application designed to manage a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
 
+<a id="item-two"></a>
 ## 2. Problem Description
 This project is about an application to effectively manage a pharmaceutical store. It helps the pharmacist to :
 - Record maintenance of medicines/drugs and supplies sent by the supplier
@@ -24,6 +25,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 - Generation of invoices, bills, receipts, and other related documents
 - Management of drugs and consumables within the pharmacy unit
 
+<a id="item-three"></a>
 ## 3. Customer Requirement
 ### Functional:   
    1. Record maintenance of medicines/drugs and supplies sent by the supplier
@@ -67,6 +69,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 ### Non-Functional:
    1. The system shall have an intuitive and user-friendly interface.
 
+<a id="item-four"></a>
 ## 4. Framework
 This report outlines the design and implementation of Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. 
 
@@ -79,7 +82,7 @@ This report outlines the design and implementation of Pharmacy Management System
 - view/: Contains Swing form classes for the GUI.
 - util/: Contains utility classes.
 
-
+<a id="item-five"></a>
 ## 5. Technologies Used
    - Hibernate: ORM framework for mapping Java objects to database tables.
    - PostgreSQL: Relational database management system for storing employee data.
@@ -88,7 +91,7 @@ This report outlines the design and implementation of Pharmacy Management System
 
 ### Library
 
-
+<a id="item-six"></a>
 ## 6. Design
 
 <a id="item-seven"></a>
