@@ -13,7 +13,7 @@
 
 <a id="item-one"></a>
 ## 1. Introduction
-This project focuses on an innovative application designed to manage a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
+This Maven project focuses on an innovative application for managing a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
 
 <a id="item-two"></a>
 ## 2. Problem Description
@@ -71,8 +71,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 <a id="item-four"></a>
 ## 4. Framework
-This report outlines the design and implementation of Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. 
-
+This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
 ### System Architecture
 - Hibernate:  Used for ORM to map Java objects to database tables.
 - PostgreSQL JDBC Driver: Allows Java to connect to PostgreSQL databases.
@@ -81,6 +80,7 @@ This report outlines the design and implementation of Pharmacy Management System
 - service/: Contains service classes that implement business logic.
 - view/: Contains Swing form classes for the GUI.
 - util/: Contains utility classes.
+- hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
 
 <a id="item-five"></a>
 ## 5. Technologies Used
@@ -89,7 +89,10 @@ This report outlines the design and implementation of Pharmacy Management System
    - Swing: GUI toolkit for the Java programming language to create the user interface.
    - Java: Programming language used for the development of the application.
 
+Thanks to Java’s diverse libraries, it has helped us a lot in development. We utilized the following
+libraries:
 ### Library
+
 
 <a id="item-six"></a>
 ## 6. Design
