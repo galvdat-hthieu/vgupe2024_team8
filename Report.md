@@ -70,17 +70,8 @@ This project is about an application to effectively manage a pharmaceutical stor
    1. The system shall have an intuitive and user-friendly interface.
 
 <a id="item-four"></a>
-## 4. Code Modules
-This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
-### System Architecture
-- Hibernate:  Used for ORM to map Java objects to database tables.
-- PostgreSQL JDBC Driver: Allows Java to connect to PostgreSQL databases.
-- model/: Contains entity classes representing the database tables.
-- repository/: Contains repository classes for database operations.
-- service/: Contains service classes that implement business logic.
-- view/: Contains Swing form classes for the GUI.
-- util/: Contains utility classes.
-- hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
+## 4. Design
+
 
 <a id="item-five"></a>
 ## 5. Technologies Used
@@ -95,32 +86,42 @@ libraries:
 
 
 <a id="item-six"></a>
-## 6. Design
+## 6. Code Modules
+This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
+### System Architecture
+- Hibernate:  Used for ORM to map Java objects to database tables.
+- PostgreSQL JDBC Driver: Allows Java to connect to PostgreSQL databases.
+- model/: Contains entity classes representing the database tables.
+- repository/: Contains repository classes for database operations.
+- service/: Contains service classes that implement business logic.
+- view/: Contains Swing form classes for the GUI.
+- util/: Contains utility classes.
+- hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
 
 <a id="item-seven"></a>
 ## 7. User Guide
 ### Employee Management:
 <p>This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.</p>
 
-![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607) 
+![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607.png =100x20) 
 
-<p>Here is the GUI of this function. It will have 3 blank boxes so users can enter information to search based on ID, name, position and then just press "search".</p>
+<p>Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "search".</p>
 
 ![employeemanagement](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8) 
 
-<p>We can view employee information more easily by clicking "View", it will display complete information.</p>
+<p>You can view employee information more easily by clicking "View", it will display complete information.</p>
 
-![viewem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59) &nbsp;
+![viewem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59) 
 
-<p>Next we can add employees by entering information or importing csv file. After we have added, we click on the "Refresh" button.</p>
+<p>Next, you can add employees by entering information or importing a csv file. After you have added it, you click on the "Refresh" button.</p>
 
-![addem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c) &nbsp;
+![addem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c) 
 
-<p>Not only that, we can click on the box of the employee who needs to change. We have delete and edit functions.</p>
+<p>Not only that, you can click on the box of the employee who needs to change. you have delete and edit functions.</p>
 
-![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) &nbsp;
+![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) 
 
-<p>Finally, we can export a csv file containing employee information.</p>
+<p>Finally, you can export a csv file containing employee information.</p>
 
 ### ....
 
