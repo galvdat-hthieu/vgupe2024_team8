@@ -856,28 +856,26 @@ public class MedicineManagementForm extends javax.swing.JFrame {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
-        String relativeFilePath = "table-to-csv/medicine_table.csv"; // Change this to your desired directory
+        String folderName = "table-to-csv";
+        String fileName = "medicine_table.csv";
 
         try {
-            // Determine the path to the resources folder
-            URL resourceUrl = this.getClass().getClassLoader().getResource("");
-            if (resourceUrl == null) {
-                throw new IllegalStateException("Resources folder not found");
-            }
+            // Get the current working directory
+            String workingDir = System.getProperty("user.dir");
 
-            File resourceFolder = new File(resourceUrl.toURI());
-            File subFolder = new File(resourceFolder, "table-to-csv");
+            // Create the folder path
+            File folder = new File(workingDir, folderName);
 
-            // Create the subfolder if it doesn't exist
-            if (!subFolder.exists()) {
-                boolean created = subFolder.mkdirs();
+            // Create the folder if it doesn't exist
+            if (!folder.exists()) {
+                boolean created = folder.mkdirs();
                 if (!created) {
-                    throw new IOException("Failed to create directory: " + subFolder.getAbsolutePath());
+                    throw new IOException("Failed to create directory: " + folder.getAbsolutePath());
                 }
             }
 
             // Full path to the CSV file
-            File csvFile = new File(resourceFolder, relativeFilePath);
+            File csvFile = new File(folder, fileName);
 
             try (FileWriter fileWriter = new FileWriter(csvFile)) {
                 DefaultTableModel model = (DefaultTableModel) medTable.getModel();
@@ -920,10 +918,11 @@ public class MedicineManagementForm extends javax.swing.JFrame {
                 e.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Error exporting data: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
             }
-        } catch (URISyntaxException | IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Error accessing resource folder: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error accessing working directory: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_exportButtonActionPerformed
     
     
