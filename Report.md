@@ -27,7 +27,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 - Management of drugs and consumables within the pharmacy unit
 
 <a id="item-three"></a>
-## 3. Customer Requirement
+## 3. Analysis 
 ### Functional:   
    1. Record maintenance of medicines/drugs and supplies sent by the supplier
       - The system shall provide forms or fields to input details such as medicine name, batch number, expiration date, quantity, and supplier information.
@@ -70,7 +70,7 @@ This project is about an application to effectively manage a pharmaceutical stor
    1. The system shall have an intuitive and user-friendly interface.
 
 <a id="item-four"></a>
-## 4. Framework
+## 4. Code Modules
 This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
 ### System Architecture
 - Hibernate:  Used for ORM to map Java objects to database tables.
