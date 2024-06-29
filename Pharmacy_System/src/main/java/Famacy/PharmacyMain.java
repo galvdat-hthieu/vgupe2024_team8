@@ -60,6 +60,7 @@ public class PharmacyMain extends javax.swing.JFrame {
         initComponents();
         checkRole();
         setResizable(false);
+        setTitle("Famacy: Internal Management");
                
     }
 
