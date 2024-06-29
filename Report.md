@@ -106,19 +106,19 @@ libraries:
 
 <p>Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "search".</p>
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8" width="400" height="500">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8" width="500" height="400">
 
 <p>You can view employee information more easily by clicking "View", it will display complete information.</p>
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59" width="400" height="500">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59" width="500" height="400">
 
 <p>Next, you can add employees by entering information or importing a csv file. After you have added it, you click on the "Refresh" button.</p>
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c" width="400" height="500">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c" width="500" height="400">
 
 <p>Not only that, you can click on the box of the employee who needs to change. you have delete and edit functions.</p>
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="400" height="500">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="500" height="400">
 
 <p>Finally, you can export a csv file containing employee information.</p>
 
