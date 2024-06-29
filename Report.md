@@ -17,7 +17,7 @@
 This Maven project focuses on an innovative application for managing a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
 
 <a id="item-two"></a>
-## 2. Problem Description
+## 2. Application Description
 This project is about an application to effectively manage a pharmaceutical store. It helps the pharmacist to :
 - Record maintenance of medicines/drugs and supplies sent by the supplier
 - Administration management of employee records
@@ -100,7 +100,29 @@ libraries:
 <a id="item-seven"></a>
 ## 7. User Guide
 ### Employee Management:
-![Screenshot 2024-06-29 161245](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/403b158f-83bc-40c4-9b51-00275941f9a6)
+This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.
+![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607) &nbsp;
+
+Here is the GUI of this function. It will have 3 blank boxes so users can enter information to search based on ID, name, position and then just press "search".
+![employeemanagement](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8) &nbsp;
+
+We can view employee information more easily by clicking "View", it will display complete information.
+![viewem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59) &nbsp;
+
+Next we can add employees by entering information or importing csv file. After we have added, we click on the "Refresh" button.
+![addem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c) &nbsp;
+
+Not only that, we can click on the box of the employee who needs to change. We have delete and edit functions.
+![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) &nbsp;
+
+Finally, we can export a csv file containing employee information.
+
+### ....
+
+
+
+
+
 
 
 <a id="item-seven"></a>
