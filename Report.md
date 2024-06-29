@@ -104,23 +104,23 @@ This is our Main Menu, here you can click the "Manage Employee" button to enter 
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607" width="400" height="400">
 
-<p>Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "search".</p>
+Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "search".
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8" width="500" height="400">
 
-<p>You can view employee information more easily by clicking "View", it will display complete information.</p>
+You can view employee information more easily by clicking "View", it will display complete information.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59" width="500" height="400">
 
-<p>Next, you can add employees by entering information or importing a csv file. After you have added it, you click on the "Refresh" button.</p>
+Next, you can add employees by entering information or importing a csv file. After you have added it, you click on the "Refresh" button.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c" width="500" height="400">
 
-<p>Not only that, you can click on the box of the employee who needs to change. you have delete and edit functions.</p>
+Not only that, you can click on the box of the employee who needs to change. you have delete and edit functions.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="500" height="400">
 
-<p>Finally, you can export a csv file containing employee information.</p>
+Finally, you can export a csv file containing employee information.
 
 ### ....
 
@@ -135,9 +135,8 @@ This is our Main Menu, here you can click the "Manage Employee" button to enter 
 
 ## 9. Cách up hình lên report
 <p>kéo hình từ thư mục trong máy vào thẳng report thì ví dụ nó sẽ ra cái này.</p>
-<p> Nhớ có 2 cái p với /p để cho nó cách dòng ra </p>
 
 ![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) 
 
-<p> sau đó copy cái https vào trong " " như thế này: </p>
+ sau đó copy cái https vào trong " " như thế này: 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="400" height="400">
