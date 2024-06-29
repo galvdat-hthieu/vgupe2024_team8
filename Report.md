@@ -99,6 +99,7 @@ libraries:
 
 <a id="item-seven"></a>
 ## 7. User Guide
+### I: Admin Account:
 ### Employee Management:
 This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.
 
@@ -122,7 +123,7 @@ Not only that, you can click on the box of the employee who needs to change. you
 
 Finally, you can export a csv file containing employee information.
 
-### ....
+### II: User Account:
 
 
 
