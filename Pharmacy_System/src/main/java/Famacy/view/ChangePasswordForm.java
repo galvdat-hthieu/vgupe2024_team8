@@ -39,6 +39,7 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Change Password");
         setResizable(false);
 
         oldPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
