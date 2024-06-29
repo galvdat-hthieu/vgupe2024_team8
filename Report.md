@@ -74,19 +74,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 
 <a id="item-five"></a>
-## 5. Technologies Used
-   - Hibernate: ORM framework for mapping Java objects to database tables.
-   - PostgreSQL: Relational database management system for storing employee data.
-   - Swing: GUI toolkit for the Java programming language to create the user interface.
-   - Java: Programming language used for the development of the application.
-
-Thanks to Java’s diverse libraries, it has helped us a lot in development. We utilized the following
-libraries:
-
-
-
-<a id="item-six"></a>
-## 6. Code Modules
+## 5. Code Modules
 This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
 ### System Architecture
 - Hibernate:  Used for ORM to map Java objects to database tables.
@@ -98,12 +86,23 @@ This report outlines the design and implementation of a Pharmacy Management Syst
 - util/: Contains utility classes.
 - hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
 
+<a id="item-six"></a>
+## 6. Technologies Used
+   - Hibernate: ORM framework for mapping Java objects to database tables.
+   - PostgreSQL: Relational database management system for storing employee data.
+   - Swing: GUI toolkit for the Java programming language to create the user interface.
+   - Java: Programming language used for the development of the application.
+
+Thanks to Java’s diverse libraries, it has helped us a lot in development. We utilized the following
+libraries:
+
+
 <a id="item-seven"></a>
 ## 7. User Guide
 ### Employee Management:
 <p>This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.</p>
 
-![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607.png =100x20) 
+![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607) 
 
 <p>Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "search".</p>
 
