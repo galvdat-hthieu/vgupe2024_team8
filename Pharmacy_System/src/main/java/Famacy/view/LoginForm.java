@@ -42,6 +42,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        setTitle("Famacy: Login");
 
         FamacyLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         FamacyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
