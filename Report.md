@@ -66,7 +66,6 @@ This project is about an application to effectively manage a pharmaceutical stor
       - The system shall keep track of the medication and consumables information frequently.
       - The system shall alert when the quantities are below a certain threshold to ensure that the pharmacy never runs out of medications and consumables. The same goes for expiration monitoring.
       - The system shall display the recorded information as commanded.
-      - The system shall alert before the supplier contracts are over.
 ### Non-Functional:
    1. The system shall have an intuitive and user-friendly interface.
 
