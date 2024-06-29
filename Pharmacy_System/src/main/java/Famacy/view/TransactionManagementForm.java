@@ -14,6 +14,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -29,6 +30,20 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JTable;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import javax.swing.JPanel;
 
 
 public class TransactionManagementForm extends javax.swing.JFrame {
@@ -588,12 +603,83 @@ public class TransactionManagementForm extends javax.swing.JFrame {
         JScrollPane scrollPane = new JScrollPane(transactedItemTable);
         transactionDialog.add(scrollPane, BorderLayout.CENTER);
 
+        // Create a panel for buttons
+        JPanel buttonPanel = new JPanel();
+
         JButton closeButton = new JButton("Close");
         closeButton.addActionListener(e -> transactionDialog.dispose());
-        transactionDialog.add(closeButton, BorderLayout.SOUTH);
+        buttonPanel.add(closeButton);
+
+        JButton generateInvoiceButton = new JButton("Generate Invoice");
+        generateInvoiceButton.addActionListener(e -> generateInvoice(transaction));
+        buttonPanel.add(generateInvoiceButton);
+
+        transactionDialog.add(buttonPanel, BorderLayout.SOUTH);
 
         transactionDialog.setLocationRelativeTo(this);
         transactionDialog.setVisible(true);
+    }
+
+    
+    private void generateInvoice(Transaction transaction) {
+        Document document = new Document();
+        try {
+            
+            // Define the folder path
+            String folderPath = "invoices";
+            File folder = new File(folderPath);
+
+            // Create the folder if it does not exist
+            if (!folder.exists()) {
+                folder.mkdirs();
+            }
+            
+            String fileName = folder + File.separator + "Invoice_" + transaction.getId() + ".pdf";
+            PdfWriter.getInstance(document, new FileOutputStream(fileName));
+            document.open();
+
+            Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+            Font bodyFont = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.NORMAL);
+
+            Paragraph title = new Paragraph("Invoice", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            document.add(new Paragraph("Transaction ID: " + transaction.getId(), bodyFont));
+            document.add(new Paragraph("Date: " + transaction.getTransactionDate(), bodyFont));
+            document.add(new Paragraph("Total Amount: $" + transaction.getTotalAmount(), bodyFont));
+            document.add(new Paragraph("\n"));
+
+            PdfPTable table = new PdfPTable(4); // 4 columns.
+            table.setWidthPercentage(100); // Width 100%
+            table.setSpacingBefore(10f); // Space before table
+            table.setSpacingAfter(10f); // Space after table
+
+            PdfPCell cell1 = new PdfPCell(new Phrase("Item Name", bodyFont));
+            PdfPCell cell2 = new PdfPCell(new Phrase("Quantity", bodyFont));
+            PdfPCell cell3 = new PdfPCell(new Phrase("Type", bodyFont));
+            PdfPCell cell4 = new PdfPCell(new Phrase("Price", bodyFont));
+
+            table.addCell(cell1);
+            table.addCell(cell2);
+            table.addCell(cell3);
+            table.addCell(cell4);
+
+            for (TransactionItem item : transaction.getItems()) {
+                table.addCell(new PdfPCell(new Phrase(item.getItemName(), bodyFont)));
+                table.addCell(new PdfPCell(new Phrase(String.valueOf(item.getQuantity()), bodyFont)));
+                table.addCell(new PdfPCell(new Phrase(item.getItemType(), bodyFont)));
+                table.addCell(new PdfPCell(new Phrase(String.valueOf(item.getPrice()), bodyFont)));
+            }
+
+            document.add(table);
+            document.close();
+
+            JOptionPane.showMessageDialog(this, "Invoice generated successfully: " + fileName, "Success", JOptionPane.INFORMATION_MESSAGE);
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error generating invoice: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 

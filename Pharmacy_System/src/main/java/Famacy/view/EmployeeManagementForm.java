@@ -28,8 +28,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Collections;
 import java.io.FileWriter;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.text.ParseException;
 /**
  *

@@ -83,7 +83,7 @@ public class ConsumableRepository {
     
     public Consumable findConsumableByName(String name){
          try (Session session = sessionFactory.openSession()) {
-            List<Consumable> consumables = session.createQuery("from Consumable where c.id.name = :name", Consumable.class)
+            List<Consumable> consumables = session.createQuery("from Consumable c where c.id.name = :name", Consumable.class)
                     .setParameter("name", name)
                     .list();
             if (consumables.isEmpty()) {

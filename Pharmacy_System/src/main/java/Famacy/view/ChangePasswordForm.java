@@ -39,7 +39,6 @@ public class ChangePasswordForm extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Change Password");
         setResizable(false);
 
         oldPasswordLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -109,6 +108,8 @@ public class ChangePasswordForm extends javax.swing.JFrame {
                     .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(15, Short.MAX_VALUE))
         );
+
+        setTitle("Change password");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,3 +199,5 @@ public class ChangePasswordForm extends javax.swing.JFrame {
     private javax.swing.JLabel oldPasswordLabel;
     // End of variables declaration//GEN-END:variables
 }
+
+

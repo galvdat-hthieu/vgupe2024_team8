@@ -30,8 +30,6 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.text.ParseException;
 
-import java.net.URL;
-import java.net.URISyntaxException;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,7 +1,6 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
-import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

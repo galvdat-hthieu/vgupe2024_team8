@@ -2,13 +2,16 @@ package Famacy.service;
 
 import Famacy.model.Account;
 import Famacy.repository.AccountRepository;
+import Famacy.repository.EmployeeRepository;
 import Famacy.util.PasswordUtil;
 
 public class AccountService {
     private AccountRepository accountRepository;
+    private EmployeeRepository employeeRepository;
 
     public AccountService() {
         this.accountRepository = new AccountRepository();
+        this.employeeRepository = new EmployeeRepository();
     }
 
     public boolean validateAccount(String username, String password) {
@@ -22,6 +25,9 @@ public class AccountService {
 
     public boolean registerAccount(String username, String password, String role, int employeeId) {
         // Check if the username is already taken
+        if (employeeRepository.findById(employeeId) == null){
+            return false;
+        }
         if (accountRepository.findByUsername(username) == null) {
             Account account = new Account();
             account.setUsername(username);
@@ -70,4 +76,6 @@ public class AccountService {
             accountRepository.saveAccount(account);
         }
     }
+    
+
 }

@@ -42,7 +42,6 @@ public class LoginForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle("Famacy: Login");
 
         FamacyLabel.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
         FamacyLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -135,6 +134,8 @@ public class LoginForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(LoginPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        setTitle("Famacy: Login");
 
         pack();
         setLocationRelativeTo(null);

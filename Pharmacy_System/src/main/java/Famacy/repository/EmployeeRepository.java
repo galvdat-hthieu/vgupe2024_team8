@@ -72,7 +72,7 @@ public class EmployeeRepository {
     }
 
     public Employee findById(int EID) {
-        Employee employee;
+        Employee employee = null;
         try (Session session = factory.openSession()) {
             employee = session.get(Employee.class, EID);
         }

@@ -1,7 +1,6 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
-import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +23,7 @@ public class RegistrationForm extends JFrame {
         this.currentUsername = currentUsername;
 
         setTitle("Register Account");
-        setSize(350, 180);
+        setSize(400, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -53,7 +52,7 @@ public class RegistrationForm extends JFrame {
                     JOptionPane.showMessageDialog(null, "Account registered successfully!");
                     dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, "Username already exists.");
+                    JOptionPane.showMessageDialog(null, "Username already exists or the employee does not exist. Please check again.");
                 }
             }
         });
