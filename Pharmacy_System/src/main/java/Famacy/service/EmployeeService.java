@@ -40,4 +40,8 @@ public class EmployeeService {
     public List<Employee> searchEmployees(String name, String role, Integer id) {
         return employeeRepository.searchEmployees(name, role, id);
     }
+    
+    public void convertDateIfNeeded() {
+        employeeRepository.dateConvert();
+    }
 }

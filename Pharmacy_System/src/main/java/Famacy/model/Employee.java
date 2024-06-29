@@ -1,11 +1,10 @@
 package Famacy.model;
 
-import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "\"Employee\"")
-public class Employee implements Serializable {
+public class Employee implements Comparable<Employee> {
     @Id
     @Column(name = "\"EID\"")
     private int id;
@@ -24,6 +23,26 @@ public class Employee implements Serializable {
 
     @Column(name = "\"Phone\"")
     private String phone;
+    
+    // Constructor
+    public Employee(int id, String name, String gender, 
+            String role, String birthDate, String phone) {
+        this.id = id;
+        this.name = name;
+        this.gender = gender;
+        this.role = role;
+        this.birth = birthDate;
+        this.phone = phone;
+    }
+    
+    public Employee() {
+        this.id = -1;
+        this.name = null;
+        this.gender = null;
+        this.role = null;
+        this.birth = null;
+        this.phone = null;
+    }
 
     // Getters and setters
     public int getId() {
@@ -72,5 +91,10 @@ public class Employee implements Serializable {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+    
+    @Override
+    public int compareTo(Employee other) {
+        return Integer.compare(this.id, other.id);
     }
 }

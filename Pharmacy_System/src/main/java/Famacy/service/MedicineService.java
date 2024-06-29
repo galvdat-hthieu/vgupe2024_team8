@@ -37,10 +37,22 @@ public class MedicineService {
     public List<Medicine> searchMedicines(String name, String batchNumber, String supplier) {
         return medicineRepository.searchMedicines(name, batchNumber, supplier);
     }
+    
+    public Medicine getMedicineByName(String name){
+        return medicineRepository.findMedicineByName(name);
+    }
 
 
     public void deleteMedicine(MedicineId id) {
         medicineRepository.delete(id);
+    }
+    
+    public void convertDateIfNeeded() {
+        medicineRepository.dateConvert();
+    }
+    
+    public List<Medicine> getMedicineByExpiredDate() {
+        return medicineRepository.findExpired();
     }
 }
 

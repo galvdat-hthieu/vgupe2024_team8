@@ -1,7 +1,6 @@
 package Famacy.view;
 
 import Famacy.service.AccountService;
-import Famacy.PharmacyMain;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,7 +21,7 @@ public class ChangeRoleForm extends JFrame {
 
         setTitle("Change Role");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         changeRolePanel = new JPanel();
@@ -73,8 +72,6 @@ public class ChangeRoleForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername);
-                pharmacyMain.setVisible(true);
             }
         });
     }

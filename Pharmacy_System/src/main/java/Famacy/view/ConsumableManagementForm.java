@@ -1,173 +1,1095 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package Famacy.view;
-
 import Famacy.model.Consumable;
 import Famacy.model.ConsumableId;
 import Famacy.service.ConsumableService;
+import Famacy.util.DateTimeAdd0Util;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-public class ConsumableManagementForm extends JFrame {
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Collections;
+import java.io.FileWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+/**
+ *
+ * @author ADMIN
+ */
+public class ConsumableManagementForm extends javax.swing.JFrame {
     private ConsumableService consumableService;
-    private JTable consumableTable;
     private DefaultTableModel tableModel;
-    private JTextField searchNameField;
-    private JTextField searchSupplierField;
-    private JButton addButton;
-    private JButton updateButton;
-    private JButton deleteButton;
+    private DateTimeAdd0Util dateTimeAdd0Util;
+    private JWindow suggestionWindow;
+    private JList<String> suggestionList;
+    
+    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
-    public ConsumableManagementForm(ConsumableService consumableService, String role) {
+    public ConsumableManagementForm(ConsumableService consumableService) {
+        this.dateTimeAdd0Util = new DateTimeAdd0Util();
         this.consumableService = consumableService;
-        setTitle("Consumable Management");
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initializeComponents();
+        initComponents();
+        initializeTable();
+        this.consumableService.convertDateIfNeeded();
         loadConsumableData();
+        dateLabel.setText(LocalDate.now().plusYears(2).format(newFormatter));
+        setupAutoComplete();
+    }
+
+    private void initializeTable() {
+        // Screen Config
+        // Disable windows resizing
+        setResizable(false);
+        // Windows displays in the center
+        this.setLocationRelativeTo(null);
         
-        // Disable buttons if the role is "user"
-        if ("user".equals(role)) {
-            addButton.setEnabled(false);
-            updateButton.setEnabled(false);
-            deleteButton.setEnabled(false);
+        // Table Config
+        tableModel = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+           //all cells false
+           return false;
         }
+        };
+        cTable.setModel(tableModel);
+        tableModel.addColumn("CName");
+        tableModel.addColumn("Quantity");
+        tableModel.addColumn("Supplied Date");
+        tableModel.addColumn("Supplier");
+        tableModel.addColumn("Price");
     }
-
-    private void initializeComponents() {
-        setLayout(new BorderLayout());
-
-        // Search Panel
-        JPanel searchPanel = new JPanel(new GridLayout(2, 3));
-        searchPanel.add(new JLabel("Name:"));
-        searchNameField = new JTextField();
-        searchPanel.add(searchNameField);
-
-        searchPanel.add(new JLabel("Supplier:"));
-        searchSupplierField = new JTextField();
-        searchPanel.add(searchSupplierField);
-
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchConsumables();
-            }
-        });
-        searchPanel.add(searchButton);
-
-        add(searchPanel, BorderLayout.NORTH);
-
-        // Table Panel
-        tableModel = new DefaultTableModel(new String[]{"Name", "Quantity", "Supplied Date", "Supplier"}, 0);
-        consumableTable = new JTable(tableModel);
-
-        JScrollPane scrollPane = new JScrollPane(consumableTable);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // Button Panel
-        JPanel buttonPanel = new JPanel();
-        addButton = new JButton("Add");
-        updateButton = new JButton("Update");
-        deleteButton = new JButton("Delete");
-        buttonPanel.add(addButton);
-        buttonPanel.add(updateButton);
-        buttonPanel.add(deleteButton);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openConsumableRecordForm();
-            }
-        });
-
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateConsumable();
-            }
-        });
-
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteConsumable();
-            }
-        });
-
-        add(buttonPanel, BorderLayout.SOUTH);
-    }
-
+    
+    
     private void loadConsumableData() {
-        tableModel.setRowCount(0); // Clear the table model
+        tableModel.setRowCount(0); // Clear the table model'
+        int count = 0;
         List<Consumable> consumables = consumableService.getAllConsumables();
+        Collections.sort(consumables);
         for (Consumable consumable : consumables) {
             tableModel.addRow(new Object[]{
                     consumable.getId().getName(),
                     consumable.getQuantity(),
                     consumable.getSuppliedDate(),
-                    consumable.getId().getSupplier()
+                    consumable.getId().getSupplier(),
+                    consumable.getPrice()
             });
+            count++;
         }
+        numRowLabel.setText(String.valueOf(count));
     }
 
-    private void searchConsumables() {
-        String name = searchNameField.getText();
-        String supplier = searchSupplierField.getText();
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
 
-        List<Consumable> consumables = consumableService.searchConsumables(name, supplier);
-        tableModel.setRowCount(0); // Clear the table model
-        for (Consumable consumable : consumables) {
-            tableModel.addRow(new Object[]{
-                    consumable.getId().getName(),
-                    consumable.getQuantity(),
-                    consumable.getSuppliedDate(),
-                    consumable.getId().getSupplier()
-            });
-        }
-    }
+        popupMenu = new javax.swing.JPopupMenu();
+        menuItemDelete = new javax.swing.JCheckBoxMenuItem();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cTable = new javax.swing.JTable();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        numRowLabel = new javax.swing.JLabel();
+        exportButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        supplierTextField = new javax.swing.JTextField();
+        batchTextField = new javax.swing.JTextField();
+        supplierSearch = new javax.swing.JLabel();
+        nameSearch = new javax.swing.JLabel();
+        nameTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        searchButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        viewButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
-    private void openConsumableRecordForm() {
-        ConsumableRecordForm recordForm = new ConsumableRecordForm(consumableService);
-        recordForm.setVisible(true);
-    }
+        menuItemDelete.setSelected(true);
+        menuItemDelete.setText("Delete Medicine");
+        popupMenu.add(menuItemDelete);
 
-    private void updateConsumable() {
-        int selectedRow = consumableTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            String name = (String) tableModel.getValueAt(selectedRow, 0);
-            Integer quantity = (Integer) tableModel.getValueAt(selectedRow, 1);
-            String suppliedDate = (String) tableModel.getValueAt(selectedRow, 2);
-            String supplier = (String) tableModel.getValueAt(selectedRow, 3);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Consumables Management");
 
-            Consumable consumable = new Consumable();
-            consumable.setId(new ConsumableId(name, supplier));
-            consumable.setQuantity(quantity);
-            consumable.setSuppliedDate(suppliedDate);
+        jLabel4.setText("Number of rows: ");
+        jLabel4.setToolTipText("");
 
-            consumableService.updateConsumable(consumable);
-            JOptionPane.showMessageDialog(this, "Consumable updated successfully!");
-            loadConsumableData();
+        cTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        cTable.setRowHeight(30);
+        cTable.getTableHeader().setResizingAllowed(false);
+        cTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(cTable);
+
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
+
+        editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        numRowLabel.setText("numRows");
+        numRowLabel.setName(""); // NOI18N
+        numRowLabel.setPreferredSize(new java.awt.Dimension(60, 16));
+
+        exportButton.setText("Export CSV");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(addButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numRowLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numRowLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        supplierTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierTextFieldActionPerformed(evt);
+            }
+        });
+
+        batchTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                batchTextFieldActionPerformed(evt);
+            }
+        });
+
+        supplierSearch.setText("Supplier: ");
+
+        nameSearch.setText("Name: ");
+
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Batch:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nameSearch)
+                        .addGap(30, 30, 30)
+                        .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(supplierSearch)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(34, 34, 34)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(batchTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(supplierTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supplierSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(batchTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)))
+        );
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        viewButton.setText("View");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Today:");
+
+        dateLabel.setText("Date");
+
+        jLabel2.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
+        jLabel2.setText("Consumables");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateLabel))
+                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(dateLabel))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 865, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameTextFieldActionPerformed
+
+    private void supplierTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_supplierTextFieldActionPerformed
+
+    private void batchTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batchTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_batchTextFieldActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String name = nameTextField.getText();
+        String batchNumber = batchTextField.getText();
+        String supplier = supplierTextField.getText();
+
+        // Check if all search fields are empty
+        if (name.isEmpty() && batchNumber.isEmpty() && supplier.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter at least one search criteria.",
+                    "Empty Search Fields", JOptionPane.WARNING_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to update.", "Update Error", JOptionPane.ERROR_MESSAGE);
+            // Perform search only if at least one field is not empty
+            List<Consumable> consumables = consumableService.searchConsumables(name, supplier);
+            tableModel.setRowCount(0); // Clear existing rows
+            
+            int count = 0;
+            Collections.sort(consumables);
+            for (Consumable consumable : consumables) {
+                tableModel.addRow(new Object[]{
+                        consumable.getId().getName(),
+                        consumable.getQuantity(),
+                        consumable.getSuppliedDate(),
+                        consumable.getId().getSupplier(),
+                        consumable.getPrice()
+                });
+                count++;
+            }
+            numRowLabel.setText(String.valueOf(count));
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private JSpinner createDaySpinner() {
+        SpinnerNumberModel dayModel = new SpinnerNumberModel(1, 1, 31, 1);
+        JSpinner daySpinner = new JSpinner(dayModel);
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) daySpinner.getEditor();
+        editor.getTextField().setColumns(2);
+        return daySpinner;
+    }
+
+    private JSpinner createMonthSpinner() {
+        SpinnerNumberModel monthModel = new SpinnerNumberModel(1, 1, 12, 1);
+        JSpinner monthSpinner = new JSpinner(monthModel);
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) monthSpinner.getEditor();
+        editor.getTextField().setColumns(2);
+        return monthSpinner;
+    }
+
+    private JSpinner createYearSpinner() {
+    int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+    SpinnerNumberModel yearModel = new SpinnerNumberModel(currentYear, currentYear - 100, currentYear + 100, 1);
+    JSpinner yearSpinner = new JSpinner(yearModel);
+    
+    // Set the editor to display the year without thousand separator
+    JSpinner.NumberEditor editor = new JSpinner.NumberEditor(yearSpinner, "#");
+    yearSpinner.setEditor(editor);
+    
+    editor.getTextField().setHorizontalAlignment(JTextField.LEFT); // Align left
+    
+    // Set the width of the text field for the year spinner
+    editor.getTextField().setColumns(4); // Adjust as needed
+
+    return yearSpinner;
+}
+
+    private Date combineDate(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
+        return calendar.getTime();
+    }
+    
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        JTextField cNameField = new JTextField(10);
+        
+        JTextField supplierField = new JTextField(10);
+
+        // Create separate spinners for day, month, and year
+        JSpinner suppliedDaySpinner = createDaySpinner();
+        JSpinner suppliedMonthSpinner = createMonthSpinner();
+        JSpinner suppliedYearSpinner = createYearSpinner();
+        
+        JTextField quantityField = new JTextField(10);
+        JTextField priceField = new JTextField(10);
+
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        JPanel manualInputPanel = new JPanel(new GridLayout(6, 2, hgap, vgap));
+        manualInputPanel.add(new JLabel(""));
+        manualInputPanel.add(new JLabel(""));
+        
+        manualInputPanel.add(new JLabel("Consumable Name:"));
+        manualInputPanel.add(cNameField);
+        
+        manualInputPanel.add(new JLabel("Supplied Date:"));
+        JPanel suppliedDatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        suppliedDatePanel.add(suppliedMonthSpinner);
+        suppliedDatePanel.add(suppliedDaySpinner);
+        suppliedDatePanel.add(suppliedYearSpinner);
+        manualInputPanel.add(suppliedDatePanel);
+        
+        manualInputPanel.add(new JLabel("Supplier:"));
+        manualInputPanel.add(supplierField);
+        
+        manualInputPanel.add(new JLabel("Quantity:"));
+        manualInputPanel.add(quantityField);
+        
+        manualInputPanel.add(new JLabel("Price:"));
+        manualInputPanel.add(priceField);
+
+        // Create components for file import
+        JButton fileImportButton = new JButton("Browse...");
+        fileImportButton.setPreferredSize(new Dimension(100, 200));
+        JLabel filePathLabel = new JLabel("No file selected");
+        filePathLabel.setVerticalAlignment(SwingConstants.CENTER);
+        filePathLabel.setFont(filePathLabel.getFont().deriveFont(14f));
+
+        // Create a panel for file import
+        JPanel fileImportPanel = new JPanel(new BorderLayout());
+        fileImportPanel.add(fileImportButton, BorderLayout.NORTH);
+        fileImportPanel.add(filePathLabel, BorderLayout.SOUTH);
+
+        // Add action listener to the file import button
+        fileImportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    filePathLabel.setText(selectedFile.getAbsolutePath());
+                    // Process the selected file (you can add your file processing code here)
+                }
+            }
+        });
+
+        // Create a tabbed pane and add the panels
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Manual Input", manualInputPanel);
+        tabbedPane.addTab("File Import", fileImportPanel);
+
+        // Display the dialog
+        int result = JOptionPane.showConfirmDialog(this, tabbedPane, "Add New Medicine", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        // If the user clicked OK, process the inputs
+        if (result == JOptionPane.OK_OPTION) {
+            if (tabbedPane.getSelectedIndex() == 0) {
+                // Manual input tab is selected
+                String cName = cNameField.getText();
+                String supplier = supplierField.getText();
+                
+                // Combine day, month, and year values to create the date
+                Date suppliedDate = combineDate((int) suppliedDaySpinner.getValue(), 
+                        (int) suppliedMonthSpinner.getValue(), 
+                        (int) suppliedYearSpinner.getValue());
+
+                // Format the dates to strings
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+                String suppliedDateString = dateFormatter.format(suppliedDate);
+                
+                int quantity = Integer.parseInt(quantityField.getText());
+                double price = Double.parseDouble(priceField.getText());
+                
+                // Id
+                ConsumableId id = new ConsumableId(cName, supplier);
+
+                // Medicine
+                Consumable consumable = new Consumable(id,
+                    suppliedDateString, quantity, price);
+
+                consumableService.updateConsumable(consumable);
+                loadConsumableData();
+
+            } else if (tabbedPane.getSelectedIndex() == 1) {
+                // File import tab is selected
+                String filePath = filePathLabel.getText();
+                System.out.println("Selected file: " + filePath);
+
+                // Process the selected file
+                if (!filePath.equals("No file selected")) {
+                    try {
+                        File file = new File(filePath);
+                        processImportedFile(file);
+
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(ConsumableManagementForm.this, "Error reading file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } 
+    }//GEN-LAST:event_addButtonActionPerformed
+
+    private void processImportedFile(File file) throws FileNotFoundException, IOException {
+        
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean isFirstLine = true; // Flag to check the first line
+            while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false; // Skip the header line
+                    continue;
+                }
+                // Split the line based on delimiter (e.g., comma for CSV)
+                String[] data = line.split(",");
+
+                // Ensure the data array has enough elements
+                try {
+                    // Parse each field from the array
+                    ConsumableId id = new ConsumableId(data[0], data[3]);
+
+                    // Handle suppliedDate
+                    String suppliedDateStr = dateTimeAdd0Util.add0(data[2]);
+
+                    int quantity = Integer.parseInt(data[1]);
+                    double price = Double.parseDouble(data[4]);
+
+                    Consumable consumable = new Consumable(id, suppliedDateStr, 
+                            quantity, price);
+
+                    consumableService.updateConsumable(consumable);
+                    loadConsumableData();
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid number format in line: " + line);
+                }
+            }
         }
     }
 
-    private void deleteConsumable() {
-        int selectedRow = consumableTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            String name = (String) tableModel.getValueAt(selectedRow, 0);
-            String supplier = (String) tableModel.getValueAt(selectedRow, 3);
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int[] selectedRows = cTable.getSelectedRows();
+        if (selectedRows.length > 0) {
+            int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete selected medicine(s)?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                for (int i = selectedRows.length - 1; i >= 0; i--) {
+                    int selectedRow = selectedRows[i];
+                    String name = (String) tableModel.getValueAt(selectedRow, 0);
+                    String supplier = (String) tableModel.getValueAt(selectedRow, 3);
+                    ConsumableId id = new ConsumableId(name, supplier);
 
-            consumableService.deleteConsumable(name, supplier);
-            tableModel.removeRow(selectedRow);
-            JOptionPane.showMessageDialog(this, "Consumable deleted successfully!");
-            loadConsumableData();
+                    consumableService.deleteConsumable(id);
+                    tableModel.removeRow(selectedRow);
+                }
+                JOptionPane.showMessageDialog(this, "Selected medicine(s) deleted successfully!");
+            }
         } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Delete Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please select one or more rows to delete.", "Delete Choice Missing", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        loadConsumableData();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        // Choosen row:
+        int selectedRow = cTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view details.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Retrieve data from the table model
+        String name = (String) tableModel.getValueAt(selectedRow, 0); // Assuming quantity is stored as Integer
+        int quantity = (Integer) tableModel.getValueAt(selectedRow, 1);
+        String sDate = (String) tableModel.getValueAt(selectedRow, 2); // Assuming supplied date is stored as String
+        String supplier = (String) tableModel.getValueAt(selectedRow, 3); // Assuming supplier is stored as String
+        double price = (Double) tableModel.getValueAt(selectedRow, 4);
+        
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        JPanel viewPanel = new JPanel(new GridLayout(5, 2, hgap, vgap));
+        viewPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+
+        // Add labels and corresponding data to the panel
+        viewPanel.add(new JLabel("Medicine Name:"));
+        viewPanel.add(new JLabel(name));
+        viewPanel.add(new JLabel("Quantity:"));
+        viewPanel.add(new JLabel(String.valueOf(quantity)));
+        viewPanel.add(new JLabel("Supplied Date:"));
+        viewPanel.add(new JLabel(sDate));
+        viewPanel.add(new JLabel("Supplier:"));
+        viewPanel.add(new JLabel(supplier));
+        viewPanel.add(new JLabel("Price:"));
+        viewPanel.add(new JLabel(String.valueOf(price)));// Convert int to String for JLabel
+
+        // Show the panel in a dialog
+        JOptionPane.showMessageDialog(this, viewPanel, "View Medicine Details", JOptionPane.PLAIN_MESSAGE);
+
+    }//GEN-LAST:event_viewButtonActionPerformed
+
+    private JPanel createDatePanel(JSpinner daySpinner, JSpinner monthSpinner, JSpinner yearSpinner) {
+        JPanel datePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        datePanel.add(daySpinner);
+        datePanel.add(monthSpinner);
+        datePanel.add(yearSpinner);
+        return datePanel;
+    }
+
+    private void setDateToSpinners(String date, JSpinner daySpinner, JSpinner monthSpinner, JSpinner yearSpinner) {
+        // Parse the date string to extract day, month, and year
+        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+        int day = localDate.getDayOfMonth();
+        int month = localDate.getMonthValue();
+        int year = localDate.getYear();
+
+        // Set the values to the spinners
+        daySpinner.setValue(day);
+        monthSpinner.setValue(month);
+        yearSpinner.setValue(year);
+    }
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = cTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to edit.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Retrieve data from the table model
+        String name = (String) tableModel.getValueAt(selectedRow, 0); // Assuming quantity is stored as Integer
+        int quantity = (Integer) tableModel.getValueAt(selectedRow, 1);
+        String sDate = (String) tableModel.getValueAt(selectedRow, 2); // Assuming supplied date is stored as String
+        String supplier = (String) tableModel.getValueAt(selectedRow, 3); // Assuming supplier is stored as String
+        double price = (Double) tableModel.getValueAt(selectedRow, 4);
+
+        // Create components for editing
+        JTextField consumableNameField = new JTextField(name, 10);
+        
+        JTextField quantityField = new JTextField(String.valueOf(quantity), 10);
+        
+        // Separate spinners for day, month, and year
+        JSpinner suppliedDaySpinner = createDaySpinner();
+        JSpinner suppliedMonthSpinner = createMonthSpinner();
+        JSpinner suppliedYearSpinner = createYearSpinner();
+        setDateToSpinners(sDate, suppliedDaySpinner, suppliedMonthSpinner, suppliedYearSpinner);
+
+        JTextField supplierField = new JTextField(supplier, 10);
+        
+        JTextField priceField = new JTextField(String.valueOf(price), 10);
+
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        JPanel editPanel = new JPanel(new GridLayout(5, 2, hgap, vgap));
+        editPanel.add(new JLabel("Consumable Name:"));
+        editPanel.add(consumableNameField);
+        editPanel.add(new JLabel("Quantity:"));
+        editPanel.add(quantityField);
+        editPanel.add(new JLabel("Supplied Date:"));
+        editPanel.add(createDatePanel(suppliedMonthSpinner, suppliedDaySpinner, suppliedYearSpinner));
+        editPanel.add(new JLabel("Supplier:"));
+        editPanel.add(supplierField);
+        editPanel.add(new JLabel("Price:"));
+        editPanel.add(priceField);
+
+        // Show the panel in a dialog
+        int option = JOptionPane.showConfirmDialog(this, editPanel, "Edit Consumable Details", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option == JOptionPane.OK_OPTION) {
+            // Retrieve edited values from components
+            
+            // Delete the old value
+            ConsumableId idDelete = new ConsumableId(name, supplier);
+            consumableService.deleteConsumable(idDelete);
+            
+            
+            // Format the dates to strings
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            
+            String editedCName = consumableNameField.getText();
+            String editedSupplier = supplierField.getText();
+
+            // Get edited supplied date from spinners
+            int editedSuppliedDay = (int) suppliedDaySpinner.getValue();
+            int editedSuppliedMonth = (int) suppliedMonthSpinner.getValue();
+            int editedSuppliedYear = (int) suppliedYearSpinner.getValue();
+            LocalDate editedSuppliedDate = LocalDate.of(editedSuppliedYear, editedSuppliedMonth, editedSuppliedDay);
+            
+            int editedQuantity = Integer.parseInt(quantityField.getText());
+            
+            double editedPrice = Double.parseDouble(priceField.getText());
+            
+            // Update the medicine in your data model or service
+            // Id
+            ConsumableId editedId = new ConsumableId(editedCName, editedSupplier);
+
+            // Medicine
+            Consumable editedConsumable = new Consumable(editedId, 
+                    formatter.format(editedSuppliedDate), 
+                    editedQuantity, editedPrice);            
+
+            consumableService.updateConsumable(editedConsumable);
+            loadConsumableData();
+            
+            JOptionPane.showMessageDialog(this, "Consumable details updated successfully!");
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        String relativeFilePath = "table-to-csv/consumable_table.csv"; // Change this to your desired directory
+
+        try {
+            // Determine the path to the resources folder
+            URL resourceUrl = this.getClass().getClassLoader().getResource("");
+            if (resourceUrl == null) {
+                throw new IllegalStateException("Resources folder not found");
+            }
+
+            File resourceFolder = new File(resourceUrl.toURI());
+            File subFolder = new File(resourceFolder, "table-to-csv");
+
+            // Create the subfolder if it doesn't exist
+            if (!subFolder.exists()) {
+                boolean created = subFolder.mkdirs();
+                if (!created) {
+                    throw new IOException("Failed to create directory: " + subFolder.getAbsolutePath());
+                }
+            }
+
+            // Full path to the CSV file
+            File csvFile = new File(resourceFolder, relativeFilePath);
+
+            try (FileWriter fileWriter = new FileWriter(csvFile)) {
+                DefaultTableModel model = (DefaultTableModel) cTable.getModel();
+                int columnCount = model.getColumnCount();
+
+                // Write header row
+                for (int i = 0; i < columnCount; i++) {
+                    fileWriter.append(model.getColumnName(i));
+                    if (i < columnCount - 1) {
+                        fileWriter.append(",");
+                    }
+                }
+                fileWriter.append("\n");
+
+                // Write data rows
+                int rowCount = model.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    for (int j = 0; j < columnCount; j++) {
+                        String data = model.getValueAt(i, j).toString();
+
+                        // Escape double quotes
+                        data = data.replace("\"", "\"\"");
+
+                        // Enclose in double quotes if it contains comma or double quotes
+                        if (data.contains(",") || data.contains("\"")) {
+                            data = "\"" + data + "\"";
+                        }
+
+                        fileWriter.append(data);
+                        if (j < columnCount - 1) {
+                            fileWriter.append(",");
+                        }
+                    }
+                    fileWriter.append("\n");
+                }
+
+                System.out.println("Data exported successfully to " + csvFile.getAbsolutePath());
+                JOptionPane.showMessageDialog(this, "Data exported successfully to " + csvFile.getAbsolutePath(), "Export Successful", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error exporting data: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing resource folder: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
+    
+    public void disableAddEditDelete() {
+        addButton.setVisible(false);
+        editButton.setVisible(false);
+        deleteButton.setVisible(false);
+    }
+     
+    private void setupAutoComplete() {
+        suggestionWindow = new JWindow();
+        suggestionList = new JList<>();
+        suggestionWindow.add(new JScrollPane(suggestionList));
+        suggestionWindow.setSize(200, 200);
+        
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateSuggestions();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateSuggestions();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateSuggestions();
+            }
+        });
+
+        nameTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_DOWN && suggestionWindow.isVisible()) {
+                    suggestionList.requestFocusInWindow();
+                    suggestionList.setSelectedIndex(0);
+                }
+            }
+        });
+
+        suggestionList.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    nameTextField.setText(suggestionList.getSelectedValue());
+                    suggestionWindow.setVisible(false);
+                    fetchItemDetails();
+                }
+            }
+        });
+
+        suggestionList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    nameTextField.setText(suggestionList.getSelectedValue());
+                    suggestionWindow.setVisible(false);
+                    fetchItemDetails();
+                }
+            }
+        });
+    }
+    
+    private void updateSuggestions() {
+        String input = nameTextField.getText();
+        List<String> suggestions = consumableService.getAllConsumables().stream()
+                .map(consumable -> consumable.getId().getName())
+                .filter(name -> name.toLowerCase().contains(input.toLowerCase()))
+                .toList();
+
+        DefaultListModel<String> model = new DefaultListModel<>();
+        for (String suggestion : suggestions) {
+            model.addElement(suggestion);
+        }
+        suggestionList.setModel(model);
+
+        if (!suggestions.isEmpty() && !input.isEmpty()) {
+            Point location = nameTextField.getLocationOnScreen();
+            suggestionWindow.setLocation(location.x, location.y + nameTextField.getHeight());
+            suggestionWindow.setVisible(true);
+        } else {
+            suggestionWindow.setVisible(false);
         }
     }
+    
+    private void fetchItemDetails() {
+        String consumableName = nameTextField.getText();
+        Consumable consumable = consumableService.getConsumableByName(consumableName);
+
+        if (consumable == null) {
+            JOptionPane.showMessageDialog(this, "Item with name " + consumableName + " does not exist in the database.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(ConsumableManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(ConsumableManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(ConsumableManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(ConsumableManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                ConsumableService consumableService = new ConsumableService();
+//                new ConsumableManagementForm(consumableService).setVisible(true);
+//            }
+//        });
+//    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JTextField batchTextField;
+    private javax.swing.JTable cTable;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JButton exportButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JCheckBoxMenuItem menuItemDelete;
+    private javax.swing.JLabel nameSearch;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel numRowLabel;
+    private javax.swing.JPopupMenu popupMenu;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel supplierSearch;
+    private javax.swing.JTextField supplierTextField;
+    private javax.swing.JButton viewButton;
+    // End of variables declaration//GEN-END:variables
 }

@@ -1,21 +1,57 @@
 
 package Famacy.repository;
 
+import Famacy.model.Account;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import Famacy.model.Employee;
+import Famacy.model.Message;
+import Famacy.util.DateTimeAdd0Util;
 import Famacy.util.HibernateUtil;
+import org.hibernate.Transaction;
 
 import org.hibernate.query.Query;
 
 public class EmployeeRepository {
     private SessionFactory factory;
+    private DateTimeAdd0Util dateTimeAdd0Util;
 
     public EmployeeRepository() {
         factory = HibernateUtil.getSessionFactory();
+        dateTimeAdd0Util = new DateTimeAdd0Util();
+    }
+    
+    public void dateConvert() {
+        List<Employee> employees;
+
+        try (Session session = factory.openSession()) {
+            employees = session.createQuery("from Employee", Employee.class).list();
+
+            // Begin a transaction to update employees
+            Transaction transaction = session.beginTransaction();
+
+            // Process each employee and update birth date if necessary
+            for (Employee employee : employees) {
+                String originalBirthDate = employee.getBirth();
+                String newBirthDate = dateTimeAdd0Util.add0(originalBirthDate);
+                
+                System.out.println("Original Supplied Date: " + originalBirthDate + " | Reformatted: " + newBirthDate);
+
+                // Update employee object with new birth date
+                employee.setBirth(newBirthDate);
+
+                // Save the updated employee back to the database
+                session.update(employee);
+            }
+
+            // Commit the transaction to persist changes
+            transaction.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public Employee save(Employee employee) {
@@ -101,12 +137,35 @@ public class EmployeeRepository {
     public void delete(int EID) {
         try (Session session = factory.openSession()) {
             session.beginTransaction();
+
+            // Find the employee by EID
             Employee employee = session.get(Employee.class, EID);
+
             if (employee != null) {
+                // Find the associated account(s) using the employee ID
+                List<Account> accounts = session.createQuery("from Account where employee_id = :employeeId", Account.class)
+                        .setParameter("employeeId", EID)
+                        .list();
+
+                // Delete the associated account(s)
+                for (Account account : accounts) {
+                    session.delete(account);
+                }
+                
+                // Find and delete the associated message(s)
+                List<Message> messages = session.createQuery("from Message where senderID = :employeeId or receiverID = :employeeId", Message.class)
+                        .setParameter("employeeId", EID)
+                        .list();
+                for (Message message : messages) {
+                    session.delete(message);
+                }
+
+
+                // Delete the employee
                 session.delete(employee);
             }
+
             session.getTransaction().commit();
-            session.close();
         }
     }
 }

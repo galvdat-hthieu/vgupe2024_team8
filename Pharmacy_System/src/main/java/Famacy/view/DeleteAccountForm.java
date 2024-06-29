@@ -20,7 +20,7 @@ public class DeleteAccountForm extends JFrame {
 
         setTitle("Delete Account");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         deleteAccountPanel = new JPanel();
@@ -63,8 +63,6 @@ public class DeleteAccountForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Continue with the current logged-in user
-                pharmacyMain.setVisible(true);
             }
         });
     }

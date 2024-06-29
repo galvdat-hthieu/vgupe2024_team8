@@ -1,11 +1,12 @@
 
 package Famacy.repository;
 
+import Famacy.model.Account;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
-import Famacy.model.Account;
 import Famacy.util.HibernateUtil;
 
 public class AccountRepository {

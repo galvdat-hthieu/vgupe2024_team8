@@ -1,14 +1,17 @@
 package Famacy.service;
 
+import Famacy.model.Item;
 import Famacy.model.Transaction;
 import Famacy.model.TransactionItem;
 import Famacy.repository.MedicineRepository;
 import Famacy.repository.ConsumableRepository;
+import Famacy.repository.ItemRepository;
 import Famacy.repository.TransactionRepository;
 
 import java.util.List;
 
 public class TransactionService {
+    private ItemRepository itemRepository;
     private TransactionRepository transactionRepository;
     private MedicineRepository medicineRepository;
     private ConsumableRepository consumableRepository;
@@ -17,6 +20,7 @@ public class TransactionService {
         this.transactionRepository = new TransactionRepository();
         this.medicineRepository = new MedicineRepository();
         this.consumableRepository = new ConsumableRepository();
+        this.itemRepository = new ItemRepository();
     }
 
     public Transaction saveTransaction(Transaction transaction) {
@@ -44,6 +48,14 @@ public class TransactionService {
         return transactionRepository.findTransactionsByDate(date);
     }
 
+    public List<Item> getAllItems() {
+        return itemRepository.findAll();
+    }
+
+    public Item getItemByName(String name) {
+        return itemRepository.findByName(name);
+    }
+
     public boolean medicineExists(String name) {
         return !medicineRepository.findMedicineNames(name).isEmpty();
     }
@@ -51,7 +63,7 @@ public class TransactionService {
     public boolean consumableExists(String name) {
         return !consumableRepository.findConsumableNames(name).isEmpty();
     }
-    
+
     private void adjustQuantities(Transaction transaction) {
         for (TransactionItem item : transaction.getItems()) {
             if (item.getItemType().equals("Medicine")) {
@@ -61,7 +73,7 @@ public class TransactionService {
             }
         }
     }
-    
+
     public List<String> getMedicineNames(String name) {
         return medicineRepository.findMedicineNames(name);
     }
@@ -69,5 +81,4 @@ public class TransactionService {
     public List<String> getConsumableNames(String name) {
         return consumableRepository.findConsumableNames(name);
     }
-
 }

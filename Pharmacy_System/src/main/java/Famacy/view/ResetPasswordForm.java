@@ -20,7 +20,7 @@ public class ResetPasswordForm extends JFrame {
 
         setTitle("Reset Password");
         setSize(400, 200);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         resetPasswordPanel = new JPanel();
@@ -62,9 +62,7 @@ public class ResetPasswordForm extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
-                dispose();
-                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Continue with the current logged-in user
-                pharmacyMain.setVisible(true);
+                dispose();;
             }
         });
     }

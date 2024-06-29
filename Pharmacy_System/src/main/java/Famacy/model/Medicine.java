@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "\"Medicine\"")
-public class Medicine {
+public class Medicine implements Comparable<Medicine>{
 
     @EmbeddedId
     private MedicineId id;
@@ -25,6 +25,29 @@ public class Medicine {
 
     @Column(name = "\"Quantity\"")
     private int quantity;
+    
+    @Column(name = "\"MPrice\"")
+    private double price; // Add this field
+    
+    // Constructor
+    public Medicine(MedicineId id, String supplier, String suppliedDate, 
+            String expirationDate, int quantity, double price) {
+        this.id = id;
+        this.supplier = supplier;
+        this.suppliedDate = suppliedDate;
+        this.expirationDate = expirationDate;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    
+    public Medicine() {
+        this.id = null;
+        this.supplier = null;
+        this.suppliedDate = null;
+        this.expirationDate = null;
+        this.quantity = -1;
+        this.price = -1;
+    }
 
     // Getters and setters
     public MedicineId getId() {
@@ -65,6 +88,20 @@ public class Medicine {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    @Override
+    public int compareTo(Medicine other) {
+        // Compare by medicine name (id.getName())
+        return this.id.getName().compareToIgnoreCase(other.getId().getName());
     }
 }
 

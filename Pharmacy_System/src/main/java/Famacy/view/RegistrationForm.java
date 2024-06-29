@@ -25,7 +25,7 @@ public class RegistrationForm extends JFrame {
 
         setTitle("Register Account");
         setSize(400, 300);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
         registrationPanel = new JPanel();
@@ -39,13 +39,18 @@ public class RegistrationForm extends JFrame {
                 String username = usernameField.getText();
                 String password = new String(passwordField.getPassword());
                 String role = (String) roleComboBox.getSelectedItem(); // Get selected role
-                int employeeId = Integer.parseInt(employeeIdField.getText());
+                int employeeId;
+                
+                 try {
+                    employeeId = Integer.parseInt(employeeIdField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Please enter a valid numeric Employee ID.");
+                    return;
+                }
 
                 if (accountService.registerAccount(username, password, role, employeeId)) {
                     JOptionPane.showMessageDialog(null, "Account registered successfully!");
                     dispose();
-                    PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Return to main screen
-                    pharmacyMain.setVisible(true);
                 } else {
                     JOptionPane.showMessageDialog(null, "Username already exists.");
                 }
@@ -57,8 +62,6 @@ public class RegistrationForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Navigate back to main menu
                 dispose();
-                PharmacyMain pharmacyMain = new PharmacyMain(currentUsername); // Return to main screen
-                pharmacyMain.setVisible(true);
             }
         });
     }

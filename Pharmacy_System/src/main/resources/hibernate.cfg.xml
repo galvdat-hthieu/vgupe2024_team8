@@ -20,6 +20,7 @@
         <mapping class="Famacy.model.Consumable"/>
         <mapping class="Famacy.model.Transaction"/>
         <mapping class="Famacy.model.TransactionItem"/>
+        <mapping class="Famacy.model.Item"/>
 <!--        <mapping class="com.yourcompany.model.Employee"/>
         <mapping class="com.yourcompany.model.User"/>-->
         <!-- Add other entity mappings here -->

@@ -1,107 +1,88 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
 package Famacy.view;
-
 import Famacy.model.Employee;
-
 import Famacy.service.EmployeeService;
-
-
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import Famacy.util.DateTimeAdd0Util;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
-public class EmployeeManagementForm extends JFrame {
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import java.awt.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Collections;
+import java.io.FileWriter;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.text.ParseException;
+/**
+ *
+ * @author ADMIN
+ */
+public class EmployeeManagementForm extends javax.swing.JFrame {
     private EmployeeService employeeService;
-    private JTable employeeTable;
     private DefaultTableModel tableModel;
-    private JTextField searchNameField;
-    private JTextField searchRoleField;
-    private JTextField searchIDField;
+    private DateTimeAdd0Util dateTimeAdd0Util;
+    
+    DateTimeFormatter newFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
     public EmployeeManagementForm(EmployeeService employeeService) {
+        this.dateTimeAdd0Util = new DateTimeAdd0Util();
         this.employeeService = employeeService;
-        setTitle("Employee Management");
-        setSize(800, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initializeComponents();
-        loadEmployeeData();
+        initComponents();
+        initializeTable();
+        this.employeeService.convertDateIfNeeded();
+        loadEmployees();
+        dateLabel.setText(LocalDate.now().plusYears(2).format(newFormatter));
     }
 
-    private void initializeComponents() {
-        setLayout(new BorderLayout());
-
-        // Search Panel
-        JPanel searchPanel = new JPanel(new GridLayout(2, 4));
-        searchPanel.add(new JLabel("Name:"));
-        searchNameField = new JTextField();
-        searchPanel.add(searchNameField);
-
-        searchPanel.add(new JLabel("Role:"));
-        searchRoleField = new JTextField();
-        searchPanel.add(searchRoleField);
-
-        searchPanel.add(new JLabel("ID:"));
-        searchIDField = new JTextField();
-        searchPanel.add(searchIDField);
-
-
-        JButton searchButton = new JButton("Search");
-        searchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                searchEmployees();
-            }
-        });
-        searchPanel.add(searchButton);
-
-        add(searchPanel, BorderLayout.NORTH);
-
-        // Table Panel
-        tableModel = new DefaultTableModel(new String[]{"ID", "Name", "Gender", "Role", "Birth", "Phone"}, 0);
-        employeeTable = new JTable(tableModel);
-
-        JScrollPane scrollPane = new JScrollPane(employeeTable);
-        add(scrollPane, BorderLayout.CENTER);
-
-        // Button Panel
-        JPanel buttonPanel = new JPanel();
-        JButton addButton = new JButton("Add");
-        JButton updateButton = new JButton("Update");
-        JButton deleteButton = new JButton("Delete");
-        buttonPanel.add(addButton);
-        buttonPanel.add(updateButton);
-        buttonPanel.add(deleteButton);
-
-        addButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                openEmployeeRecordForm();
-            }
-        });
-
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateEmployee();
-            }
-        });
-
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                deleteEmployee();
-            }
-        });
-
-        add(buttonPanel, BorderLayout.SOUTH);
+    private void initializeTable() {
+        // Screen Config
+        // Disable windows resizing
+        setResizable(false);
+        // Windows displays in the center
+        this.setLocationRelativeTo(null);
+        
+        // Table Config
+        tableModel = new DefaultTableModel(){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+           //all cells false
+           return false;
+        }
+        };
+        employeeTable.setModel(tableModel);
+        tableModel.addColumn("EID");
+        tableModel.addColumn("EName");
+        tableModel.addColumn("Gender");
+        tableModel.addColumn("Role");
+        tableModel.addColumn("Birth");
+        tableModel.addColumn("Phone");
     }
+    
 
-    private void loadEmployeeData() {
-        tableModel.setRowCount(0); // Clear the table model
+    private void loadEmployees() {
+        tableModel.setRowCount(0);
+        
+        int count = 0;
         List<Employee> employees = employeeService.getAllEmployees();
-        employees.sort((e1, e2) -> Integer.compare(e1.getId(), e2.getId())); // Sort by EID
+        Collections.sort(employees);
         for (Employee employee : employees) {
             tableModel.addRow(new Object[]{
                     employee.getId(),
@@ -111,106 +92,989 @@ public class EmployeeManagementForm extends JFrame {
                     employee.getBirth(),
                     employee.getPhone()
             });
+            count++;
         }
+        numRowLabel.setText(String.valueOf(count));
     }
 
-    public void addEmployeeToTable(Employee employee) {
-        tableModel.addRow(new Object[]{
-                employee.getId(),
-                employee.getName(),
-                employee.getGender(),
-                employee.getRole(),
-                employee.getBirth(),
-                employee.getPhone()
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        popupMenu = new javax.swing.JPopupMenu();
+        menuItemDelete = new javax.swing.JCheckBoxMenuItem();
+        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        employeeTable = new javax.swing.JTable();
+        addButton = new javax.swing.JButton();
+        editButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        numRowLabel = new javax.swing.JLabel();
+        exportButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        nameTextField = new javax.swing.JTextField();
+        roleTextField = new javax.swing.JTextField();
+        supplierSearch = new javax.swing.JLabel();
+        nameSearch = new javax.swing.JLabel();
+        idTextField = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jPanel4 = new javax.swing.JPanel();
+        searchButton = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
+        viewButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        menuItemDelete.setSelected(true);
+        menuItemDelete.setText("Delete Medicine");
+        popupMenu.add(menuItemDelete);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Employees Management");
+
+        jLabel4.setText("Number of rows: ");
+        jLabel4.setToolTipText("");
+
+        employeeTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        employeeTable.setRowHeight(30);
+        employeeTable.getTableHeader().setResizingAllowed(false);
+        employeeTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(employeeTable);
+
+        addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
         });
-    }
 
-    private void openEmployeeRecordForm() {
-        EmployeeRecordForm recordForm = new EmployeeRecordForm(employeeService);
-        recordForm.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        recordForm.setVisible(true);
-    }
+        editButton.setText("Edit");
+        editButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editButtonActionPerformed(evt);
+            }
+        });
 
-    private void searchEmployees() {
-        String name = searchNameField.getText();
-        String role = searchRoleField.getText();
-        String text = searchIDField.getText();
-    
-        List<Employee> employees;
-        if (name.isEmpty() && role.isEmpty() && text.isEmpty()) {
-            employees = employeeService.getAllEmployees();
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        numRowLabel.setText("numRows");
+        numRowLabel.setName(""); // NOI18N
+        numRowLabel.setPreferredSize(new java.awt.Dimension(60, 16));
+
+        exportButton.setText("Export CSV");
+        exportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(addButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(editButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 726, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(numRowLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(numRowLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(editButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(exportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        nameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameTextFieldActionPerformed(evt);
+            }
+        });
+
+        roleTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                roleTextFieldActionPerformed(evt);
+            }
+        });
+
+        supplierSearch.setText("Name: ");
+
+        nameSearch.setText("ID: ");
+
+        idTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Role:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nameSearch)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(supplierSearch)
+                                .addGap(18, 18, 18))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(34, 34, 34)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(roleTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(idTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(supplierSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(roleTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)))
+        );
+
+        searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
+
+        refreshButton.setText("Refresh");
+        refreshButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshButtonActionPerformed(evt);
+            }
+        });
+
+        viewButton.setText("View");
+        viewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Today:");
+
+        dateLabel.setText("Date");
+
+        jLabel2.setFont(new java.awt.Font("Swis721 BlkCn BT", 0, 36)); // NOI18N
+        jLabel2.setText("Employees");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6)
+                        .addComponent(dateLabel))
+                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(dateLabel))
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jSeparator1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(53, 53, 53))))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 850, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void idTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idTextFieldActionPerformed
+
+    private void nameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nameTextFieldActionPerformed
+
+    private void roleTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_roleTextFieldActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String idText = idTextField.getText();
+        String name = nameTextField.getText(); // Assuming you have a nameTextField
+        String role = roleTextField.getText();
+
+        // Check if all search fields are empty
+        if (name.isEmpty() && idText.isEmpty() && role.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please enter at least one search criteria.",
+                    "Empty Search Fields", JOptionPane.WARNING_MESSAGE);
         } else {
+            // Perform search only if at least one field is not empty
             Integer id = null;
-            if (!text.isEmpty()) {
+            if (!idText.isEmpty()) {
                 try {
-                    id = Integer.parseInt(text);
+                    id = Integer.parseInt(idText);
                 } catch (NumberFormatException e) {
-                    System.out.println("Invalid input: " + text);
+                    JOptionPane.showMessageDialog(this, "ID must be a valid integer.",
+                            "Invalid ID", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
-            if (id != null) {
-                employees = employeeService.searchEmployees(name, role, id);
-            } else {
-                employees = employeeService.searchEmployees(name, role, null);
+
+            // Search for employees
+            List<Employee> employees = employeeService.searchEmployees(name, role, id);
+            tableModel.setRowCount(0); // Clear existing rows
+
+            int count = 0;
+            Collections.sort(employees);
+            for (Employee employee : employees) {
+                tableModel.addRow(new Object[]{
+                        employee.getId(),
+                        employee.getName(),
+                        employee.getGender(),
+                        employee.getRole(),
+                        employee.getBirth(),
+                        employee.getPhone()
+                });
+                count++;
+            }
+            numRowLabel.setText(String.valueOf(count));
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
+
+    private JSpinner createDaySpinner() {
+        SpinnerNumberModel dayModel = new SpinnerNumberModel(1, 1, 31, 1);
+        JSpinner daySpinner = new JSpinner(dayModel);
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) daySpinner.getEditor();
+        editor.getTextField().setColumns(2);
+        return daySpinner;
+    }
+
+    private JSpinner createMonthSpinner() {
+        SpinnerNumberModel monthModel = new SpinnerNumberModel(1, 1, 12, 1);
+        JSpinner monthSpinner = new JSpinner(monthModel);
+        JSpinner.DefaultEditor editor = (JSpinner.DefaultEditor) monthSpinner.getEditor();
+        editor.getTextField().setColumns(2);
+        return monthSpinner;
+    }
+
+    private JSpinner createYearSpinner() {
+    int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+    SpinnerNumberModel yearModel = new SpinnerNumberModel(currentYear, currentYear - 100, currentYear + 100, 1);
+    JSpinner yearSpinner = new JSpinner(yearModel);
+    
+    // Set the editor to display the year without thousand separator
+    JSpinner.NumberEditor editor = new JSpinner.NumberEditor(yearSpinner, "#");
+    yearSpinner.setEditor(editor);
+    
+    editor.getTextField().setHorizontalAlignment(JTextField.LEFT); // Align left
+    
+    // Set the width of the text field for the year spinner
+    editor.getTextField().setColumns(4); // Adjust as needed
+
+    return yearSpinner;
+}
+
+    private Date combineDate(int day, int month, int year) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day);
+        return calendar.getTime();
+    }
+    
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+       
+        // id
+        JTextField idField = new JTextField(10);
+        
+        //name
+        JTextField nameField = new JTextField(10);
+        
+        //Gender ratio buttons
+        JRadioButton maleRadioButton = new JRadioButton("Male");
+        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(maleRadioButton);
+        genderGroup.add(femaleRadioButton);
+        
+        // role
+        JComboBox<String> roleBox = new JComboBox<>(new String[]{"Admin", "Pharmacist"});
+
+        // Create separate spinners for day, month, and year
+        JSpinner birthDaySpinner = createDaySpinner();
+        JSpinner birthMonthSpinner = createMonthSpinner();
+        JSpinner birthYearSpinner = createYearSpinner();
+        
+        // phone
+        JTextField phoneField = new JTextField(10);
+
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        JPanel manualInputPanel = new JPanel(new GridLayout(7, 2, hgap, vgap));
+        manualInputPanel.add(new JLabel(""));
+        manualInputPanel.add(new JLabel(""));
+        
+        manualInputPanel.add(new JLabel("ID:"));
+        manualInputPanel.add(idField);
+        
+        manualInputPanel.add(new JLabel("Employee Name:"));
+        manualInputPanel.add(nameField);
+        
+        manualInputPanel.add(new JLabel("Gender:"));
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
+        genderPanel.add(maleRadioButton);
+        genderPanel.add(femaleRadioButton);
+        manualInputPanel.add(genderPanel);
+        
+        manualInputPanel.add(new JLabel("Role:"));
+        manualInputPanel.add(roleBox);
+        
+        manualInputPanel.add(new JLabel("Date of Birth:"));
+        JPanel DatePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        DatePanel.add(birthMonthSpinner);
+        DatePanel.add(birthDaySpinner);
+        DatePanel.add(birthYearSpinner);
+        manualInputPanel.add(DatePanel);
+        
+        manualInputPanel.add(new JLabel("Phone:"));
+        manualInputPanel.add(phoneField);
+
+        // Create components for file import
+        JButton fileImportButton = new JButton("Browse...");
+        fileImportButton.setPreferredSize(new Dimension(100, 200));
+        JLabel filePathLabel = new JLabel("No file selected");
+        filePathLabel.setVerticalAlignment(SwingConstants.CENTER);
+        filePathLabel.setFont(filePathLabel.getFont().deriveFont(14f));
+
+        // Create a panel for file import
+        JPanel fileImportPanel = new JPanel(new BorderLayout());
+        fileImportPanel.add(fileImportButton, BorderLayout.NORTH);
+        fileImportPanel.add(filePathLabel, BorderLayout.SOUTH);
+
+        // Add action listener to the file import button
+        fileImportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    filePathLabel.setText(selectedFile.getAbsolutePath());
+                    // Process the selected file (you can add your file processing code here)
+                }
+            }
+        });
+
+        // Create a tabbed pane and add the panels
+        JTabbedPane tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Manual Input", manualInputPanel);
+        tabbedPane.addTab("File Import", fileImportPanel);
+
+        // Display the dialog
+        int result = JOptionPane.showConfirmDialog(this, tabbedPane, "Add New Employee", 
+                JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        // If the user clicked OK, process the inputs
+        if (result == JOptionPane.OK_OPTION) {
+            if (tabbedPane.getSelectedIndex() == 0) {
+                // Manual input tab is selected
+                // id
+                int id = Integer.parseInt(idField.getText());
+                
+                // name
+                String name = nameField.getText();
+                
+                // gender
+                String gender = "";
+                if(maleRadioButton.isSelected()){
+                    gender = "M";
+                }
+                if(femaleRadioButton.isSelected()){
+                    gender = "F";
+                }
+                
+                // role
+                String role = roleBox.getSelectedItem().toString();
+                
+                // birth
+                // Combine day, month, and year values to create the date
+                Date birthDate = combineDate((int) birthDaySpinner.getValue(), 
+                        (int) birthMonthSpinner.getValue(), (int) birthYearSpinner.getValue());
+                
+
+                // Format the dates to strings
+                SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+                String birthDateString = dateFormatter.format(birthDate);
+
+                // phone
+                String phone = phoneField.getText();
+                
+                // Medicine
+                Employee employee = new Employee(id, name, gender, role, birthDateString, phone);
+
+                employeeService.updateEmployee(employee);
+                loadEmployees();
+
+            } else if (tabbedPane.getSelectedIndex() == 1) {
+                // File import tab is selected
+                String filePath = filePathLabel.getText();
+                System.out.println("Selected file: " + filePath);
+
+                // Process the selected file
+                if (!filePath.equals("No file selected")) {
+                    try {
+                        File file = new File(filePath);
+                        processImportedFile(file);
+
+                    } catch (IOException ex) {
+                        JOptionPane.showMessageDialog(EmployeeManagementForm.this, "Error reading file: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        } 
+    }//GEN-LAST:event_addButtonActionPerformed
+    
+    private String parseAndFormatDate(String dateStr, SimpleDateFormat inputFormat, SimpleDateFormat outputFormat) {
+        try {
+            Date date = inputFormat.parse(dateStr);
+            return outputFormat.format(date);
+        } catch (ParseException e) {
+            // If parsing fails, return the original string
+            return dateStr;
+        }
+    }
+    
+    private void processImportedFile(File file) throws FileNotFoundException, IOException {
+        SimpleDateFormat dataFormatter = new SimpleDateFormat("MM/dd/yyyy");
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            boolean isFirstLine = true; // Flag to check the first line
+            while ((line = reader.readLine()) != null) {
+                if (isFirstLine) {
+                    isFirstLine = false; // Skip the header line
+                    continue;
+                }
+                // Split the line based on delimiter (e.g., comma for CSV)
+                String[] data = line.split(",");
+
+                // Ensure the data array has enough elements
+                if (data.length >= 6) {
+                    try {
+                        // Parse each field from the array
+                        
+                        int id = Integer.parseInt(data[0]);
+                        String name = data[1];
+                        String gender = data[2];
+                        String role = data[3];
+                        String birthDateStr = dateTimeAdd0Util.add0(data[4]);
+                        String phone = data[5];
+                        
+                        Employee employee = new Employee(id, name, gender, role,
+                            birthDateStr, phone);
+
+                        employeeService.updateEmployee(employee);
+                        loadEmployees();
+                    } catch (NumberFormatException e) {
+                        System.err.println("Invalid number format in line: " + line);
+                    }
+                } else {
+                    System.err.println("Invalid data format in line: " + line);
+                }
             }
         }
+    }
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        // TODO add your handling code here:
+        int[] selectedRows = employeeTable.getSelectedRows();
+        if (selectedRows.length > 0) {
+            int option = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete selected Employee(s)?", "Confirm Deletion", JOptionPane.YES_NO_OPTION);
+            if (option == JOptionPane.YES_OPTION) {
+                for (int i = selectedRows.length - 1; i >= 0; i--) {
+                    int selectedRow = selectedRows[i];
+                    int id = (Integer) tableModel.getValueAt(selectedRow, 0);
+                    
+                    employeeService.deleteEmployee(id);
+                    tableModel.removeRow(selectedRow);
+                }
+                JOptionPane.showMessageDialog(this, "Selected medicine(s) deleted successfully!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select one or more rows to delete.", "Delete Choice Missing", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
+    private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
+        // TODO add your handling code here:
+        loadEmployees();
+    }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void viewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewButtonActionPerformed
+        // Choosen row:
+        int selectedRow = employeeTable.getSelectedRow();
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to view details.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Retrieve data from the table model
+        Integer id = (Integer) tableModel.getValueAt(selectedRow, 0);
+        String name = (String) tableModel.getValueAt(selectedRow, 1); // Assuming batch number is stored as String
+        String gender = (String) tableModel.getValueAt(selectedRow, 2); // Assuming supplier is stored as String
+        String role = (String) tableModel.getValueAt(selectedRow, 3); // Assuming supplied date is stored as String
+        String birth = (String) tableModel.getValueAt(selectedRow, 4); // Assuming expiration date is stored as String
+        String phone = (String) tableModel.getValueAt(selectedRow, 5); // Assuming quantity is stored as Integer
+
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        JPanel viewPanel = new JPanel(new GridLayout(6, 2, hgap, vgap));
+        viewPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding
+
+        // Add labels and corresponding data to the panel
+        viewPanel.add(new JLabel("ID:"));
+        viewPanel.add(new JLabel(id.toString())); // Convert Integer to String
+        viewPanel.add(new JLabel("Employee Name:"));
+        viewPanel.add(new JLabel(name));
+        viewPanel.add(new JLabel("Gender:"));
+        viewPanel.add(new JLabel(gender));
+        viewPanel.add(new JLabel("Role:"));
+        viewPanel.add(new JLabel(role));
+        viewPanel.add(new JLabel("Date of Birth:"));
+        viewPanel.add(new JLabel(birth));
+        viewPanel.add(new JLabel("Phone:"));
+        viewPanel.add(new JLabel(phone));
+
+        // Show the panel in a dialog
+        JOptionPane.showMessageDialog(this, viewPanel, "View Employee Details", JOptionPane.PLAIN_MESSAGE);
+        
+    }//GEN-LAST:event_viewButtonActionPerformed
+
+private JPanel createDatePanel(JSpinner daySpinner, JSpinner monthSpinner, JSpinner yearSpinner) {
+    JPanel datePanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 0));
+    datePanel.add(daySpinner);
+    datePanel.add(monthSpinner);
+    datePanel.add(yearSpinner);
+    return datePanel;
+}
+
+private void setDateToSpinners(String date, JSpinner daySpinner, JSpinner monthSpinner, JSpinner yearSpinner) {
+    // Parse the date string to extract day, month, and year
+    LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+    int day = localDate.getDayOfMonth();
+    int month = localDate.getMonthValue();
+    int year = localDate.getYear();
     
-        tableModel.setRowCount(0); // Clear the table model
-        for (Employee employee : employees) {
-            tableModel.addRow(new Object[]{
-                    employee.getId(),
-                    employee.getName(),
-                    employee.getGender(),
-                    employee.getRole(),
-                    employee.getBirth(),
-                    employee.getPhone()
-            });
-        }
-    }
-    private void updateEmployee() {
+    // Set the values to the spinners
+    daySpinner.setValue(day);
+    monthSpinner.setValue(month);
+    yearSpinner.setValue(year);
+}
+
+    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
+        // TODO add your handling code here:
         int selectedRow = employeeTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            int id = (int) tableModel.getValueAt(selectedRow, 0);
-            String name = (String) tableModel.getValueAt(selectedRow, 1);
-            String gender = (String) tableModel.getValueAt(selectedRow, 2);
-            String role = (String) tableModel.getValueAt(selectedRow, 3);
-            String birth = (String) tableModel.getValueAt(selectedRow, 4);
-            String phone = (String) tableModel.getValueAt(selectedRow, 5);
-
-            Employee employee = new Employee();
-            employee.setId(id);
-            employee.setName(name);
-            employee.setGender(gender);
-            employee.setRole(role);
-            employee.setBirth(birth);
-            employee.setPhone(phone);
-
-            employeeService.updateEmployee(employee);
-            JOptionPane.showMessageDialog(this, "Employee updated successfully!");
-            loadEmployeeData();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to update.", "Update Error", JOptionPane.ERROR_MESSAGE);
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to edit.", "No Row Selected", JOptionPane.WARNING_MESSAGE);
+            return;
         }
-    }
 
-    private void deleteEmployee() {
-        int selectedRow = employeeTable.getSelectedRow();
-        if (selectedRow >= 0) {
-            int id = (int) tableModel.getValueAt(selectedRow, 0);
+        // Retrieve data from the table model
+        int id = (Integer) tableModel.getValueAt(selectedRow, 0);
+        String name = (String) tableModel.getValueAt(selectedRow, 1); // Assuming batch number is stored as String
+        String gender = (String) tableModel.getValueAt(selectedRow, 2); // Assuming supplier is stored as String
+        String role = (String) tableModel.getValueAt(selectedRow, 3); // Assuming supplied date is stored as String
+        String birth = (String) tableModel.getValueAt(selectedRow, 4); // Assuming expiration date is stored as String
+        String phone = (String) tableModel.getValueAt(selectedRow, 5); // Assuming quantity is stored as Integer
 
+        // id
+        JTextField idField = new JTextField(String.valueOf(id), 10);
+        
+        //name
+        JTextField nameField = new JTextField(name, 10);
+        
+        //Gender ratio buttons ***FIX THIS ONE, PREFILL VALUE***
+        JRadioButton maleRadioButton = new JRadioButton("Male");
+        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        ButtonGroup genderGroup = new ButtonGroup();
+        genderGroup.add(maleRadioButton);
+        genderGroup.add(femaleRadioButton);
+        if(gender.equals("M")) maleRadioButton.setSelected(true);
+        if(gender.equals("F")) femaleRadioButton.setSelected(true);
+        
+        // role
+        JComboBox<String> roleBox = new JComboBox<>(new String[]{"Admin", "Pharmacist"});
+        roleBox.setSelectedItem(role);
+
+        // Create separate spinners for day, month, and year
+        JSpinner birthDaySpinner = createDaySpinner();
+        JSpinner birthMonthSpinner = createMonthSpinner();
+        JSpinner birthYearSpinner = createYearSpinner();
+        setDateToSpinners(birth, birthDaySpinner, birthMonthSpinner, birthYearSpinner);
+        
+        // phone
+        JTextField phoneField = new JTextField(phone, 10);
+
+        // Create a panel to hold the text fields and spinners
+        int hgap = 20; // horizontal gap
+        int vgap = 10; // vertical gap
+        
+        // Main panel
+        JPanel editPanel = new JPanel(new GridLayout(6, 2, hgap, vgap));
+        
+        //ID
+        editPanel.add(new JLabel("ID:"));
+        editPanel.add(idField);
+        
+        // Name
+        editPanel.add(new JLabel("Employee Name:"));
+        editPanel.add(nameField);
+        
+        // Gender
+        editPanel.add(new JLabel("Gender:"));
+        JPanel genderPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 3, 0));
+        genderPanel.add(maleRadioButton);
+        genderPanel.add(femaleRadioButton);
+        editPanel.add(genderPanel);
+        
+        // Role
+        editPanel.add(new JLabel("Role:"));
+        editPanel.add(roleBox);
+        
+        // Birth
+        editPanel.add(new JLabel("Date of Birth:"));
+        editPanel.add(createDatePanel(birthMonthSpinner, 
+                birthDaySpinner, birthYearSpinner));
+        
+        // Phone
+        editPanel.add(new JLabel("Phone:"));
+        editPanel.add(phoneField);
+
+        // Show the panel in a dialog
+        int option = JOptionPane.showConfirmDialog(this, editPanel, "Edit Medicine Details", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if (option == JOptionPane.OK_OPTION) {
+            // Retrieve edited values from components
+            
+            // Delete the old value
             employeeService.deleteEmployee(id);
-            tableModel.removeRow(selectedRow);
-            JOptionPane.showMessageDialog(this, "Employee deleted successfully!");
-            loadEmployeeData();
-        } else {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete.", "Delete Error", JOptionPane.ERROR_MESSAGE);
-        }
-    }
+            
+            // Get id
+            int editedId = Integer.parseInt(idField.getText());
+                    
+            // Get name
+            String editedName = nameField.getText();
+            
+            // Get gender
+            String editedgender = "";
+            if(maleRadioButton.isSelected()){
+                editedgender = "M";
+            }
+            if(femaleRadioButton.isSelected()){
+                editedgender = "F";
+            }
+            // Get role
+            String editedRole = roleBox.getSelectedItem().toString();
+            
+            // Birth
+            // Combine day, month, and year values to create the date
+            Date birthDate = combineDate((int) birthDaySpinner.getValue(), 
+                    (int) birthMonthSpinner.getValue(), (int) birthYearSpinner.getValue());
 
-//    public static void main(String[] args) {
-//        EmployeeService employeeService = new EmployeeService();
-//        EmployeeManagementForm managementForm = new EmployeeManagementForm(employeeService);
-//        managementForm.setVisible(true);
+
+            // Format the dates to strings
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MM/dd/yyyy");
+            String editedBirthDateString = dateFormatter.format(birthDate);
+            
+            // Phone
+            String editedPhone = phoneField.getText();
+            
+            // Employee
+            Employee employee = new Employee(editedId, editedName, editedgender, 
+                    editedRole, editedBirthDateString, editedPhone);
+            employeeService.updateEmployee(employee);
+            loadEmployees();
+            
+            JOptionPane.showMessageDialog(this, "Employee details updated successfully!");
+        }
+    }//GEN-LAST:event_editButtonActionPerformed
+
+    private void exportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportButtonActionPerformed
+        String relativeFilePath = "table-to-csv/employee_table.csv"; // Change this to your desired directory
+
+        try {
+            // Determine the path to the resources folder
+            URL resourceUrl = this.getClass().getClassLoader().getResource("");
+            if (resourceUrl == null) {
+                throw new IllegalStateException("Resources folder not found");
+            }
+
+            File resourceFolder = new File(resourceUrl.toURI());
+            File subFolder = new File(resourceFolder, "table-to-csv");
+
+            // Create the subfolder if it doesn't exist
+            if (!subFolder.exists()) {
+                boolean created = subFolder.mkdirs();
+                if (!created) {
+                    throw new IOException("Failed to create directory: " + subFolder.getAbsolutePath());
+                }
+            }
+
+            // Full path to the CSV file
+            File csvFile = new File(resourceFolder, relativeFilePath);
+
+            try (FileWriter fileWriter = new FileWriter(csvFile)) {
+                DefaultTableModel model = (DefaultTableModel) employeeTable.getModel();
+                int columnCount = model.getColumnCount();
+
+                // Write header row
+                for (int i = 0; i < columnCount; i++) {
+                    fileWriter.append(model.getColumnName(i));
+                    if (i < columnCount - 1) {
+                        fileWriter.append(",");
+                    }
+                }
+                fileWriter.append("\n");
+
+                // Write data rows
+                int rowCount = model.getRowCount();
+                for (int i = 0; i < rowCount; i++) {
+                    for (int j = 0; j < columnCount; j++) {
+                        String data = model.getValueAt(i, j).toString();
+
+                        // Escape double quotes
+                        data = data.replace("\"", "\"\"");
+
+                        // Enclose in double quotes if it contains comma or double quotes
+                        if (data.contains(",") || data.contains("\"")) {
+                            data = "\"" + data + "\"";
+                        }
+
+                        fileWriter.append(data);
+                        if (j < columnCount - 1) {
+                            fileWriter.append(",");
+                        }
+                    }
+                    fileWriter.append("\n");
+                }
+
+                System.out.println("Data exported successfully to " + csvFile.getAbsolutePath());
+                JOptionPane.showMessageDialog(this, "Data exported successfully to " + csvFile.getAbsolutePath(), "Export Successful", JOptionPane.INFORMATION_MESSAGE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Error exporting data: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (URISyntaxException | IOException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error accessing resource folder: " + e.getMessage(), "Export Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_exportButtonActionPerformed
+        
+    
+    /**
+     * @param args the command line arguments
+     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(EmployeeManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(EmployeeManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(EmployeeManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(EmployeeManagementForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                EmployeeService employeeService = new EmployeeService();
+//                new EmployeeManagementForm(employeeService).setVisible(true);
+//            }
+//        });
 //    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addButton;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JButton deleteButton;
+    private javax.swing.JButton editButton;
+    private javax.swing.JTable employeeTable;
+    private javax.swing.JButton exportButton;
+    private javax.swing.JTextField idTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JCheckBoxMenuItem menuItemDelete;
+    private javax.swing.JLabel nameSearch;
+    private javax.swing.JTextField nameTextField;
+    private javax.swing.JLabel numRowLabel;
+    private javax.swing.JPopupMenu popupMenu;
+    private javax.swing.JButton refreshButton;
+    private javax.swing.JTextField roleTextField;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel supplierSearch;
+    private javax.swing.JButton viewButton;
+    // End of variables declaration//GEN-END:variables
 }

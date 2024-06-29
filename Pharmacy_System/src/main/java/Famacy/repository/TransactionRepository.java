@@ -32,10 +32,11 @@ public class TransactionRepository {
     }
 
     public Transaction findById(Integer id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.get(Transaction.class, id);
-        session.close();
-        return transaction;
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("from Transaction t left join fetch t.items where t.id = :transactionId", Transaction.class)
+                    .setParameter("transactionId", id)
+                    .uniqueResult();
+        }
     }
 
     public List<Transaction> findTransactionsByDate(String date) {

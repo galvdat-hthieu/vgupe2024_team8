@@ -5,20 +5,38 @@
 package Famacy.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "\"Consumable\"")
-public class Consumable implements Serializable {
+public class Consumable implements Comparable<Consumable>{
 
     @EmbeddedId
     private ConsumableId id;
 
-    @Column(name = "\"Quantity\"")
-    private Integer quantity;
-
     @Column(name = "\"Supplied_date\"")
     private String suppliedDate;
+    
+    @Column(name = "\"Quantity\"")
+    private Integer quantity;
+    
+    @Column(name = "\"CPrice\"")
+    private double price;
+    
+    //Constructor
+    public Consumable(ConsumableId id, String suppliedDate, 
+            int quantity, double price){
+        this.id = id;
+        this.suppliedDate = suppliedDate;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    
+    public Consumable() {
+        this.id = null;
+        this.suppliedDate = null;
+        this.quantity = -1;
+        this.price = -1;
+    }
 
     public ConsumableId getId() {
         return id;
@@ -43,4 +61,18 @@ public class Consumable implements Serializable {
     public void setSuppliedDate(String suppliedDate) {
         this.suppliedDate = suppliedDate;
     }
-}
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    
+    @Override
+    public int compareTo(Consumable other) {
+        // Compare by medicine name (id.getName())
+            return this.id.getName().compareToIgnoreCase(other.getId().getName());
+        }
+    }

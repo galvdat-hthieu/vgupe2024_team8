@@ -6,6 +6,7 @@ package Famacy.service;
 
 
 import Famacy.model.Consumable;
+import Famacy.model.ConsumableId;
 import Famacy.repository.ConsumableRepository;
 
 import java.util.List;
@@ -18,27 +19,35 @@ public class ConsumableService {
     }
 
     public Consumable saveConsumable(Consumable consumable) {
-        return consumableRepository.saveOrUpdate(consumable);
+        return consumableRepository.save(consumable);
     }
 
     public List<Consumable> getAllConsumables() {
         return consumableRepository.findAll();
     }
-
-    public Consumable getConsumableById(String name, String supplier) {
-        return consumableRepository.findById(name, supplier);
+    
+    public Consumable getConsumableByName(String name){
+        return consumableRepository.findConsumableByName(name);
+    }
+    
+    public Consumable getConsumableById(ConsumableId id) {
+        return consumableRepository.findById(id);
     }
 
     public void updateConsumable(Consumable consumable) {
-        consumableRepository.saveOrUpdate(consumable);
+        consumableRepository.save(consumable);
     }
 
-    public void deleteConsumable(String name, String supplier) {
-        consumableRepository.delete(name, supplier);
+    public void deleteConsumable(ConsumableId id) {
+        consumableRepository.delete(id);
     }
 
     public List<Consumable> searchConsumables(String name, String supplier) {
         return consumableRepository.searchConsumables(name, supplier);
+    }
+    
+    public void convertDateIfNeeded() {
+        consumableRepository.dateConvert();
     }
 }
 

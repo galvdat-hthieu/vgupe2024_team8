@@ -35,6 +35,10 @@ public class AccountService {
             return false; // Username already exists
         }
     }
+    
+    public Integer getEmployeeIdByUsername(String username){
+        return accountRepository.findEmployeeIdByUsername(username);
+    }
 
     public boolean deleteAccount(String username) {
         Account account = accountRepository.findByUsername(username);
@@ -58,7 +62,7 @@ public class AccountService {
             accountRepository.saveAccount(account);
         }
     }
-
+    
     public void changeRole(String username, String newRole) {
         Account account = accountRepository.findByUsername(username);
         if (account != null) {
