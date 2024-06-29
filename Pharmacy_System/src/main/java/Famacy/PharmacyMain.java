@@ -255,11 +255,11 @@ public class PharmacyMain extends javax.swing.JFrame {
                 .addComponent(userRoleInfoLabel))
         );
 
-        jLabel5.setFont(new java.awt.Font("Tekton Pro Cond", 1, 70)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Impact", 1, 70)); // NOI18N
         jLabel5.setText("Famacy");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
-        jLabel6.setFont(new java.awt.Font("Swis721 BdCnOul BT", 0, 36)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Cascadia Code", 0, 36)); // NOI18N
         jLabel6.setText("Internal Management");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -270,7 +270,7 @@ public class PharmacyMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(471, 471, 471)
+                .addGap(438, 438, 438)
                 .addComponent(popupButton)
                 .addGap(54, 54, 54))
             .addGroup(layout.createSequentialGroup()
@@ -285,7 +285,7 @@ public class PharmacyMain extends javax.swing.JFrame {
                         .addGap(431, 431, 431))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(490, 490, 490))))
+                        .addGap(444, 444, 444))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
