@@ -99,6 +99,9 @@ libraries:
 
 <a id="item-seven"></a>
 ## 7. User Guide
+### Employee Management:
+![Screenshot 2024-06-29 161245](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/403b158f-83bc-40c4-9b51-00275941f9a6)
+
 
 <a id="item-seven"></a>
 ## 8. Task Division
