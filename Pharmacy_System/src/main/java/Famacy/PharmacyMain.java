@@ -385,6 +385,7 @@ public class PharmacyMain extends javax.swing.JFrame {
         accountFrame.setSize(300, 200);
         accountFrame.setLocationRelativeTo(null);
         accountFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        accountFrame.setResizable(false);
 
         JPanel accountPanel = new JPanel(new GridLayout(2, 1, 10, 10));
         JButton changePasswordButton = new JButton("Change Password");
@@ -467,6 +468,7 @@ public class PharmacyMain extends javax.swing.JFrame {
         dialog.getContentPane().add(panel);
         dialog.pack();
         dialog.setLocationRelativeTo(this);
+        dialog.setResizable(false);
 
         // Action listeners to handle button clicks
         cancelButton.addActionListener(e -> dialog.dispose());
@@ -559,6 +561,7 @@ public class PharmacyMain extends javax.swing.JFrame {
         dialog.getContentPane().add(panel);
         dialog.pack();
         dialog.setLocationRelativeTo(this);
+        dialog.setResizable(false);
 
         // Show the dialog
         dialog.setVisible(true);
