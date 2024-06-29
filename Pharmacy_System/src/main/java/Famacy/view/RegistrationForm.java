@@ -23,7 +23,7 @@ public class RegistrationForm extends JFrame {
         this.currentUsername = currentUsername;
 
         setTitle("Register Account");
-        setSize(400, 200);
+        setSize(350, 180);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
