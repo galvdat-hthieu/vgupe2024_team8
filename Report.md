@@ -4,11 +4,11 @@
 
 ## Table of Contents
 1. [Introduction](#item-one)
-2. [Problem Description](#item-two)
-3. [Customer Requirement](#item-three)
-4. [Framework](#item-four)
-5. [Technologies Used](#item-five)
-6. [Design](#item-six)
+2. [Application Description](#item-two)
+3. [Analysis](#item-three)
+4. [Design](#item-four)
+5. [Framework](#item-five)
+6. [Technologies Used](#item-six)
 7. [User Guide](#item-seven)
 8. [Task Division](#item-seven)
 
@@ -74,7 +74,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 
 <a id="item-five"></a>
-## 5. Code Modules
+## 5. Framework
 This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
 ### System Architecture
 - Hibernate:  Used for ORM to map Java objects to database tables.
