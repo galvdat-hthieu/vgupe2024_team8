@@ -101,7 +101,8 @@ libraries:
 ## 7. User Guide
 ### Employee Management:
 <p>This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.</p>
-![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607) &nbsp;
+
+![mainmenu](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607) 
 
 <p>Here is the GUI of this function. It will have 3 blank boxes so users can enter information to search based on ID, name, position and then just press "search".</p>
 ![employeemanagement](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8) &nbsp;
