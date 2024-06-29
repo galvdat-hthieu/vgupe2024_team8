@@ -134,9 +134,10 @@ Finally, you can export a csv file containing employee information.
 ## 8. Task Division
 
 ## 9. Cách up hình lên report
-<p>kéo hình từ thư mục trong máy vào thẳng report thì ví dụ nó sẽ ra cái này.</p>
+<p>kéo hình từ thư mục trong máy vào thẳng report thì ví dụ nó sẽ ra cái này.
+![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) </p>
 
 ![editem](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e) 
 
- sau đó copy cái https vào trong " " như thế này: 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="400" height="400">
+ sau đó copy cái https vào trong " " như thế này: img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="400" height="400"
+<p><img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="400" height="400"></p>
