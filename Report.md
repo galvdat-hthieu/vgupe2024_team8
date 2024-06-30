@@ -102,18 +102,7 @@ This application is built base on the Model-View-Control pattern:
 - hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
   
 <a id="item-six"></a>
-## 6. Technologies Used
-   - Hibernate: ORM framework for mapping Java objects to database tables.
-   - PostgreSQL: Relational database management system for storing employee data.
-   - Swing: GUI toolkit for the Java programming language to create the user interface.
-   - Java: Programming language used for the development of the application.
-
-Thanks to Java’s diverse libraries, it has helped us a lot in development. We utilized the following
-libraries:
-
-
-<a id="item-seven"></a>
-## 7. User Guide
+## 6. User Guide
 ### I. Admin Account
 ### Employee Management:
 This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.
