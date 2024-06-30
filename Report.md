@@ -192,11 +192,13 @@ This application is built base on the Model-View-Control pattern:
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c" width="500" height="400">
 
-Not only that, you can click on the box of the employee who needs to change. you have delete and edit functions.
+- To edit an employee information : Choose an employee on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok" 
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/0c6e9456-15a4-4613-a651-00c9118c6f9e" width="500" height="400">
 
-Finally, you can export a csv file containing employee information.
+- To delete an employee : Choose an employee on the list -> click "Delete" .
+
+- To export employee list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
 
 ### II. User Account
 #### ....
