@@ -175,14 +175,15 @@ This application is built base on the Model-View-Control pattern:
 #### Admin Role
 - Admin have full access to the application features.
 ##### 1. Main menu
-- Overview of available features and statistics
+- Overview of available features
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607" width="400" height="400">
 
 ##### 2. Manage Employee
-Here is the GUI of this function. It will have 3 blank boxes so you can enter information to search based on ID, name, position and then just press "Search".
-
+- GUI of the Employee Management
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/ff984017-9e0e-454b-999f-63e06c7638a8" width="500" height="400">
 
+- To search employee, fill out at least 1 data into 1 of 3 fields at the top left of the GUI.
+   
 You can view employee information more easily by clicking "View", it will display complete information.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59" width="500" height="400">
