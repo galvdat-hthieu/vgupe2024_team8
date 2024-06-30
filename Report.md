@@ -159,8 +159,22 @@ This application is built base on the Model-View-Control pattern:
   
 <a id="item-six"></a>
 ## 6. User Guide
-### I. Admin Account
-#### Employee Management:
+### I. Installation 
+#### System Requirements:
+- Java JDK 21
+- PostgreSQL database
+#### Installation Instruction:
+- Step 1: Download the application package.
+- Step 2: Install Java JDK 21 or higher.
+- Step 3: Set up PostgreSQL and import the provide sql file into the database.
+- Step 4: Go to the config.properties file to specify the connection link to the database server as well as the username and password.
+### Getting Started
+- Launching the Application: double click on Pharmacy_System.jar or run it from the command line using "java -jar Pharmacy_System.jar".
+- Login Process: Enter the username and provided password in the package to log in as Admin.
+### Role-Based Functionalities
+#### Admin Role
+- Admin have full access to the application features.
+#### Employee Management
 This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607" width="400" height="400">
