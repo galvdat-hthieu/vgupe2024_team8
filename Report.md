@@ -130,6 +130,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 <a id="item-five"></a>
 ## 5. System architecture
 This section outlines the architecture of the Pharmacy Management System.
+### Language
+- Java : Core language for application development. Built on Java JDK 21
 ### Framework
 - Hibernate : used for Object-Relational Mapping (ORM) to interact with databases. Provides some onjects for database operation and manages entities in the database.
 ### Library 
