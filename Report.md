@@ -74,18 +74,33 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 
 <a id="item-five"></a>
-## 5. Framework
-This report outlines the design and implementation of a Pharmacy Management System using Hibernate, Postgre SQL, and the MVC pattern. Hibernate has available operations to connect, store, and modify data in the database because this is an open source and automatically generates SQL queries based on the entity mappings. In addition, Hibernate supports multiple database dialects which means we can switch databases with minimal configuration changes.
-### System Architecture
-- Hibernate:  Used for ORM to map Java objects to database tables.
-- PostgreSQL JDBC Driver: Allows Java to connect to PostgreSQL databases.
+## 5. System architecture
+This section outlines the architecture of the Pharmacy Management System.
+### Framework
+- Hibernate : used for Object-Relational Mapping (ORM) to interact with databases. Provides some onjects for database operation and manages entities in the database.
+### Library 
+- PostgreSQL JDBC Driver: provide the JDBC driver for PostgreSQL database. Allow Java application to connect to databases
+- Java Standard libray: Collections, Input/Output, Exception Handling (java.util, java.io, etc.)
+- iText: for creating and designing PDF documents in Java. Use to generate bills, invoices of the transaction.
+- Swing : used to build  the graphical user interface of the application 
+### Tools
+- Maven Jar Plugin : used to build JAR file.
+- Maven Shade Plugin : used to packages all dependencies into a single JAR file.
+### Architectural Pattern and Directory Structure
+This application is built base on the Model-View-Control pattern:
+#### Model
 - model/: Contains entity classes representing the database tables.
 - repository/: Contains repository classes for database operations.
 - service/: Contains service classes that implement business logic.
-- view/: Contains Swing form classes for the GUI.
+#### View
+- view/: Contains Swing form classes for the GUI including action listeners for handling user input
+#### Controller
+- Intergrated into the GUI form
+#### Utilities
 - util/: Contains utility classes.
+#### Other resource
 - hibernate.cfg.xml: Configuration file for Hibernate. Important for database connection details and mappings.
-
+  
 <a id="item-six"></a>
 ## 6. Technologies Used
    - Hibernate: ORM framework for mapping Java objects to database tables.
