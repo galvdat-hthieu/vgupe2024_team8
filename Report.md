@@ -8,7 +8,7 @@
 3. [Analysis](#item-three)
 4. [Design](#item-four)
 5. [Framework](#item-five)
-6. [Technologies Used](#item-six)
+6. [User Guide](#item-six)
 7. [User Guide](#item-seven)
 8. [Task Division](#item-seven)
 
