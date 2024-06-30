@@ -71,7 +71,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 <a id="item-four"></a>
 ## 4. Design
-
+### Class diagram
+####
 
 <a id="item-five"></a>
 ## 5. System architecture
@@ -104,7 +105,7 @@ This application is built base on the Model-View-Control pattern:
 <a id="item-six"></a>
 ## 6. User Guide
 ### I. Admin Account
-### Employee Management:
+#### Employee Management:
 This is our Main Menu, here you can click the "Manage Employee" button to enter the Employee Management fuction. But this functionality is only available to people with admin roles.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/b86dc19b-091d-499f-a49a-5b8d915bd607" width="400" height="400">
@@ -128,6 +129,7 @@ Not only that, you can click on the box of the employee who needs to change. you
 Finally, you can export a csv file containing employee information.
 
 ### II. User Account
+#### ....
 
 
 
