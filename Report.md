@@ -91,19 +91,19 @@ This project is about an application to effectively manage a pharmaceutical stor
 ### Use case diagram
 
 #### Account
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/account_usecase.png" width="700" height="900">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/account_usecase.png" width="700" height="800">
 
 #### Consumable
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/consumable_use%20case.png" width="700" height="900">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/consumable_use%20case.png" width="700" height="800">
 
 #### Employee
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/usecaseemployee.png" width="700" height="900">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/usecaseemployee.png" width="700" height="800">
 
 #### Medicine
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/medicine_usecase.png" width="700" height="900">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/medicine_usecase.png" width="700" height="800">
 
 #### Transaction
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="900">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="800">
 
 ### Sequence diagram
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Item_%20Management.png">
