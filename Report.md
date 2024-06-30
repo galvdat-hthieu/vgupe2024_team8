@@ -200,6 +200,41 @@ This application is built base on the Model-View-Control pattern:
 
 - To export employee list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
 
+##### 3. Manage Account 
+- To create a new account: click "Create Account" -> input the username and the employee id associate with that account -> "Create". The password will be "123" by default
+- To reset password of an account : click "Reset password" -> input the account username that need to be reset -> "Reset Password". The password will be reset to the default (123).
+- To delete an account: click "Delete account" -> input the account username that need to be deleted -> "Delete Account"
+- To change the role : click "Change Role" -> enter the username, specify the new role -> "Change Role". 
+
+##### 4. Medicine
+- GUI of Medicine Management
+- To search medicine: fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
+- To view medicine: choose a medicine on the list -> "view"
+- To check for expired medicine : click "Out-of-date medicine" . It will list all the medicine that is expired
+- To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again.
+- To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok"
+- To delete an medicine : Choose an medicine on the list -> click "Delete" .
+- To export medicine list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
+##### 5. Consumable
+- GUi of Consumable Management
+- To search consumable, fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
+- To view consumable, choose a consumable on the list -> "view"
+- To add consumable: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the consumable list again.
+- To edit a consumable information : Choose a consumable on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok"
+- To delete an consumable : Choose an consumable on the list -> click "Delete" .
+- To export consumable list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
+##### 6. Internal chat
+- GUi of internal chat
+- To view the conversation with other employee: click on the box next to "Conversation with" text -> choose the employee.
+- To send message: Click "Send Message" -> select the receiver -> "Next" -> Input message -> "Send Message"
+- To send message to many people : Click "Send Message" -> select multiple receiver -> "Next" -> Input message -> "Send Message"
+- To send message to all:  Click "Send Message" -> click "All" -> "Next" -> Input message -> "Send Message"
+##### 7. Transaction
+- GUI of Transaction Management
+- To create new transacton : click "New Transaction" -> specify the name and quantity of the item -> click "Add". Multiple items can be added to the list. When you are done adding items, click "Save Transaction"
+- To view a transaction : choose a transaction on the list -> "View Transaction"
+- To generate invoice of a transaction : choose a transaction on the list -> "View Transaction" -> "generate invoice". The invoice will be saved in the current working directory.
+
 ### II. User Account
 #### ....
 
