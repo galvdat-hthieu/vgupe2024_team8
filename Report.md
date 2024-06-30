@@ -106,11 +106,22 @@ This project is about an application to effectively manage a pharmaceutical stor
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="800">
 
 ### Sequence diagram
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Item_%20Management.png">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Medicine-Consumable_Manager.png">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/employeesequence.png">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/transaction_sequence.png">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/separate_account.png">
+
+#### Account
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/separate_account.png" width="700" height="800">
+
+#### Item
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Item_%20Management.png" width="700" height="800">
+
+#### Employee
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/employeesequence.png" width="700" height="800">
+
+#### Medicine and Consumable
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Medicine-Consumable_Manager.png" width="700" height="800">
+
+#### Transaction
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/transaction_sequence.png" width="700" height="800">
+
 
 ### Database
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/92b574e4-9a1f-4416-9bdb-fb7de8bf2e91">
