@@ -73,7 +73,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 ## 4. Design
 
 ### Class diagram
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="600" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="700" height="500">
 
 <img src=" " width="500" height="400">
 ### Use case diagram
