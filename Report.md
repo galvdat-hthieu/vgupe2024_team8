@@ -74,19 +74,19 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 ### Class diagram
 #### Account
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="900" height="700">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
 
 #### Consumable
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="900" height="700">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="1000" height="600">
 
 #### Employee
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="900" height="700">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="1000" height="600">
 
 #### Medicine
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/medicine_class.png" width="900" height="700">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/medicine_class.png" width="1000" height="600">
 
 #### Transaction
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="900" height="700">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="1000" height="600">
 
 ### Use case diagram
 
