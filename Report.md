@@ -74,12 +74,12 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 ### Class diagram
 This is our class diagram about account
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="800" height="500">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="800" height="500">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="800" height="500">
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="800" height="500">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="800" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="800" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="800" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="800" height="400">
 
-<img src=" " width="800" height="500">
+<img src=" " width="800" height="400">
 ### Use case diagram
 
 ### Sequence diagram
