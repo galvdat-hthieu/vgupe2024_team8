@@ -188,7 +188,7 @@ This application is built base on the Model-View-Control pattern:
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/de7348f0-72af-4f4c-ae06-ccbb0c963a59" width="500" height="400">
 
-Next, you can add employees by entering information or importing a csv file. After you have added it, you click on the "Refresh" button.
+- To add employee: click "Add" at the bottom left of the GUI, fill out the fields -> click "Save" -> click "Refresh" to load the employees list again.
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/3bfd3e48-5169-456b-9e00-97c591af0f1c" width="500" height="400">
 
