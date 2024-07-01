@@ -9,8 +9,7 @@
 4. [Design](#item-four)
 5. [Framework](#item-five)
 6. [User Guide](#item-six)
-7. [User Guide](#item-seven)
-8. [Task Division](#item-seven)
+7. [Task Division](#item-seven)
 
 <a id="item-one"></a>
 ## 1. Introduction
@@ -242,19 +241,19 @@ This application is built base on the Model-View-Control pattern:
 
 - To view medicine: choose a medicine on the list -> "view"
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b52af887-3f29-4c54-a2ab-3582ddc3cbfe" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b52af887-3f29-4c54-a2ab-3582ddc3cbfe" width="700" height="600">
 
 - To check for expired medicine : click "Out-of-date medicine" . It will list all the medicine that is expired
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="700" height="600">
   
 - To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again.
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5dc49c08-2d88-4f11-83d5-cc4c045257ad" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5dc49c08-2d88-4f11-83d5-cc4c045257ad" width="700" height="600">
 
 - To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok"
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/012a051b-91b5-43a9-bc35-25b25cd1fae0" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/012a051b-91b5-43a9-bc35-25b25cd1fae0" width="700" height="600">
   
 - To delete an medicine : Choose an medicine on the list -> click "Delete" .
 
@@ -265,23 +264,23 @@ This application is built base on the Model-View-Control pattern:
 ##### 5. Consumable
 - GUi of Consumable Management
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/cb708a7d-8f7b-4486-93e2-749b008db04a" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/cb708a7d-8f7b-4486-93e2-749b008db04a" width="700" height="600">
 
 - To search consumable, fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="600"">
 
 - To view consumable, choose a consumable on the list -> "view"
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a79076d6-aa19-4d41-ae23-5ee8cb017529" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a79076d6-aa19-4d41-ae23-5ee8cb017529" width="700" height="600">
 
 - To add consumable: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the consumable list again.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/721a0c27-17da-49e7-8910-fca6935fd03d" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/721a0c27-17da-49e7-8910-fca6935fd03d" width="700" height="600">
 
 - To edit a consumable information : Choose a consumable on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok"
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a689ee14-ec01-40b8-8c3d-2ca9d2efd2d9" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a689ee14-ec01-40b8-8c3d-2ca9d2efd2d9" width="700" height="600">
 
 - To delete an consumable : Choose an consumable on the list -> click "Delete" .
 
@@ -337,27 +336,27 @@ This application is built base on the Model-View-Control pattern:
 ##### 2. Medicine
 - GUI of Medicine Management
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/36ccba23-bf83-4d03-9d41-0cb2bfd9a823" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/36ccba23-bf83-4d03-9d41-0cb2bfd9a823" width="700" height="600">
 
 - To search medicine: fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search. 
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/6be1fdb6-f941-4fc9-b7db-ff55119c2362" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/6be1fdb6-f941-4fc9-b7db-ff55119c2362" width="700" height="600">
 
 - To view medicine: choose a medicine on the list -> "view" 
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b52af887-3f29-4c54-a2ab-3582ddc3cbfe" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b52af887-3f29-4c54-a2ab-3582ddc3cbfe" width="700" height="600">
 
 - To check for expired medicine : click "Out-of-date medicine" . It will list all the medicine that is expired
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="700" height="600">
   
 - To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again. (only user Authorized)
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5dc49c08-2d88-4f11-83d5-cc4c045257ad" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5dc49c08-2d88-4f11-83d5-cc4c045257ad" width="700" height="600">
 
 - To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok" (only user Authorized)
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/012a051b-91b5-43a9-bc35-25b25cd1fae0" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/012a051b-91b5-43a9-bc35-25b25cd1fae0" width="700" height="600">
   
 - To delete an medicine : Choose an medicine on the list -> click "Delete" . (only user Authorized)
 
@@ -368,23 +367,23 @@ This application is built base on the Model-View-Control pattern:
 ##### 3. Consumable
 - GUi of Consumable Management
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/cb708a7d-8f7b-4486-93e2-749b008db04a" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/cb708a7d-8f7b-4486-93e2-749b008db04a" width="700" height="600">
 
 - To search consumable, fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="600">
 
 - To view consumable, choose a consumable on the list -> "view"
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a79076d6-aa19-4d41-ae23-5ee8cb017529" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a79076d6-aa19-4d41-ae23-5ee8cb017529" width="700" height="600">
 
 - To add consumable: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the consumable list again. (only user Authorized)
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/721a0c27-17da-49e7-8910-fca6935fd03d" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/721a0c27-17da-49e7-8910-fca6935fd03d" width="700" height="600">
 
 - To edit a consumable information : Choose a consumable on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok" (only user Authorized)
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a689ee14-ec01-40b8-8c3d-2ca9d2efd2d9" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a689ee14-ec01-40b8-8c3d-2ca9d2efd2d9" width="700" height="600">
 
 - To delete an consumable : Choose an consumable on the list -> click "Delete" . (only user Authorized)
 
@@ -435,5 +434,5 @@ This application is built base on the Model-View-Control pattern:
 
 
 <a id="item-seven"></a>
-## 8. Task Division
+## 7. Task Division
 
