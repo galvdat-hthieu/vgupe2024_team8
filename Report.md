@@ -332,7 +332,7 @@ This application is built base on the Model-View-Control pattern:
 ### II. User Account
 ##### 1. Main menu
 - Overview of available features
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/493d7085-945d-4c16-85fc-682185abfa2b" width="400" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/493d7085-945d-4c16-85fc-682185abfa2b" width="500" height="500">
 
 ##### 2. Medicine
 - GUI of Medicine Management
