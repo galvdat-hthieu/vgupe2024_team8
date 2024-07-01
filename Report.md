@@ -363,7 +363,7 @@ This application is built base on the Model-View-Control pattern:
 
 - To export medicine list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/92cef99f-c7b7-470f-b34e-d39dbf4f55cc" width="400" height="200">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/92cef99f-c7b7-470f-b34e-d39dbf4f55cc" width="600" height="200">
 
 ##### 3. Consumable
 - GUi of Consumable Management
@@ -391,7 +391,7 @@ This application is built base on the Model-View-Control pattern:
 
 - To export consumable list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b69e6a23-6e10-4c0b-875c-0b77b9d4a99e" width="400" height="200">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b69e6a23-6e10-4c0b-875c-0b77b9d4a99e" width="600" height="200">
 
 ##### 4. Internal chat
 - GUi of internal chat
