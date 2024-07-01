@@ -13,7 +13,10 @@
    4. [Database](#item-four-d)
 6. [Framework](#item-five)
 7. [User Guide](#item-six)
-8. [Task Division](#item-seven)
+   1. [Installation](#item-six-a)
+   2. [Getting Started](#item-six-b)
+   3. [Role-base Functionalities](#item-six-c)
+9. [Task Division](#item-seven)
 
 <a id="item-one"></a>
 ## 1. Introduction
@@ -96,7 +99,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/Message%20System.png" width="700" height="800">
 
-### Sequence diagram {#item-four-b}
+<a id="item-four-b"></a>
+### Sequence diagram 
 
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/separate_account.png" width="700" height="800">
@@ -116,7 +120,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
 
-### Class diagram {#item-four-c}
+<a id="item-four-c"></a>
+### Class diagram 
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
 
@@ -135,8 +140,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
 
-
-### Database {#item-four-d}
+<a id="item-four-d"></a>
+### Database 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
 
 
@@ -173,6 +178,8 @@ This application is built base on the Model-View-Control pattern:
   
 <a id="item-six"></a>
 ## 6. User Guide
+
+<a id="item-six-a"></a>
 ### I. Installation 
 #### System Requirements:
 - Java JDK 21
@@ -182,9 +189,13 @@ This application is built base on the Model-View-Control pattern:
 - Step 2: Install Java JDK 21 or higher.
 - Step 3: Set up PostgreSQL and import the provide sql file into the database.
 - Step 4: Go to the config.properties file to specify the connection link to the database server as well as the username and password of that server.
+
+<a id="item-six-b"></a>
 ### Getting Started
 - Launching the Application: double click on Pharmacy_System.jar or run it from the command line using "java -jar Pharmacy_System.jar".
 - Login Process: Enter the username and provided password in the package to log in as Admin.
+
+<a id="item-six-c"></a>
 ### Role-Based Functionalities
 #### Admin Role
 - Admin have full access to the application features.
