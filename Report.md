@@ -1,4 +1,4 @@
-# Programing Exercise Report: Pharmacy Management System
+![Warframe0000](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b24ac750-d99c-4911-a956-aa0bf8e9854e)# Programing Exercise Report: Pharmacy Management System
 # Team 8
 
 
@@ -241,6 +241,7 @@ This application is built base on the Model-View-Control pattern:
 
 
 
+![Warframe0000](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/aa7dd1c0-e63c-424d-9ef0-c58dc89216ac)
 
 
 
