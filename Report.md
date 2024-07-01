@@ -228,7 +228,7 @@ This application is built base on the Model-View-Control pattern:
 
 - To change the role : click "Change Role" -> enter the username, specify the new role -> "Change Role".
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/4f939cd5-f9e0-4e09-afcc-9c0443cf4613" width="400" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/4f939cd5-f9e0-4e09-afcc-9c0443cf4613" width="400" height="500">
 
 
 ##### 4. Medicine
