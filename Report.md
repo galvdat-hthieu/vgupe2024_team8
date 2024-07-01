@@ -90,8 +90,9 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Employee
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/usecaseemployee.png" width="700" height="800">
 
+
 #### Medicine
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/medicine_usecase.png" width="700" height="800">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/49a8d1f6-9918-4b7b-ad38-89f403ad7983" width="700" height="800">
 
 #### Transaction
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="800">
