@@ -20,11 +20,11 @@
 
 <a id="item-one"></a>
 ## 1. Introduction
-This Maven project focuses on an innovative application for managing a pharmaceutical store. The application can record the maintenance of medicines, drugs, and supplies from suppliers. It also handles the administration of employee records, provides separate usernames and passwords for each employee, and features a built-in messaging system. Additionally, it can generate invoices, bills, receipts, and other related documents, while ensuring the effective management of drugs and consumables within the pharmacy unit.
+Welcome to the documentation for our Pharmacy Management System. This system is designed to streamline the operations of a pharmacy, ensuring efficient management of inventory, employees, and transactions.
 
 <a id="item-two"></a>
 ## 2. Application Description
-This project is about an application to effectively manage a pharmaceutical store. It helps the pharmacist to :
+This application is built to effectively manage a pharmaceutical store. It helps the pharmacist to :
 - Record maintenance of medicines/drugs and supplies sent by the supplier
 - Administration management of employee records
 - Provision of separate usernames and passwords for each employee
