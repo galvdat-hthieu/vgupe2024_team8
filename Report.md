@@ -233,9 +233,21 @@ This application is built base on the Model-View-Control pattern:
 
 ##### 4. Medicine
 - GUI of Medicine Management
+  
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/36ccba23-bf83-4d03-9d41-0cb2bfd9a823" width="400" height="400">
+
 - To search medicine: fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
+  
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/6be1fdb6-f941-4fc9-b7db-ff55119c2362" width="400" height="400">
+
 - To view medicine: choose a medicine on the list -> "view"
+  
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b52af887-3f29-4c54-a2ab-3582ddc3cbfe" width="400" height="400">
+
 - To check for expired medicine : click "Out-of-date medicine" . It will list all the medicine that is expired
+  
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="400" height="400">
+  
 - To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again.
 - To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok"
 - To delete an medicine : Choose an medicine on the list -> click "Delete" .
