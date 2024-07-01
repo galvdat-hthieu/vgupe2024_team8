@@ -134,6 +134,9 @@ This project is about an application to effectively manage a pharmaceutical stor
 ### Database
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/92b574e4-9a1f-4416-9bdb-fb7de8bf2e91">
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
+
+
 
 <a id="item-five"></a>
 ## 5. System architecture
