@@ -75,7 +75,8 @@ This project is about an application to effectively manage a pharmaceutical stor
 <a id="item-four"></a>
 ## 4. Design
 
-### Use case diagram {#item-four-a}
+<a id="item-four-a"></a>
+### Use case diagram
 
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/account_usecase.png" width="700" height="800">
