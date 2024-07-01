@@ -88,6 +88,9 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Transaction
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="1000" height="600">
 
+#### Message
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
+
 ### Use case diagram
 
 #### Account
@@ -105,6 +108,9 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Transaction
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="800">
 
+#### Message
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/Message%20System.png" width="700" height="800">
+
 ### Sequence diagram
 
 #### Account
@@ -121,6 +127,13 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 #### Transaction
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/transaction_sequence.png" width="700" height="800">
+
+#### Message
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
+
+
+
+
 
 
 ### Database
