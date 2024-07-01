@@ -132,7 +132,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 
 
 ### Database
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/5d58e684-8bfe-4fb1-998c-d660404566f7">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/92b574e4-9a1f-4416-9bdb-fb7de8bf2e91">
 
 
 <a id="item-five"></a>
