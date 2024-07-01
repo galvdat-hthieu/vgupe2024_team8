@@ -215,6 +215,7 @@ This application is built base on the Model-View-Control pattern:
 
 ##### 3. Manage Account 
 - To create a new account: click "Create Account" -> input the username and the employee id associate with that account -> "Create". The password will be "123" by default
+  <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/64c3ecca-d86b-4d67-8550-e04ef7d5a5e7" width="500" height="400">
 - To reset password of an account : click "Reset password" -> input the account username that need to be reset -> "Reset Password". The password will be reset to the default (123).
 - To delete an account: click "Delete account" -> input the account username that need to be deleted -> "Delete Account"
 - To change the role : click "Change Role" -> enter the username, specify the new role -> "Change Role". 
