@@ -268,7 +268,7 @@ This application is built base on the Model-View-Control pattern:
 
 - To search consumable, fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="600"">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a3726c0c-959a-4a71-83da-ea1a70b0fa6a" width="700" height="600">
 
 - To view consumable, choose a consumable on the list -> "view"
 
