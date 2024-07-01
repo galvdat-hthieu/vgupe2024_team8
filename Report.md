@@ -293,18 +293,24 @@ This application is built base on the Model-View-Control pattern:
 ##### 6. Internal chat
 - GUi of internal chat
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5b1c8976-4a45-459d-a541-1ecfa382ead7" width="400" height="400">
 
 - To view the conversation with other employee: click on the box next to "Conversation with" text -> choose the employee.
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/9de0bc13-2c85-4478-8cdf-c570b269ae9b" width="400" height="400">
 
 - To send message: Click "Send Message" -> select the receiver -> "Next" -> Input message -> "Send Message"
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/456f6c7c-8f34-4877-b83c-ff1cb28275fa" width="400" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/96dd6ec4-e1b2-40a6-893f-aded78894dff" width="400" height="400">
 
 - To send message to many people : Click "Send Message" -> select multiple receiver -> "Next" -> Input message -> "Send Message"
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b35b86d9-7481-4905-bd34-096dda93db4f" width="400" height="400">
 
 - To send message to all:  Click "Send Message" -> click "All" -> "Next" -> Input message -> "Send Message"
 
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/e5c583ac-3c29-4aeb-b25b-c503a6e14fef" width="400" height="400">
 
 ##### 7. Transaction
 - GUI of Transaction Management
