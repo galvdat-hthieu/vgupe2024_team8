@@ -197,7 +197,7 @@ This application is built base on the Model-View-Control pattern:
 
 <a id="item-six-c"></a>
 ### Role-Based Functionalities
-#### Admin Role
+### I. Admin Role
 - Admin have full access to the application features.
 ##### 1. Main menu
 - Overview of available features
