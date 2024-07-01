@@ -7,9 +7,13 @@
 2. [Application Description](#item-two)
 3. [Analysis](#item-three)
 4. [Design](#item-four)
-5. [Framework](#item-five)
-6. [User Guide](#item-six)
-7. [Task Division](#item-seven)
+   1. [Use-case](#item-four-a)
+   2. [Sequence Diagram](#item-four-b)
+   3. [Class Diagram](#item-four-c)
+   4. [Database](#item-four-d)
+6. [Framework](#item-five)
+7. [User Guide](#item-six)
+8. [Task Division](#item-seven)
 
 <a id="item-one"></a>
 ## 1. Introduction
@@ -71,7 +75,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 <a id="item-four"></a>
 ## 4. Design
 
-### Use case diagram
+### Use case diagram {#item-four-a}
 
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/account_usecase.png" width="700" height="800">
@@ -91,7 +95,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/Message%20System.png" width="700" height="800">
 
-### Sequence diagram
+### Sequence diagram {#item-four-b}
 
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/separate_account.png" width="700" height="800">
@@ -111,7 +115,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
 
-### Class diagram
+### Class diagram {#item-four-c}
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
 
@@ -131,7 +135,7 @@ This project is about an application to effectively manage a pharmaceutical stor
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
 
 
-### Database
+### Database {#item-four-d}
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
 
 
