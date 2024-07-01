@@ -522,7 +522,7 @@ This application is built base on the Model-View-Control pattern:
 <a id="item-seven"></a>
 ## 7. Task Division
 ID        |Name                  |Tasks                                                                    |Comments                                                   |
-|---------|----------------------|-------------------------------------------------------------------------|-----------------------------------------------------------|
+|:-------:|:--------------------:|:------------------------------------------------------------------------|:----------------------------------------------------------|
 |         |Phạm Phi Long         |<ul><li>Project manager</li><li>Full-stack developer</li></ul>           | <ul><li>Responsible</li><li>Enthusiastic</li></ul>        |
 |         |Thái Minh Kiên        |<ul><li>Back-end developer</li><li>Docker deployment </li></ul>          | <ul><li>Active</li><li>Understanding</li></ul>            |
 |         |Đào Thế Hiển          |<ul><li>Back-end developer</li><li>Tester</li><li>Report writer</li></ul>| <ul><li>High-level tool utilizing</li><li>Neat</li></ul>  |
