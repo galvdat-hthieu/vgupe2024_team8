@@ -71,25 +71,6 @@ This project is about an application to effectively manage a pharmaceutical stor
 <a id="item-four"></a>
 ## 4. Design
 
-### Class diagram
-#### Account
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
-
-#### Consumable
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="1000" height="600">
-
-#### Employee
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="1000" height="600">
-
-#### Medicine
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/medicine_class.png" width="1000" height="600">
-
-#### Transaction
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="1000" height="600">
-
-#### Message
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
-
 ### Use case diagram
 
 #### Account
@@ -130,13 +111,28 @@ This project is about an application to effectively manage a pharmaceutical stor
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
 
+### Class diagram
+#### Account
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
 
+#### Consumable
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="1000" height="600">
 
+#### Employee
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="1000" height="600">
 
+#### Medicine
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/medicine_class.png" width="1000" height="600">
+
+#### Transaction
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="1000" height="600">
+
+#### Message
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
 
 
 ### Database
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/130123521/92b574e4-9a1f-4416-9bdb-fb7de8bf2e91">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/5d58e684-8bfe-4fb1-998c-d660404566f7">
 
 
 <a id="item-five"></a>
