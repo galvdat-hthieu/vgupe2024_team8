@@ -160,6 +160,7 @@ This section outlines the architecture of the Pharmacy Management System.
 - iText: for creating and designing PDF documents in Java. Use to generate bills, invoices of the transaction.
 - Swing : used to build  the graphical user interface of the application 
 ### Tools
+- Build Tool: Maven 
 - Maven Jar Plugin : used to build JAR file.
 - Maven Shade Plugin : used to packages all dependencies into a single JAR file.
 ### Architectural Pattern and Directory Structure
