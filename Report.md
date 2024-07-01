@@ -234,11 +234,11 @@ This application is built base on the Model-View-Control pattern:
 ##### 4. Medicine
 - GUI of Medicine Management
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/36ccba23-bf83-4d03-9d41-0cb2bfd9a823" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/36ccba23-bf83-4d03-9d41-0cb2bfd9a823" width="700" height="600">
 
 - To search medicine: fill out at least 1 data into 1 of 3 fields at the top left of the GUI and click Search.
   
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/6be1fdb6-f941-4fc9-b7db-ff55119c2362" width="700" height="400">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/6be1fdb6-f941-4fc9-b7db-ff55119c2362" width="700" height="600">
 
 - To view medicine: choose a medicine on the list -> "view"
   
