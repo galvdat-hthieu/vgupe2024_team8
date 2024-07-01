@@ -145,6 +145,81 @@ This project is about an application to effectively manage a pharmaceutical stor
 ### Database 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
 
+#### Entities and Attributes
+
+#### Employee
+- **EID**: Employee ID (Primary Key)
+- **EName**: Employee Name
+- **Gender**: Gender of the Employee
+- **Year of Birth**: Year of Birth of the Employee
+- **Phone number**: Contact Number
+- **Role**: Role in the organization
+
+#### Admin
+- **AID**: Admin ID (Primary Key)
+- **AName**: Admin Name
+
+#### Account
+- **Username**: Account Username (Primary Key)
+- **A**: Foreign Key linking to Admin
+- **Access level**: Access level of the account
+- **AStatus**: Account Status
+
+#### Message
+- **senderID**: ID of the sender (Foreign Key referencing Employee)
+- **receiverID**: ID of the receiver (Foreign Key referencing Employee)
+- **message content**: Content of the message
+- **Time**: Timestamp of the message
+- **MStatus**: Status of the message
+
+#### Transaction
+- **id**: Transaction ID (Primary Key)
+- **transaction date**: Date of the transaction
+- **total amount**: Total amount of the transaction
+
+#### Transaction Item
+- **id**: Transaction Item ID (Primary Key)
+- **name**: Name of the transaction item
+- **price**: Price of the item
+- **quantity**: Quantity of the item
+- **item type**: Type of item
+- **transaction id**: Foreign Key linking to Transaction
+
+#### Item
+- **id**: Item ID (Primary Key)
+- **name**: Name of the item
+- **price**: Price of the item
+- **type**: Type of item
+
+#### Medicine
+- **MName**: Medicine Name
+- **Batch number**: Batch number of the medicine
+- **Expiration date**: Expiration date of the medicine
+- **Supplied date**: Date the medicine was supplied
+- **Quantity**: Quantity of the medicine
+- **Supplier**: Supplier of the medicine
+- **price**: Price of the medicine
+
+#### Consumable
+- **CName**: Consumable Name
+- **Supplied date**: Date the consumable was supplied
+- **Quantity**: Quantity of the consumable
+- **Supplier**: Supplier of the consumable
+- **price**: Price of the consumable
+
+#### Relationships
+- **Employee** creates **Transaction** (1:N)
+- **Employee** manages **Medicine** (M:N)
+- **Employee** manages **Consumable** (M:N)
+- **Transaction** contains **Transaction Item** (1:N)
+- **Transaction Item** is part of **Item** (N:1)
+- **Message** is sent by **Employee** (1:N)
+- **Admin** creates **Account** (1:N)
+- **Account** is owned by **Employee** (1:1)
+- **Item** is a **Medicine** (1:1)
+- **Item** is a **Consumable** (1:1)
+
+This ERD provides a comprehensive view of how different entities within the pharmacy management system interact with each other, facilitating effective management and communication within the system.
 
 
 <a id="item-five"></a>
