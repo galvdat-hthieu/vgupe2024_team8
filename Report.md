@@ -349,20 +349,23 @@ This application is built base on the Model-View-Control pattern:
 - To check for expired medicine : click "Out-of-date medicine" . It will list all the medicine that is expired
   
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/7ab473cf-f86b-4eef-a26c-bc3e7db6e858" width="700" height="600">
-  
-- To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again. (only user Authorized)
+
+- To export medicine list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
+
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/92cef99f-c7b7-470f-b34e-d39dbf4f55cc" width="1000" height="200">
+
+###### For authorized user
+- To add medicine: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the medicine list again. 
   
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/5dc49c08-2d88-4f11-83d5-cc4c045257ad" width="700" height="600">
 
-- To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok" (only user Authorized)
+- To edit a medicine information : Choose a medicine on the list -> click "Edit" at the bottom left -> Change information in the field -> click "Ok" 
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/012a051b-91b5-43a9-bc35-25b25cd1fae0" width="700" height="600">
   
 - To delete an medicine : Choose an medicine on the list -> click "Delete" . (only user Authorized)
 
-- To export medicine list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/92cef99f-c7b7-470f-b34e-d39dbf4f55cc" width="1000" height="200">
 
 ##### 3. Consumable
 - GUi of Consumable Management
@@ -377,6 +380,11 @@ This application is built base on the Model-View-Control pattern:
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/a79076d6-aa19-4d41-ae23-5ee8cb017529" width="700" height="600">
 
+- To export consumable list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
+
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b69e6a23-6e10-4c0b-875c-0b77b9d4a99e" width="1000" height="200">
+
+###### For authorized user
 - To add consumable: click "Add" at the bottom left of the GUI, fill out the fields -> click "Ok" -> click "Refresh" to load the consumable list again. (only user Authorized)
 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/721a0c27-17da-49e7-8910-fca6935fd03d" width="700" height="600">
@@ -387,10 +395,6 @@ This application is built base on the Model-View-Control pattern:
 
 - To delete an consumable : Choose an consumable on the list -> click "Delete" . (only user Authorized)
 
-
-- To export consumable list into .csv file : click export at the bottom right. The .csv file will be save on the current working directory.
-
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/68812852/b69e6a23-6e10-4c0b-875c-0b77b9d4a99e" width="1000" height="200">
 
 ##### 4. Internal chat
 - GUi of internal chat
