@@ -176,7 +176,7 @@ This application is built base on the Model-View-Control pattern:
 - Step 1: Download the application package.
 - Step 2: Install Java JDK 21 or higher.
 - Step 3: Set up PostgreSQL and import the provide sql file into the database.
-- Step 4: Go to the config.properties file to specify the connection link to the database server as well as the username and password.
+- Step 4: Go to the config.properties file to specify the connection link to the database server as well as the username and password of that server.
 ### Getting Started
 - Launching the Application: double click on Pharmacy_System.jar or run it from the command line using "java -jar Pharmacy_System.jar".
 - Login Process: Enter the username and provided password in the package to log in as Admin.
