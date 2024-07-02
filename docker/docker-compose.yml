@@ -1,0 +1,45 @@
+version: '2.27.1'
+services:
+  app:
+    build: .
+    ports:
+      - "5555:5555"
+      - "5900:5900"
+    image: orcaa0512/famacy:pharmacy_system-app
+    environment:
+      HIBERNATE_CONNECTION_URL: jdbc:postgresql://db:5432/famacy
+      HIBERNATE_CONNECTION_USERNAME: postgres
+      HIBERNATE_CONNECTION_PASSWORD: 1234
+      DISPLAY: ":99"
+      LANG: en_US.UTF-8
+      LANGUAGE: en_US:en
+      LC_ALL: en_US.UTF-8
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: orcaa0512/famacy:postgres
+    environment:
+      POSTGRES_DB: famacy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./backup_file.backup:/docker-entrypoint-initdb.d/backup_file.backup
+      - db_data:/var/lib/postgresql/data
+    entrypoint: >
+      sh -c "
+        docker-entrypoint.sh postgres &
+        sleep 10
+        until pg_isready -h localhost -p 5432 -U postgres; do
+          echo 'Waiting for PostgreSQL to be ready...'
+          sleep 2
+        done
+        psql -U postgres -d famacy -f /docker-entrypoint-initdb.d/backup_file.backup
+        tail -f /dev/null
+      "
+
+volumes:
+  db_data:

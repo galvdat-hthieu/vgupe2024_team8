@@ -1,0 +1,999 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.3
+-- Dumped by pg_dump version 16.3
+
+-- Started on 2024-06-30 17:44:11
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 215 (class 1259 OID 16661)
+-- Name: Account; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Account" (
+    username text NOT NULL,
+    password text NOT NULL,
+    role text NOT NULL,
+    employee_id integer NOT NULL
+);
+
+
+ALTER TABLE public."Account" OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16666)
+-- Name: Administrator; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Administrator" (
+    "AID" integer NOT NULL,
+    "AName" text
+);
+
+
+ALTER TABLE public."Administrator" OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16671)
+-- Name: Administrator_AID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public."Administrator" ALTER COLUMN "AID" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public."Administrator_AID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 218 (class 1259 OID 16672)
+-- Name: Consumable; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Consumable" (
+    "CName" text NOT NULL,
+    "Quantity" integer NOT NULL,
+    "Supplied_date" text NOT NULL,
+    "Supplier" text NOT NULL,
+    "CPrice" double precision NOT NULL
+);
+
+
+ALTER TABLE public."Consumable" OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16677)
+-- Name: Employee; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Employee" (
+    "EID" integer NOT NULL,
+    "EName" text NOT NULL,
+    "Gender" text NOT NULL,
+    "Role" text NOT NULL,
+    "Birth" text NOT NULL,
+    "Phone" text
+);
+
+
+ALTER TABLE public."Employee" OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16682)
+-- Name: Item; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Item" (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    price double precision NOT NULL,
+    type character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public."Item" OWNER TO postgres;
+
+--
+-- TOC entry 221 (class 1259 OID 16685)
+-- Name: Item_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public."Item" ALTER COLUMN id ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public."Item_id_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 222 (class 1259 OID 16686)
+-- Name: Medicine; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Medicine" (
+    "MName" text NOT NULL,
+    "Batch" text NOT NULL,
+    "Supplier" text NOT NULL,
+    "Supplied_date" text NOT NULL,
+    "Expired_date" text NOT NULL,
+    "Quantity" integer NOT NULL,
+    "MPrice" double precision NOT NULL
+);
+
+
+ALTER TABLE public."Medicine" OWNER TO postgres;
+
+--
+-- TOC entry 223 (class 1259 OID 16691)
+-- Name: Message; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Message" (
+    "senderID" integer,
+    "receiverID" integer,
+    content text,
+    "MID" integer NOT NULL
+);
+
+
+ALTER TABLE public."Message" OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16696)
+-- Name: Message_MID_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+ALTER TABLE public."Message" ALTER COLUMN "MID" ADD GENERATED ALWAYS AS IDENTITY (
+    SEQUENCE NAME public."Message_MID_seq"
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1
+);
+
+
+--
+-- TOC entry 225 (class 1259 OID 16697)
+-- Name: Supplier; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Supplier" (
+    "SName" text
+);
+
+
+ALTER TABLE public."Supplier" OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 16702)
+-- Name: Transaction; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Transaction" (
+    id integer NOT NULL,
+    transaction_date text NOT NULL,
+    total_amount double precision NOT NULL
+);
+
+
+ALTER TABLE public."Transaction" OWNER TO postgres;
+
+--
+-- TOC entry 227 (class 1259 OID 16707)
+-- Name: TransactionItem; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."TransactionItem" (
+    id integer NOT NULL,
+    transaction_id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    quantity integer NOT NULL,
+    price double precision NOT NULL,
+    item_type text NOT NULL
+);
+
+
+ALTER TABLE public."TransactionItem" OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16712)
+-- Name: TransactionItem_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."TransactionItem_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."TransactionItem_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4862 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: TransactionItem_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."TransactionItem_id_seq" OWNED BY public."TransactionItem".id;
+
+
+--
+-- TOC entry 229 (class 1259 OID 16713)
+-- Name: Transaction_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public."Transaction_id_seq"
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public."Transaction_id_seq" OWNER TO postgres;
+
+--
+-- TOC entry 4863 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: Transaction_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public."Transaction_id_seq" OWNED BY public."Transaction".id;
+
+
+--
+-- TOC entry 4674 (class 2604 OID 16714)
+-- Name: Transaction id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Transaction" ALTER COLUMN id SET DEFAULT nextval('public."Transaction_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4675 (class 2604 OID 16715)
+-- Name: TransactionItem id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."TransactionItem" ALTER COLUMN id SET DEFAULT nextval('public."TransactionItem_id_seq"'::regclass);
+
+
+--
+-- TOC entry 4842 (class 0 OID 16661)
+-- Dependencies: 215
+-- Data for Name: Account; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Account" (username, password, role, employee_id) FROM stdin;
+user3	a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3	user	3
+user2	a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3	user (Authorized)	2
+user1	26c0b9c67268ea0882d434f8ca083ba5f5770ab14d12a218534ebf8a27527df1	admin	1
+user5	a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3	user	5
+\.
+
+
+--
+-- TOC entry 4843 (class 0 OID 16666)
+-- Dependencies: 216
+-- Data for Name: Administrator; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Administrator" ("AID", "AName") FROM stdin;
+1	Issiah Penniall
+\.
+
+
+--
+-- TOC entry 4845 (class 0 OID 16672)
+-- Dependencies: 218
+-- Data for Name: Consumable; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Consumable" ("CName", "Quantity", "Supplied_date", "Supplier", "CPrice") FROM stdin;
+hydrogen peroxide	485	11/10/2023	Rohan-Brekke	170
+calamine lotion	499	10/23/2023	Kunze-Doyle	200
+throat lozenges	483	11/19/2023	Keeling-Terry	210
+nasal spray	179	11/18/2023	Schroeder and Sons	100
+cotton balls	254	10/28/2023	Douglas, Corwin and Hansen	120
+antibacterial ointment	435	07/22/2023	Wilderman, Bauch and Yost	140
+ear drops	377	04/28/2024	Ritchie-Ward	150
+ear drops	436	06/08/2023	Koelpin-Koch	160
+cough syrup	309	03/21/2024	Daugherty, Reinger and Toy	180
+cough drops	348	04/02/2024	Kassulke-Kessler	190
+vitamins	183	09/10/2023	Erdman, Brakus and Lesch	220
+cough drops	432	04/17/2024	Effertz Inc	230
+gauze pads	255	05/19/2024	Kunze and Sons	240
+syringes	305	04/15/2024	Morar, McLaughlin and Price	250
+cough drops	471	08/12/2023	Goldner-Yundt	260
+antacids	396	08/03/2023	Erdman-Upton	270
+allergy medication	338	01/29/2024	Bradtke, Strosin and Hane	280
+alcohol swabs	266	04/24/2024	Morar Group	290
+nasal spray	294	01/30/2024	Kiehn-Schoen	110
+cotton balls	392	02/22/2024	Cartwright Group	130
+\.
+
+
+--
+-- TOC entry 4846 (class 0 OID 16677)
+-- Dependencies: 219
+-- Data for Name: Employee; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Employee" ("EID", "EName", "Gender", "Role", "Birth", "Phone") FROM stdin;
+2	Swen Bilofsky	F	Pharmacist	11/01/2002	331-235-4921
+3	Evvy Worsam	M	Pharmacist	02/11/1992	632-211-6453
+6	Terri Bastide	F	Pharmacist	02/09/1995	865-117-5515
+9	Dukie Brailey	M	Pharmacist	05/01/1993	388-882-8520
+10	Marc Killbey	F	Pharmacist	03/21/1992	200-718-6071
+1	Issiah Penniall	M	Admin	09/20/1998	605-159-1952
+5	Erik Bartosiak	M	Pharmacist	08/25/2001	325-708-0218
+7	Granville Burborough	M	Pharmacist	08/27/1996	435-646-2365
+8	Dee dee Skain	F	Janitor	01/25/2001	660-791-3598
+\.
+
+
+--
+-- TOC entry 4847 (class 0 OID 16682)
+-- Dependencies: 220
+-- Data for Name: Item; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Item" (id, name, price, type) FROM stdin;
+2	Metformin Hydrochloride	110	Medicine
+3	Pollens - Trees, Olive Olea europaea	120	Medicine
+4	SHISEIDO ADVANCED HYDRO-LIQUID COMPACT (REFILL)	130	Medicine
+5	Tizanidine	140	Medicine
+6	Zaliex Alcohol-Free Foaming Hand Sanitizer	150	Medicine
+7	Viagra	160	Medicine
+8	PureLife APF	170	Medicine
+9	FAMCICLOVIR	180	Medicine
+10	Pollens - Grasses, Grass Mix 8	190	Medicine
+11	Vivarin	200	Medicine
+12	Valsartan and Hydrochlorothiazide	210	Medicine
+13	Hydrocodone Bitartrate And Acetaminophen	220	Medicine
+14	Etomidate	230	Medicine
+15	Ethyl Rubbing Alcohol	240	Medicine
+16	Methylprednisolone Acetate	250	Medicine
+17	Insect Bites	260	Medicine
+18	Walgreens Pain Relieving for Boils	270	Medicine
+19	Ready Foundation	280	Medicine
+20	Amlodipine Besylate and Benazepril Hydrochloride	290	Medicine
+21	Cefuroxime Axetil	300	Medicine
+22	ANAFRANIL	310	Medicine
+23	Stomach Relief	320	Medicine
+24	Fluoxetine	330	Medicine
+25	IT RADIANT CC IN MELTING FOUNDATION	340	Medicine
+26	CVS Pharmacy Daytime Nighttime Severe Cold and Cough Kit	350	Medicine
+27	Total Suncare Sunscreen SPF 15	360	Medicine
+28	Pericardium Triple Warmer	370	Medicine
+29	Full Care Three Povidone Iodine Swabsticks	380	Medicine
+30	CUPRUM METALLICUM	390	Medicine
+31	Quelicin	400	Medicine
+32	Warfarin Sodium	410	Medicine
+33	Pepcid	420	Medicine
+34	Doxepin Hydrochloride	430	Medicine
+35	RU-HIST PLUS	440	Medicine
+36	DEODORANT	450	Medicine
+37	mycophenolate mofetil	460	Medicine
+38	Neuroforce	470	Medicine
+39	West Sycamore	480	Medicine
+40	Colgate Optic White Sparkling Mint Flavor	490	Medicine
+41	pravastatin sodium	500	Medicine
+42	Galantamine	510	Medicine
+43	miconazole 1	520	Medicine
+44	Lymph-Tone II	530	Medicine
+45	Lovastatin	540	Medicine
+46	Mamonde Total	550	Medicine
+47	SULAR	560	Medicine
+48	MuSkel-S	570	Medicine
+49	Methoxsalen	580	Medicine
+50	LIPODOX 50	590	Medicine
+51	Oxycodone and Acetaminophen	600	Medicine
+52	NARS ALL DAY LUMINOUS FOUNDATION	610	Medicine
+53	Mometasone Furoate	620	Medicine
+54	BlancTis Essence	630	Medicine
+55	Rx Act sinus and allergy PE	640	Medicine
+56	Promethazine Hydrochloride and Dextromethorphan Hydrobromide	650	Medicine
+57	Amitriptyline Hydrochloride	660	Medicine
+58	Dr. Cocoa Daytime Cough and Cold	670	Medicine
+59	Lidocaine Hydrochloride	680	Medicine
+60	Simvastatin	690	Medicine
+61	ORAVIG	700	Medicine
+62	equate antacid	710	Medicine
+63	care one aspirin	720	Medicine
+64	Nighttime Cold and Flu Relief	730	Medicine
+65	Sepia Kit Refill	740	Medicine
+66	Dextrose	750	Medicine
+67	Hevert Cough Relief	760	Medicine
+68	ropinirole hydrochloride	770	Medicine
+69	Nighttime Sleep Aid	780	Medicine
+70	HYDROCHLOROTHIAZIDE	790	Medicine
+71	Interarticular Joint Kit	800	Medicine
+72	Caduet	810	Medicine
+73	PROVENCE TWO WAY PACT	820	Medicine
+74	hydropel sports	830	Medicine
+75	Ginseng Stemcell Mask	840	Medicine
+76	Food Processing	850	Medicine
+77	Aspirin	860	Medicine
+78	Intense Care Snail ampoule	870	Medicine
+79	FERMENTED SOY MILK WRINKLE CARE SLEEPING MASK	880	Medicine
+80	Rice Grain	890	Medicine
+81	Lady Speed Stick	900	Medicine
+82	Interferon	910	Medicine
+83	Sodium Phosphates	920	Medicine
+84	ESIKA Extreme Moisturizing SPF 16	930	Medicine
+85	USTILAGO TRITICI	940	Medicine
+86	Tolazamide	950	Medicine
+87	Blistex	960	Medicine
+88	Olanzapine	970	Medicine
+89	Pioglitazone	980	Medicine
+90	DocQLace	990	Medicine
+91	Lidocaine Hydrochloride	1000	Medicine
+92	Natria	1010	Medicine
+93	Equaline ibuprofen	1020	Medicine
+94	PR Natal 400	1030	Medicine
+95	Phosphorus Kit Refill	1040	Medicine
+96	Antibacterial Foaming Hand Cleanser	1050	Medicine
+97	Island Blossom Antibacterial Foaming Hand Wash	1060	Medicine
+98	CARBAMAZEPINE	1070	Medicine
+99	Image Essentials Hair Regrowth Treatment	1080	Medicine
+100	goku	1090	Medicine
+102	Allopurinol	1110	Medicine
+103	nasal spray	100	Consumable
+104	nasal spray	110	Consumable
+105	cotton balls	120	Consumable
+106	cotton balls	130	Consumable
+107	antibacterial ointment	140	Consumable
+108	ear drops	150	Consumable
+109	ear drops	160	Consumable
+110	hydrogen peroxide	170	Consumable
+111	cough syrup	180	Consumable
+112	cough drops	190	Consumable
+113	calamine lotion	200	Consumable
+114	throat lozenges	210	Consumable
+115	vitamins	220	Consumable
+116	cough drops	230	Consumable
+117	gauze pads	240	Consumable
+118	syringes	250	Consumable
+119	cough drops	260	Consumable
+120	antacids	270	Consumable
+121	allergy medication	280	Consumable
+122	alcohol swabs	290	Consumable
+1	NITROGEN	100	Medicine
+\.
+
+
+--
+-- TOC entry 4849 (class 0 OID 16686)
+-- Dependencies: 222
+-- Data for Name: Medicine; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Medicine" ("MName", "Batch", "Supplier", "Supplied_date", "Expired_date", "Quantity", "MPrice") FROM stdin;
+Hydrocodone Bitartrate And Acetaminophen	285	McKesson Packaging Services a business unit of McKesson Corproration	11/12/2023	12/20/2026	130	220
+Metformin Hydrochloride	170	Heritage Pharmaceuticals Inc.	06/22/2023	10/12/2026	185	110
+goku	1	haduken	01/11/2003	03/12/2024	1	1090
+Pepcid	24	Marathon Pharmaceuticals, LLC	10/24/2023	07/16/2026	270	420
+Doxepin Hydrochloride	284	Physicians Total Care, Inc.	11/14/2023	09/10/2026	177	430
+RU-HIST PLUS	271	CARWIN ASSOCIATES, INC	02/16/2024	06/02/2026	191	440
+Pollens - Trees, Olive Olea europaea	17	Jubilant HollisterStier LLC	08/09/2023	07/30/2026	115	120
+SHISEIDO ADVANCED HYDRO-LIQUID COMPACT (REFILL)	121	SHISEIDO CO., LTD.	03/20/2024	08/08/2026	293	130
+Tizanidine	97	Bryant Ranch Prepack	12/02/2023	05/26/2027	127	140
+Zaliex Alcohol-Free Foaming Hand Sanitizer	191	SAS Healthcare Inc	04/29/2024	07/04/2026	136	150
+Viagra	272	Physicians Total Care, Inc.	11/03/2023	03/03/2027	179	160
+PureLife APF	270	PureLife Dental	08/02/2023	06/04/2026	167	170
+FAMCICLOVIR	233	Golden State Medical Supply, Inc.	11/28/2023	09/07/2026	291	180
+Pollens - Grasses, Grass Mix 8	138	Jubilant HollisterStier LLC	06/14/2023	11/25/2026	138	190
+Vivarin	176	Meda Consumer Healthcare Inc.	02/08/2024	05/07/2027	147	200
+Valsartan and Hydrochlorothiazide	68	Aurobindo Pharma Limited	11/23/2023	01/20/2027	185	210
+Etomidate	11	Pfizer Laboratories Div Pfizer Inc.	10/17/2023	04/20/2027	116	230
+Ethyl Rubbing Alcohol	181	McKesson	10/28/2023	08/01/2026	279	240
+Methylprednisolone Acetate	86	Rebel Distributors Corp	08/03/2023	08/24/2026	169	250
+Insect Bites	263	Liddell Laboratories, Inc.	09/12/2023	02/11/2027	236	260
+Walgreens Pain Relieving for Boils	114	Walgreen Company	06/11/2023	03/16/2027	178	270
+Ready Foundation	8	Bare Escentuals Beauty Inc.	10/05/2023	01/11/2027	277	280
+Amlodipine Besylate and Benazepril Hydrochloride	31	Physicians Total Care, Inc.	07/03/2023	05/27/2027	274	290
+Cefuroxime Axetil	181	Wockhardt USA LLC.	01/21/2024	04/02/2027	276	300
+ANAFRANIL	244	Mallinckrodt, Inc.	12/20/2023	04/28/2027	287	310
+Stomach Relief	152	Shopko Stores Operating Co., LLC	11/02/2023	06/20/2026	161	320
+Fluoxetine	94	Life Line Home Care Services, Inc.	02/09/2024	02/15/2027	235	330
+IT RADIANT CC IN MELTING FOUNDATION	111	F&CO Co., Ltd.	12/24/2023	05/27/2027	181	340
+CVS Pharmacy Daytime Nighttime Severe Cold and Cough Kit	95	CVS Pharmacy	10/19/2023	04/30/2027	271	350
+Total Suncare Sunscreen SPF 15	44	Total Suncare LLC	09/18/2023	02/26/2027	246	360
+Pericardium Triple Warmer	120	Deseret Biologicals	10/05/2023	02/20/2027	283	370
+Full Care Three Povidone Iodine Swabsticks	256	Shaoxing Fuqing Health Products Co., Ltd.	10/06/2023	05/23/2027	175	380
+CUPRUM METALLICUM	181	HOMEOLAB USA INC.	11/02/2023	01/21/2027	212	390
+Quelicin	33	Hospira, Inc.	04/22/2024	08/16/2026	176	400
+Warfarin Sodium	178	Camber Pharmaceuticals	01/29/2024	04/22/2027	159	410
+DEODORANT	8	Shanghai Kangyi Tourism Products Co., Ltd.	08/18/2023	01/25/2027	125	450
+mycophenolate mofetil	18	Ascend Laboratories, LLC	04/18/2024	05/04/2027	283	460
+Neuroforce	111	Apotheca Company	05/08/2024	08/07/2026	106	470
+West Sycamore	199	Nelco Laboratories, Inc.	08/06/2023	11/21/2026	119	480
+Colgate Optic White Sparkling Mint Flavor	83	Mission Hills S.A de C.V	03/30/2024	03/23/2027	264	490
+pravastatin sodium	33	Cadila Healthcare Limited	07/29/2023	05/13/2027	231	500
+Galantamine	241	Cadila Healthcare Limited	10/29/2023	10/02/2026	152	510
+miconazole 1	97	CVS Pharmacy	12/26/2023	04/07/2027	215	520
+Lymph-Tone II	126	Energetix Corp	10/04/2023	08/13/2026	116	530
+Lovastatin	115	Aphena Pharma Solutions - Tennessee, LLC	02/01/2024	08/05/2026	119	540
+Mamonde Total	283	AMOREPACIFIC	03/03/2024	05/18/2027	151	550
+SULAR	171	Shionogi Inc.	05/29/2023	12/29/2026	128	560
+MuSkel-S	233	VIATREXX BIO INCORPORATED	04/09/2024	05/08/2027	119	570
+Methoxsalen	138	Strides Arcolab Limited	04/15/2024	04/11/2027	221	580
+LIPODOX 50	78	Sun Pharma Global FZE	11/28/2023	03/11/2027	243	590
+Oxycodone and Acetaminophen	192	Lake Erie Medical DBA Quality Care Products LLC	04/13/2024	06/23/2026	239	600
+NARS ALL DAY LUMINOUS FOUNDATION	188	NARS COSMETICS	08/14/2023	09/14/2026	218	610
+Mometasone Furoate	12	Taro Pharmaceuticals U.S.A., Inc.	02/13/2024	07/20/2026	292	620
+BlancTis Essence	200	Nibec Co., Ltd	10/02/2023	01/10/2027	159	630
+Rx Act sinus and allergy PE	81	H E B	05/29/2023	03/02/2027	139	640
+Promethazine Hydrochloride and Dextromethorphan Hydrobromide	262	Hi-Tech Pharmacal Co., Inc.	03/15/2024	05/30/2026	110	650
+Amitriptyline Hydrochloride	263	Mylan Institutional Inc.	08/06/2023	08/16/2026	206	660
+Dr. Cocoa Daytime Cough and Cold	117	Infirst Healthcare	03/14/2024	01/22/2027	123	670
+Lidocaine Hydrochloride	288	Acme United Corporation	10/21/2023	01/30/2027	293	680
+Simvastatin	228	Blu Pharmaceuticals, LLC	04/12/2024	11/16/2026	234	690
+ORAVIG	295	Praelia Pharmaceuticals Inc	07/17/2023	12/05/2026	255	700
+equate antacid	81	Wal-Mart Stores Inc	03/28/2024	06/13/2026	216	710
+care one aspirin	56	American Sales Company	12/12/2023	01/02/2027	168	720
+Nighttime Cold and Flu Relief	133	Safeway, Inc.	04/22/2024	10/24/2026	207	730
+Sepia Kit Refill	35	Washington Homeopathic Products	12/20/2023	02/03/2027	164	740
+Dextrose	196	Baxter Healthcare Corporation	03/10/2024	12/02/2026	213	750
+Hevert Cough Relief	158	Hevert Pharmaceuticals LLC	06/29/2023	11/15/2026	106	760
+ropinirole hydrochloride	7	Solco healthcare U.S., LLC	04/17/2024	04/28/2027	124	770
+Nighttime Sleep Aid	269	EQUALINE (SuperValu)	11/14/2023	06/06/2026	122	780
+HYDROCHLOROTHIAZIDE	263	STAT RX USA LLC	09/21/2023	07/11/2026	154	790
+Interarticular Joint Kit	90	Asclemed USA, Inc.	06/23/2023	08/31/2026	117	800
+Caduet	86	Physicians Total Care, Inc.	11/01/2023	10/10/2026	116	810
+PROVENCE TWO WAY PACT	118	NATURE REPUBLIC CO., LTD.	10/10/2023	07/02/2026	165	820
+hydropel sports	291	Genesis Pharmaceutical	01/14/2024	03/04/2027	117	830
+Ginseng Stemcell Mask	205	AMI Cosmetic Co.,Ltd.	05/26/2024	11/06/2026	181	840
+Food Processing	248	Chester Packaging, LLC	07/10/2023	11/02/2026	106	850
+Aspirin	103	KEM Pharma LLC	09/23/2023	04/03/2027	140	860
+Intense Care Snail ampoule	219	TONYMOLY CO., LTD.	03/09/2024	07/25/2026	121	870
+FERMENTED SOY MILK WRINKLE CARE SLEEPING MASK	206	SKINFOOD CO., LTD.	11/06/2023	11/25/2026	199	880
+Rice Grain	93	Nelco Laboratories, Inc.	06/07/2023	03/14/2027	259	890
+Lady Speed Stick	44	Colgate-Palmolive Company	04/28/2024	02/06/2027	230	900
+Interferon	271	BioActive Nutritional	03/22/2024	03/20/2027	229	910
+Sodium Phosphates	133	Fresenius Kabi USA, LLC	06/19/2023	09/11/2026	117	920
+ESIKA Extreme Moisturizing SPF 16	173	Ventura Corporation LTD	06/21/2023	01/21/2027	142	930
+USTILAGO TRITICI	217	ALK-Abello, Inc.	05/10/2024	08/02/2026	219	940
+Tolazamide	151	Mylan Pharmaceuticals Inc.	11/17/2023	01/13/2027	115	950
+Blistex	234	Blistex Inc	01/31/2024	12/08/2026	122	960
+Olanzapine	107	Major Pharmaceuticals	02/12/2024	11/24/2026	101	970
+Pioglitazone	209	Wockhardt Limited	11/03/2023	05/26/2027	209	980
+DocQLace	262	Qualitest Pharmaceuticals	02/15/2024	04/30/2027	297	990
+Lidocaine Hydrochloride	250	Aidarex Pharmaceuticals LLC	02/02/2024	03/13/2027	217	1000
+Natria	182	Wasatch Product Development, Inc.	06/03/2023	10/15/2026	108	1010
+Equaline ibuprofen	26	Supervalu Inc	03/06/2024	07/30/2026	134	1020
+PR Natal 400	61	PruGen, Inc Pharmaceuticals	04/18/2024	11/21/2026	298	1030
+Phosphorus Kit Refill	206	Washington Homeopathic Products	02/14/2024	06/03/2026	260	1040
+Antibacterial Foaming Hand Cleanser	259	Jets, Sets, & Elephants Beauty Corp.	06/25/2023	01/13/2027	209	1050
+Island Blossom Antibacterial Foaming Hand Wash	239	SJ Creations, Inc.	11/17/2023	04/06/2027	181	1060
+CARBAMAZEPINE	101	Preferred Pharmaceuticals, Inc.	08/26/2023	07/28/2026	113	1070
+Image Essentials Hair Regrowth Treatment	299	Kmart Corporation	04/10/2024	05/22/2027	222	1080
+NITROGEN	262	Crumpton Welding Supply & Equipment, Inc	09/02/2023	11/29/2026	190	100
+Allopurinol	284	American Health Packaging	10/18/2023	11/09/2026	228	1110
+\.
+
+
+--
+-- TOC entry 4850 (class 0 OID 16691)
+-- Dependencies: 223
+-- Data for Name: Message; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Message" ("senderID", "receiverID", content, "MID") FROM stdin;
+1	1	Hello	1
+1	3	Helllo	3
+1	2	asddddd	4
+1	1	hallo	5
+1	1	Longg	6
+1	3	Long nguu	7
+2	5	Long nguu	8
+2	1	wtf	9
+3	1	frefwerfwer	10
+3	2	aaa	11
+2	1	nguLong	12
+2	1	longquadan	13
+2	1	asdsd	14
+1	2	Hello, this is a test message.	15
+2	5	gay	17
+2	1	gayyyy	18
+2	5	yes surrr	19
+2	5	uuuuuuuuuu	20
+3	8	fryjfyjfry	21
+3	8	uujcjucjf	22
+3	1	gggggg	23
+1	6	hello	24
+1	5	khoi is gay	25
+1	2	im testin dont mind me	26
+1	3	im testin dont mind me	27
+1	6	im testin dont mind me	28
+1	9	im testin dont mind me	29
+1	2	it should be right	30
+1	2	I need someone to help me\n	31
+1	3	I need someone to help me\n	32
+1	6	I need someone to help me\n	33
+1	9	I need someone to help me\n	34
+1	10	I need someone to help me\n	35
+1	1	I need someone to help me\n	37
+1	5	I need someone to help me\n	38
+1	7	I need someone to help me\n	39
+1	8	I need someone to help me\n	40
+1	3	Long	2
+1	2	testing	16
+1	1	alphabet	41
+1	5	alphabet	42
+1	7	alphabet	43
+1	8	alphabet	44
+1	6	fake	45
+1	9	fake	46
+1	10	fake	47
+1	6	ajfhdkhfhwfqwefwe	49
+1	1	ajfhdkhfhwfqwefwe	50
+\.
+
+
+--
+-- TOC entry 4852 (class 0 OID 16697)
+-- Dependencies: 225
+-- Data for Name: Supplier; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Supplier" ("SName") FROM stdin;
+REMEDYREPACK INC.
+Toy Group
+Supervalu Inc
+Kiehn, Hoeger and Langworth
+Bryant Ranch Prepack
+Weimann, Greenholt and O'Reilly
+China Ningbo Shangge Cosmetic Technology Corp.
+RxPak Division of McKesson Corporation
+Ling Nam Medicine Factory (H.K.) Ltd.
+REMEDYREPACK INC.
+Satterfield-Lynch
+Allermed Laboratories, Inc.
+Bashirian-Cassin
+Prohaska, Jacobs and McCullough
+Physicians Total Care, Inc.
+Torp Group
+Liddell Laboratories
+Physicians Science & Nature Inc.
+W.S. Badger Company, Inc.
+Hegmann-Bogisich
+IGI Labs, Inc.
+Zydus Pharmaceuticals (USA) Inc.
+Wockhardt Limited
+Jafra Cosmetics International Inc
+Larkin Group
+Sanum Kehlbeck GmbH & Co. KG
+Allermed Laboratories, Inc.
+Jakubowski, Rath and Bayer
+Wuckert-Leffler
+Caraco Pharmaceutical Laboratories, Ltd.
+Bernhard and Sons
+Stracke-Schaden
+Kunde-Steuber
+Nelco Laboratories, Inc.
+Johns, Stroman and Kilback
+Larkin Inc
+Schuster and Sons
+Fresenius Kabi USA, LLC
+Walsh Group
+AMERICAN SALES COMPANY
+Murphy-Anderson
+Energique, Inc.
+STAT Rx USA LLC
+Vi-Jon
+Volkman, Carroll and Balistreri
+Murphy Inc
+Clinical Solutions Wholesale
+King Bio Inc.
+STAT RX USA LLC
+Olson-Braun
+Bauch-Gerlach
+Allergy Laboratories, Inc.
+Elcure Co., Ltd.
+Barton-Adams
+Hilll-Grant
+Lancaster S.A.M.
+Guthy-Renker LLC
+Huel LLC
+Marvin LLC
+CarePluss Pharma S.A. de C.V.
+Bins, Wiegand and Zemlak
+Apotheca Company
+Fadel and Sons
+Barr Laboratories Inc.
+Bartoletti, Botsford and White
+Ernser, Terry and Connelly
+Taro Pharmaceuticals U.S.A., Inc.
+Anderson Group
+Lake Erie Medical & Surgical Supply DBA Quality Care Products LLC
+Lake Erie Medical & Surgical Supply DBA Quality Care Products LLC
+Antigen Laboratories, Inc.
+Oral BioTech
+Wiegand, Durgan and Keeling
+YVES ROCHER NORTH AMERICA INC
+Amneal Pharmaceuticals
+Kertzmann and Sons
+B. Braun Medical Inc.
+Lindgren LLC
+Rath LLC
+Cartwright-Mante
+REMEDYREPACK INC.
+Kshlerin, Heidenreich and Kutch
+NARS Cosmetics
+WALGREEN CO.
+STAT RX USA LLC
+Bare Escentuals Beauty Inc.
+Teva Pharmaceuticals USA Inc
+Altenwerth-Conn
+Ningbo Dowland Daily Health Co., Ltd
+Allergy Laboratories, Inc.
+Wal-Mart
+Fritsch, Blick and Weimann
+Preferred Pharmaceuticals, Inc
+Zieme, Pfeffer and Rogahn
+Cole, Sipes and Prohaska
+Lubowitz Inc
+Nasal and Sinus Health, Inc.
+Ritchie, Walter and Swaniawski
+Hisamitsu Pharmaceutical Co., Inc.
+Select Corporation
+Aurobindo Pharma Limited
+Romaguera and Sons
+Beahan, Volkman and Mosciski
+Bailey-Morissette
+Moen-Murphy
+West-Kuvalis
+Energique, Inc.
+Leannon LLC
+Carilion Materials Management
+Stark, Tillman and Gleichner
+\.
+
+
+--
+-- TOC entry 4853 (class 0 OID 16702)
+-- Dependencies: 226
+-- Data for Name: Transaction; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Transaction" (id, transaction_date, total_amount) FROM stdin;
+3	24/06/2024	144000
+4	24/06/2024	288000
+5	24/06/2024	144000
+6	24/04/2024	140000
+7	24/06/2024	1000
+8	27-06-2024	13100
+9	27-06-2024	2340
+10	27-06-2024	0
+\.
+
+
+--
+-- TOC entry 4854 (class 0 OID 16707)
+-- Dependencies: 227
+-- Data for Name: TransactionItem; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."TransactionItem" (id, transaction_id, name, quantity, price, item_type) FROM stdin;
+6	3	Allopurinol	12	12000	Medicine
+7	4	Allopurinol	12	12000	Medicine
+8	4	Allopurinol	12	12000	Medicine
+9	5	Allopurinol	12	12000	Medicine
+10	6	alcohol swabs	1	40000	Consumable
+11	6	Allopurinol	6	10000	Medicine
+12	6	Aspirin	4	10000	Medicine
+13	7	nasal spray	10	100	Consumable
+14	8	Allopurinol	10	1110	Medicine
+15	8	NITROGEN	10	100	Medicine
+16	8	nasal spray	10	100	Consumable
+17	9	Allopurinol	2	1110	Medicine
+18	9	cotton balls	1	120	Consumable
+\.
+
+
+--
+-- TOC entry 4864 (class 0 OID 0)
+-- Dependencies: 217
+-- Name: Administrator_AID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Administrator_AID_seq"', 1, true);
+
+
+--
+-- TOC entry 4865 (class 0 OID 0)
+-- Dependencies: 221
+-- Name: Item_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Item_id_seq"', 123, true);
+
+
+--
+-- TOC entry 4866 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: Message_MID_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Message_MID_seq"', 50, true);
+
+
+--
+-- TOC entry 4867 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: TransactionItem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."TransactionItem_id_seq"', 18, true);
+
+
+--
+-- TOC entry 4868 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: Transaction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public."Transaction_id_seq"', 10, true);
+
+
+--
+-- TOC entry 4677 (class 2606 OID 16717)
+-- Name: Account Account_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Account"
+    ADD CONSTRAINT "Account_pkey" PRIMARY KEY (username);
+
+
+--
+-- TOC entry 4679 (class 2606 OID 16719)
+-- Name: Administrator Administrator_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Administrator"
+    ADD CONSTRAINT "Administrator_pkey" PRIMARY KEY ("AID");
+
+
+--
+-- TOC entry 4681 (class 2606 OID 16721)
+-- Name: Consumable Consumable_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Consumable"
+    ADD CONSTRAINT "Consumable_pkey" PRIMARY KEY ("CName", "Supplier");
+
+
+--
+-- TOC entry 4683 (class 2606 OID 16723)
+-- Name: Employee Employee_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Employee"
+    ADD CONSTRAINT "Employee_pkey" PRIMARY KEY ("EID");
+
+
+--
+-- TOC entry 4685 (class 2606 OID 16725)
+-- Name: Item Item_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Item"
+    ADD CONSTRAINT "Item_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4687 (class 2606 OID 16727)
+-- Name: Medicine Medicine_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Medicine"
+    ADD CONSTRAINT "Medicine_pkey" PRIMARY KEY ("MName", "Supplier");
+
+
+--
+-- TOC entry 4689 (class 2606 OID 16729)
+-- Name: Message Message_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT "Message_pkey" PRIMARY KEY ("MID");
+
+
+--
+-- TOC entry 4693 (class 2606 OID 16731)
+-- Name: TransactionItem TransactionItem_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."TransactionItem"
+    ADD CONSTRAINT "TransactionItem_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4691 (class 2606 OID 16733)
+-- Name: Transaction Transaction_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Transaction"
+    ADD CONSTRAINT "Transaction_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4698 (class 2606 OID 16734)
+-- Name: TransactionItem TransactionItem_transaction_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."TransactionItem"
+    ADD CONSTRAINT "TransactionItem_transaction_id_fkey" FOREIGN KEY (transaction_id) REFERENCES public."Transaction"(id) ON DELETE CASCADE;
+
+
+--
+-- TOC entry 4695 (class 2606 OID 16739)
+-- Name: Administrator admin_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Administrator"
+    ADD CONSTRAINT admin_fkey FOREIGN KEY ("AID") REFERENCES public."Employee"("EID") NOT VALID;
+
+
+--
+-- TOC entry 4694 (class 2606 OID 16744)
+-- Name: Account employee_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Account"
+    ADD CONSTRAINT employee_id_fkey FOREIGN KEY (employee_id) REFERENCES public."Employee"("EID") ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4696 (class 2606 OID 16749)
+-- Name: Message receive_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT receive_fkey FOREIGN KEY ("receiverID") REFERENCES public."Employee"("EID");
+
+
+--
+-- TOC entry 4697 (class 2606 OID 16754)
+-- Name: Message sender_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Message"
+    ADD CONSTRAINT sender_fkey FOREIGN KEY ("senderID") REFERENCES public."Employee"("EID");
+
+
+-- Completed on 2024-06-30 17:44:11
+
+--
+-- PostgreSQL database dump complete
+--
+
