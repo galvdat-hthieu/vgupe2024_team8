@@ -10,7 +10,7 @@
    1. [Use-case](#item-four-a)
    2. [Sequence Diagram](#item-four-b)
    3. [Database](#item-four-c)
-6. [Framework](#item-five)
+6. [System Architeture](#item-five)
 7. [User Guide](#item-six)
    1. [Installation](#item-six-a)
    2. [Getting Started](#item-six-b)
