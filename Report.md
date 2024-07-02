@@ -1,4 +1,4 @@
-![Pharmacy_Managament_system-ER diagram drawio (2)](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/a7fe5e43-64bd-4c24-b01f-4d2aae115c6b)# Programing Exercise Report: Pharmacy Management System
+# Programing Exercise Report: Pharmacy Management System
 # Team 8
 
 
