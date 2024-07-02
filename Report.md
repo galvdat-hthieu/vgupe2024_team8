@@ -379,11 +379,18 @@ This application is built base on the Model-View-Control pattern:
 - Java JDK 21
 - PostgreSQL database
 #### Installation Instruction:
+### For .jar file 
 - Step 1: Download the application package.
 - Step 2: Install Java JDK 21 or higher.
 - Step 3: Set up PostgreSQL and import the provide sql file into the database.
 - Step 4: Go to the config.properties file to specify the connection link to the database server as well as the username and password of that server.
-
+### For Docker
+- Step 1 : Install and set up Docker Desktop
+- Step 2 : Install any VNC machine
+- Step 3 : Download "backup_file.backup" and "docker-compose.yml" and put it into 1 folder
+- Step 4 : Open Command Prompt, cd to the folder that contains both file
+- Step 5 : type "docker-compose up"
+- Step 6 : Open your VNC application, type in the link "localhost:5900" with password "yourpassword" 
 <a id="item-six-b"></a>
 ### Getting Started
 - Launching the Application: double click on Pharmacy_System.jar or run it from the command line using "java -jar Pharmacy_System.jar".
