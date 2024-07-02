@@ -73,22 +73,30 @@ This application is built to effectively manage a pharmaceutical store. It helps
 ### Use case diagram
 
 #### Account
+- In the diagram, the admin can create a new account for a user. First, the admin will create a username with the employee id, and assign a role. The default password has been set to "123". When the user forgets the password, they can ask the admin to reset it. The admin needs to add the username and the password will reset to "123". Also, the admin can delete the account of a user.  Not only that, the admin can input the username, and they can change the role to authorized or default user.
+- On the user side, they can change the password by inputting the old password and the new password.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/account_usecase.png" width="700" height="800">
 
 #### Consumable
+- On the pharmacist account, they can just search the consumable based on name or supplier. Also, to view the full information of that consumable, the Pharmacist can export the CSV of the consumable database.
+Administrators and authorized users can add the consumable data. In addition, they can delete existing records and update the info like quantity, date, etc.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/consumable_use%20case.png" width="700" height="800">
 
 #### Employee
+- This is the function just for administrators, it is used for managing employee records like personal details, and roles. Also, they can update or delete employee records. But if the admin wants to delete employee records, they have to make sure that the account with that has to be deleted first. The admin can search the employees based on name, id, and role.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/usecaseemployee.png" width="700" height="800">
 
 
 #### Medicine
+- This is the same with the consumable diagram. But this diagram is used for medicine management. Normal employees just can view, search, and export CSV files. And the administrator, authorized employees have more permission.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/49a8d1f6-9918-4b7b-ad38-89f403ad7983" width="700" height="800">
 
 #### Transaction
+- This function is for everyone in the Pharmacy can use. Create a transaction, the pharmacist adds an item with name and quantity and they can edit the item before saving. When they save the transaction. They can view it and generate an invoice with the date and the price.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/transaction_Use%20case.png" width="700" height="800">
 
 #### Message
+- The employee can send a message to one or many employees at once. After entering the messages, the messages can be stored in the database. For message viewing, they just choose a contact, the database will return the data and display all messages of the user and chosen contact.
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/use_case/Message%20System.png" width="700" height="800">
 
 <a id="item-four-b"></a>
