@@ -1,4 +1,4 @@
-# Programing Exercise Report: Pharmacy Management System
+![Pharmacy_Managament_system-ER diagram drawio (2)](https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/a7fe5e43-64bd-4c24-b01f-4d2aae115c6b)# Programing Exercise Report: Pharmacy Management System
 # Team 8
 
 
@@ -114,7 +114,7 @@ This application is built to effectively manage a pharmaceutical store. It helps
 
 <a id="item-four-c"></a>
 ### Database 
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
+<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/f6851ade-1168-4c7d-b07f-daa641a120d8">
 
 #### Entities and Attributes
 
@@ -132,16 +132,15 @@ This application is built to effectively manage a pharmaceutical store. It helps
 
 #### Account
 - **Username**: Account Username (Primary Key)
-- **A**: Foreign Key linking to Admin
-- **Access level**: Access level of the account
-- **AStatus**: Account Status
+- **password**: Account password
+- **Role**: Role of the account
+- **Employee ID**: Id of the employee (Foreign Key referencing Employee)
 
 #### Message
 - **senderID**: ID of the sender (Foreign Key referencing Employee)
 - **receiverID**: ID of the receiver (Foreign Key referencing Employee)
 - **message content**: Content of the message
-- **Time**: Timestamp of the message
-- **MStatus**: Status of the message
+- **MID**: ID of the message sent (Primary Key)
 
 #### Transaction
 - **id**: Transaction ID (Primary Key)
