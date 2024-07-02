@@ -105,20 +105,159 @@ Administrators and authorized users can add the consumable data. In addition, th
 #### Account
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/separate_account.png" width="700" height="800">
 
+- **Create Account:**
+  - Administrator requests account creation.
+  - Account Provision System initiates account setup.
+
+- **Create Username:**
+  - System generates a unique username.
+
+- **Input Employee Information:**
+  - System collects employee information from Employee Records.
+
+- **Generate Random Password:**
+  - System creates a random password for the account.
+
+- **Grant Permission:**
+  - System assigns appropriate permissions to the account.
+
+- **Alternative Flow - Delete Account:**
+  - Administrator can delete the account if necessary.
+
+- **Change Password:**
+  - User changes the initial random password.
+
+- **Save Password:**
+  - System saves the new user-defined password.
+
 #### Item
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Item_%20Management.png" width="700" height="800">
+
+- **Input New Medicine Record:**
+  - Account inputs a new medicine record.
+  - Supply Records sends the information to Inventory Management.
+  - Inventory Management updates the information in Medicine Management.
+  - Medicine Management sends supplier information to Supplier Management.
+  - Supplier Management updates the information.
+  - Success announcement sent back through the chain to Account.
+
+- **Input New Consumable Record:**
+  - Account inputs a new consumable record.
+  - Supply Records sends the information to Inventory Management.
+  - Inventory Management updates the information in Consumable Management.
+  - Consumable Management sends supplier information to Supplier Management.
+  - Supplier Management updates the information.
+  - Success announcement sent back through the chain to Account.
+
+- **Search Inventory:**
+  - Account searches the inventory.
+  - Supply Records sends the search information to Inventory Management.
+  - Inventory Management displays the information to Account.
 
 #### Employee
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/employeesequence.png" width="700" height="800">
 
+- **Input Employee Information:**
+  - Administrator inputs employee information.
+  - Employee Management System creates an employee record in the Employee Database.
+  - Employee Database sends the created employee data back to the Employee Management System.
+  - Employee Management System displays the employee data to the Administrator.
+
+- **Update Employee Record:**
+  - Administrator updates an employee record.
+  - Employee Management System sends the update record to the Employee Database.
+  - Employee Database processes the update and sends a confirmation message back to the Employee Management System.
+  - Employee Management System displays the confirmation message to the Administrator.
+
+- **Search Employee:**
+  - Administrator searches for an employee based on names, ID, or role.
+  - Employee Management System requests employee data from the Employee Database.
+  - Employee Database retrieves and sends the employee data to the Employee Management System.
+  - Employee Management System displays the employee data to the Administrator.
+
 #### Medicine and Consumable
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/Medicine-Consumable_Manager.png" width="700" height="800">
+
+- **New Record:**
+  - Account initiates the creation of a new record.
+  - Supply Request Form generates a new form.
+
+- **Input Medicine Info:**
+  - Account inputs medicine information into the form.
+
+- **Save Form:**
+  - Account saves the form.
+  - Supply Request Form sends the record to Inventory Management.
+  - Inventory Management receives the record.
+  - Supply Request Form confirms that the form is saved.
+
+- **Search Medicine/Consumable Record:**
+  - Account searches for a medicine or consumable record.
+  - Supply Request Form displays the searched medicine or consumable record.
+
+- **Edit Record:**
+  - Account requests to edit a record.
+  - Supply Request Form opens the form.
+  - Account makes the record editable.
+
+- **Remove Record:**
+  - Account removes the record.
+  - Supply Request Form deletes the record.
+  - Confirmation that the record is deleted is sent back.
+
 
 #### Transaction
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/transaction_sequence.png" width="700" height="800">
 
+- **Create Transaction:**
+  - Employee creates a transaction.
+  - Transaction Management opens the transaction form.
+
+- **Add Item (Loop):**
+  - Employee adds an item to the transaction.
+  - Transaction Management requests the item from Transaction Service.
+  - Transaction Service finds the item using Transaction Repository.
+  - Transaction Repository returns the item name to Transaction Service.
+  - Transaction Service retrieves the item and sends it to Transaction Management.
+  - Transaction Management adds the item to the table.
+
+- **Save Transaction:**
+  - Employee saves the transaction.
+  - Transaction Management sets the transaction.
+  - Transaction Service saves the transaction using Transaction Repository.
+  - Transaction Repository confirms the transaction is saved.
+
+- **Show Transaction on Table:**
+  - Transaction Management displays the saved transaction on the table.
+
+- **View Transaction Detail:**
+  - Employee views transaction details.
+  - Transaction Management requests transaction items from Transaction Service.
+  - Transaction Service retrieves the items using Transaction Repository.
+  - Transaction Repository finds the items by ID and sends them to Transaction Service.
+  - Transaction Service returns the retrieved items to Transaction Management.
+  - Transaction Management shows the transaction items to the Employee.
+
+- **Generate Invoice:**
+  - Employee generates an invoice.
+  - Transaction Management creates a PDF file.
+  - Invoice is generated and confirmed.
+
 #### Message
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
+
+- **Send Message:**
+  - User sends a message.
+  - Application stores the message in the Database.
+  - Database confirms the message is stored.
+  - Application announces successful storage to the User.
+
+- **View Message:**
+  - User requests to view a message.
+  - Application searches for the message in the Database.
+  - Database retrieves the message.
+  - Application displays the message to the User.
+
 
 <a id="item-four-c"></a>
 ### Database 
