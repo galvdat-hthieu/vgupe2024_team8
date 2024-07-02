@@ -9,8 +9,7 @@
 4. [Design](#item-four)
    1. [Use-case](#item-four-a)
    2. [Sequence Diagram](#item-four-b)
-   3. [Class Diagram](#item-four-c)
-   4. [Database](#item-four-d)
+   3. [Database](#item-four-c)
 6. [Framework](#item-five)
 7. [User Guide](#item-six)
    1. [Installation](#item-six-a)
@@ -114,26 +113,6 @@ This application is built to effectively manage a pharmaceutical store. It helps
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/sequence_diagram/MessagingSeq.png" width="700" height="800">
 
 <a id="item-four-c"></a>
-### Class diagram 
-#### Account
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/account_class.png" width="1000" height="600">
-
-#### Consumable
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/consumable_class.png" width="1000" height="600">
-
-#### Employee
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/employeeclass.png" width="1000" height="600">
-
-#### Medicine
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/medicine_class.png" width="1000" height="600">
-
-#### Transaction
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/transaction_class.png" width="1000" height="600">
-
-#### Message
-<img src="https://github.com/galvdat-hthieu/vgupe2024_team8/blob/main/class_diagram/MessageClass.png" width="1000" height="600">
-
-<a id="item-four-d"></a>
 ### Database 
 <img src="https://github.com/galvdat-hthieu/vgupe2024_team8/assets/94373117/6f74be52-8ea0-4339-b1b2-cd3731a9d75b">
 
